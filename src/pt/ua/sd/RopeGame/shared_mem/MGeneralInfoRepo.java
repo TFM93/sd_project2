@@ -10,6 +10,7 @@ import pt.ua.sd.RopeGame.interfaces.IRepoReferee;
 
 import java.io.*;
 import java.nio.file.*;
+import java.util.Arrays;
 
 /**
  * Logging repository<br>
@@ -28,13 +29,15 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
 
     public enum refStates{//abreviation of referee states
         SOM,SOG,TSR,WTC,EOM,EOG,NON
-    };
+    }
+
     public enum  coachStates{//abreviation of coach states
         WRC,AST,WTR,NON
-    };
+    }
+
     public enum contestantStates{//abreviation of contestant states
         SAB,SIP,DYB,NON
-    };
+    }
 
     private static refStates referee_state;//referee state
     private static coachStates[] coach_state;//each coach state is saved here
@@ -48,16 +51,35 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
     private static String LOG_LOCATION;//location of the log file
     private static Writer output=null;
 
-    private static int[] contestants_team1 = {-1, -1, -1};
-    private static int[] contestants_team2 = {-1, -1, -1};
+    private static int[] contestants_team1;
+    private static int[] contestants_team2;
 
-//    private int contestant_nr=5;
+    int players_team;
+    int players_pushing;
+    int n_trials;
+    int n_games;
+    int knockDif;
 
     /**
      * Constructor
      */
-    public MGeneralInfoRepo(int contestant_nr)
+    public MGeneralInfoRepo(int players_team, int players_pushing, int n_trials, int n_games, int knockDif)
     {
+        this.players_pushing = players_pushing;
+        this.players_team = players_team;
+        this.n_games = n_games;
+        this.n_trials = n_trials;
+        this.knockDif = knockDif;
+
+        if(contestants_team1 == null){
+            contestants_team1 = new int[players_pushing];
+            Arrays.fill(contestants_team1, -1);
+        }
+
+        if(contestants_team2 == null){
+            contestants_team2 = new int[players_pushing];
+            Arrays.fill(contestants_team2, -1);
+        }
 
         LOG_LOCATION = "RopeGame.log";
         TO_WRITE="";//nothing needs to be written now
@@ -73,45 +95,21 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
             coach_state[i]= coachStates.NON;
         }
 
-        team1_state = new contestantStates[contestant_nr];
-        team2_state = new contestantStates[contestant_nr];
-        System.out.println("team 1 size: "+team1_state.length);
+        team1_state = new contestantStates[players_team];
+        team2_state = new contestantStates[players_team];
         for (int i=0;i<team1_state.length;i++) {
             team1_state[i]= contestantStates.NON;
             team2_state[i]= contestantStates.NON;
         }
 
-        team1_strength = new int[contestant_nr];
-        team2_strength = new int[contestant_nr];
-        System.out.println("team strengt size: " + team1_strength.length);
+        team1_strength = new int[players_team];
+        team2_strength = new int[players_team];
         for (int i=0;i<team1_strength.length;i++) {
             team1_strength[i] = 0;
             team2_strength[i] = 0;
         }
 
         Addheader(true);//add initial header
-    }
-
-    /**
-     * function to update the number of contestants in the game
-     * @param contestant_nr number of contestants per team
-     */
-    public synchronized void updContestant_nr(int contestant_nr)
-    {
-/*        this.contestant_nr= contestant_nr;
-        team1_state = new contestantStates[contestant_nr];
-        team2_state = new contestantStates[contestant_nr];
-        for (int i=0;i<team1_state.length;i++) {
-            team1_state[i]= contestantStates.NON;
-            team2_state[i]= contestantStates.NON;
-        }
-
-        team1_strength = new int[contestant_nr];
-        team2_strength = new int[contestant_nr];
-        for (int i=0;i<team1_strength.length;i++) {
-            team1_strength[i] = 0;
-            team2_strength[i] = 0;
-        }*/
     }
 
     /**
@@ -281,49 +279,44 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
                     team1_state[id] = contestantStates.SAB;
                     team1_strength[id] = strength;
 
-                    if(contestants_team1[0] == id){
-                        contestants_team1[0] = -1;
-                    }else if(contestants_team1[1] == id){
-                        contestants_team1[1] = -1;
-                    }else if(contestants_team1[2] == id){
-                        contestants_team1[2] = -1;
+                    for (int i = 0; i < players_pushing; i++){
+                        if (contestants_team1[i] == id){
+                            contestants_team1[i] = -1;
+                        }
                     }
                 }else if (team_id == 2){
                     team2_state[id] = contestantStates.SAB;
                     team2_strength[id] = strength;
 
-                    if(contestants_team2[0] == id){
-                        contestants_team2[0] = -1;
-                    }else if(contestants_team2[1] == id){
-                        contestants_team2[1] = -1;
-                    }else if(contestants_team2[2] == id){
-                        contestants_team2[2] = -1;
+                    for (int i = 0; i < players_pushing; i++){
+                        if (contestants_team2[i] == id){
+                            contestants_team2[i] = -1;
+                        }
                     }
                 }
 
                 break;
             case STAND_IN_POSITION:
                 if(team_id == 1){
-                   team1_state[id] = contestantStates.SIP;
+                    team1_state[id] = contestantStates.SIP;
                     team1_strength[id] = strength;
 
-                    if(contestants_team1[0] == -1){
-                        contestants_team1[0] = id;
-                    }else if(contestants_team1[1] == -1){
-                        contestants_team1[1] = id;
-                    }else if(contestants_team1[2] == -1){
-                        contestants_team1[2] = id;
+                    for (int i = 0; i < players_pushing; i++){
+                        if (contestants_team1[i] == -1){
+                            contestants_team1[i] = id;
+                        }
                     }
+
+
+
                 }else if (team_id == 2){
                     team2_state[id] = contestantStates.SIP;
                     team2_strength[id] = strength;
 
-                    if(contestants_team2[0] == -1){
-                        contestants_team2[0] = id;
-                    }else if(contestants_team2[1] == -1){
-                        contestants_team2[1] = id;
-                    }else if(contestants_team2[2] == -1){
-                        contestants_team2[2] = id;
+                    for (int i = 0; i < players_pushing; i++){
+                        if (contestants_team2[i] == -1){
+                            contestants_team2[i] = id;
+                        }
                     }
                 }
                 break;
@@ -349,7 +342,7 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
     /**
      * buffers the states in current moment for each entity
      */
-    public synchronized void printStates(){
+    private synchronized void printStates(){
 
         TO_WRITE += String.format("%s   %s %s %02d %s %02d %s %02d %s %02d %s %02d   %s %s %02d %s %02d %s %02d %s %02d %s %02d %s %s %s . %s %s %s %s %s\n",
                 referee_state,
@@ -400,7 +393,7 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
     /**
      * writes the text present in TO_WRITE buffer to file
      */
-    private synchronized void writeToFile(){
+    public synchronized void writeToFile(){
         //use buffering
 
         try {
@@ -420,7 +413,7 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
     /**
      * deletes the RopeGame.log file
      */
-    private void deleteFile()
+    public void deleteFile()
     {
         try {
             Files.delete(OUTPUT_FILE.toPath());
@@ -430,7 +423,7 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
             System.err.format("%s not empty%n", OUTPUT_FILE.toPath());
         } catch (IOException x) {
             // File permission problems are caught here.
-            System.err.println(x);
+            System.err.println(x.toString());
         }
     }
 

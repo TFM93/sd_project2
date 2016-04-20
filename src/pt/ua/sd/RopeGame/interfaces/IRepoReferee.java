@@ -13,5 +13,4 @@ public interface IRepoReferee {
     void printMatchResult(int winner, int score1, int score2);
     void updGame_nr();
     void updtRopeCenter(int center);
-//    void updContestant_nr(int cont_nr);
 }

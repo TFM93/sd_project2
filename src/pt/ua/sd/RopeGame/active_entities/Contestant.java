@@ -35,6 +35,7 @@ public class Contestant extends Thread {
     private int n_players_pushing;//number of players in each team pushing at any given trial, defined in rg.config
     private int n_trials;//number of trials, defined in rg.config
     private int n_games;//number of games, defined in rg.config
+    private int knockDif;//number of knockout difference needed to win, defined in rg.config
 
 
     /**
@@ -53,7 +54,7 @@ public class Contestant extends Thread {
                       IContestantsBenchContestant contestants_bench,
                       IRepoContestant repo,
                       int n_players, int n_players_pushing,
-                      int n_trials, int n_games){
+                      int n_trials, int n_games, int knockDif){
         this.id = id;
         this.team_id = team_id;
         this.strength = strength;
@@ -65,13 +66,14 @@ public class Contestant extends Thread {
         this.n_players_pushing = n_players_pushing;
         this.n_trials = n_trials;
         this.n_games = n_games;
+        this.knockDif = knockDif;
     }
 
     /**
      * Thread life cycle
      */
     public void run() {
-        //repo.updContestant_nr(this.n_players);
+
         ContestantState state = ContestantState.START;//initial state
         boolean[] unpack = new boolean[2];//for receive return from follow coach advice
         unpack[0]=false;//def
@@ -97,16 +99,16 @@ public class Contestant extends Thread {
                     repo.contestantLog(this.id, this.team_id, this.strength, state);//update central info repository
                     break;
                 case STAND_IN_POSITION:
-                    contestants_bench.getReady();
+                    contestants_bench.getReady(n_players_pushing);
                     state = ContestantState.DO_YOUR_BEST;//change state
                     repo.contestantLog(this.id, this.team_id, this.strength, state);//update central info repository
                     break;
                 case DO_YOUR_BEST:
-                    playground.pullTheRope(this.team_id,this.strength,this.id);
+                    playground.pullTheRope(this.team_id, this.strength, this.id, n_players_pushing, n_players);
                     repo.contestantLog(this.id, this.team_id, this.strength, state);//update central info repository
-                    playground.iAmDone();
+                    playground.iAmDone(n_players_pushing);
                     decrementStrength();//depois de am done decrementar a forca
-                    playground.seatDown();
+                    playground.seatDown(n_players_pushing);
                     state = ContestantState.START;//change state
                     break;
                 default:

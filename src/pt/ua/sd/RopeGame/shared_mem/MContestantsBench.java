@@ -54,13 +54,16 @@ public class MContestantsBench implements IContestantsBenchContestant, IContesta
     private int n_ready_contestants_started;//nr of contestants that started trial and are ready
     private boolean followed_coach_advice;//flag for follow coach advice, true when the advce is followed
     /*team strenght*/
-//    private int[] team1_strength = {0, 0, 0, 0, 0};
+    //private int[] team1_strength = {0, 0, 0, 0, 0};
     //private int[] team2_strength = {0, 0, 0, 0, 0};
     private int[] team1_strength;
     private int[] team2_strength;
 
     private boolean match_ended = false;//flag for match ended, true if ended
 
+    /*  array to know if the players are playing  */
+    private boolean playing1[];
+    private boolean playing2[];
 
     /**
      * Referee calls the trial
@@ -174,36 +177,45 @@ public class MContestantsBench implements IContestantsBenchContestant, IContesta
         }
 
 
-        if(this.team1_strength == null){
-            this.team1_strength = new int[n_players];
-            Arrays.fill(this.team1_strength,0);
-        }
-
-        if(this.team2_strength == null){
-            this.team2_strength = new int[n_players];
-            Arrays.fill(this.team2_strength,0);
-        }
-
         if(team_id == 1){
+
+            if (team1_strength == null){
+                team1_strength = new int[n_players];
+                Arrays.fill(team1_strength, 0);
+            }
+
             this.team1_strength[contestant_id] = strength;
         }
         else if(team_id == 2){
+
+            if (team2_strength == null){
+                team2_strength = new int[n_players];
+                Arrays.fill(team2_strength, 0);
+            }
+
             this.team2_strength[contestant_id] = strength;
         }
 
         if(team_id == 1){
 
-            while (
-                    ((!this.contestants_called) ||
-                    ((contestant_id != team1_selected_contestants[0]) &&
-                            (contestant_id != team1_selected_contestants[1]) &&
-                            (contestant_id != team1_selected_contestants[2])))
+            /*  if array is not created, create it  */
+            if(playing1 == null){
+                playing1 = new boolean[n_players];
+                Arrays.fill(playing1, false);
+            }
 
-                    ||
 
-                            this.match_ended
+            /*  check if player is going to play the next trial  */
+            playing1[contestant_id] = false;
+            for (int j = 0; j < n_players_pushing; j++){
+                if (team1_selected_contestants[j] == contestant_id){
+                    /*  know that contestant is playing  */
+                    playing1[contestant_id] = true;
+                    break;
+                }
+            }
 
-                    ){
+            while ( !this.contestants_called || !playing1[contestant_id] || this.match_ended ){
 
 
                 if(this.match_ended){
@@ -214,10 +226,8 @@ public class MContestantsBench implements IContestantsBenchContestant, IContesta
                 if( new_team1_selected[contestant_id] ){
                     new_team1_selected[contestant_id] = false;
 
-                    if(((contestant_id != team1_selected_contestants[0]) &&
-                            (contestant_id != team1_selected_contestants[1]) &&
-                            (contestant_id != team1_selected_contestants[2]))){
-                        ret[1]=true;//increment strenght
+                    if(!playing1[contestant_id]){
+                        ret[1] = true; //increment strength
                     }
 
                 }
@@ -229,31 +239,52 @@ public class MContestantsBench implements IContestantsBenchContestant, IContesta
                     e.printStackTrace();
                 }
 
+                /*  check if player is going to play the next trial  */
+                playing1[contestant_id] = false;
+                for (int j = 0; j < n_players_pushing; j++){
+                    if (team1_selected_contestants[j] == contestant_id){
+                    /*  know that contestant is playing  */
+                        playing1[contestant_id] = true;
+                        break;
+                    }
+                }
+
             }
 
         }else if(team_id == 2){
-            while (
-                    ((!this.contestants_called) ||
-                    ((contestant_id != team2_selected_contestants[0]) &&
-                            (contestant_id != team2_selected_contestants[1]) &&
-                            (contestant_id != team2_selected_contestants[2])))
-                    ||
-                            this.match_ended
-                    ){
+
+
+            /*  if array is not created, create it  */
+            if(playing2 == null){
+                playing2 = new boolean[n_players];
+                Arrays.fill(playing2, false);
+            }
+
+
+            /*  check if player is going to play the next trial  */
+            playing2[contestant_id] = false;
+            for (int j = 0; j < n_players_pushing; j++){
+                if (team2_selected_contestants[j] == contestant_id){
+                    /*  know that contestant is playing  */
+                    playing2[contestant_id] = true;
+                    break;
+                }
+            }
+
+
+            while ( !this.contestants_called || !playing2[contestant_id] || this.match_ended ){
 
 
                 if(this.match_ended){
-                    ret[1]=false;//not increment by default
+                    ret[1] = false;//not increment by default
                     return ret;
                 }
 
                 if( new_team2_selected[contestant_id] ){
                     new_team2_selected[contestant_id] = false;
 
-                    if(((contestant_id != team2_selected_contestants[0]) &&
-                            (contestant_id != team2_selected_contestants[1]) &&
-                            (contestant_id != team2_selected_contestants[2]))){
-                        ret[1]=true;
+                    if(!playing2[contestant_id]){
+                        ret[1] = true;
                     }
 
                 }
@@ -265,6 +296,15 @@ public class MContestantsBench implements IContestantsBenchContestant, IContesta
                 }
 
 
+                /*  check if player is going to play the next trial  */
+                playing2[contestant_id] = false;
+                for (int j = 0; j < n_players_pushing; j++){
+                    if (team2_selected_contestants[j] == contestant_id){
+                    /*  know that contestant is playing  */
+                        playing2[contestant_id] = true;
+                        break;
+                    }
+                }
             }
         }
 
@@ -282,7 +322,7 @@ public class MContestantsBench implements IContestantsBenchContestant, IContesta
         }
 
         this.n_contestants_called += 1;
-        if (this.n_contestants_called >= 6){
+        if (this.n_contestants_called >= n_players_pushing * 2){
             this.contestants_called = false; // the last contestant to get here, resets the seatDown flag
             this.n_contestants_called = 0;
         }
@@ -290,7 +330,7 @@ public class MContestantsBench implements IContestantsBenchContestant, IContesta
 
         /*  when all the players have followed the advice, wake up coach  */
         this.advice_followed += 1;
-        if(this.advice_followed >= 6){
+        if(this.advice_followed >= n_players_pushing * 2){
             this.followed_coach_advice = true;
             this.advice_followed = 0;
             notifyAll();
@@ -356,7 +396,7 @@ public class MContestantsBench implements IContestantsBenchContestant, IContesta
      * Contestants sleep until trial is started
      *
      */
-    public synchronized void getReady()
+    public synchronized void getReady(int n_players_pushing)
     {
 
         /*  wait for every contestant to be ready  */
@@ -370,7 +410,7 @@ public class MContestantsBench implements IContestantsBenchContestant, IContesta
         }
 
         this.n_ready_contestants_started += 1;
-        if(this.n_ready_contestants_started >= 6){
+        if(this.n_ready_contestants_started >= n_players_pushing * 2){
             /*  restore contestants value for next trial  */
             this.n_ready_contestants_started = 0;
             this.trial_started = false;

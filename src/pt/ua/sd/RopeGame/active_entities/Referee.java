@@ -31,8 +31,12 @@ public class Referee extends Thread {
     private IRefereeSiteReferee referee_site;//represents the referee site shared memory
     private IPlaygroundReferee playground;//represents the playground shared memory
     private IRepoReferee repo;//represents the general info repository of shared memory
-    private int nock_dif;//number of the max deslocation of the rope at the end of trial to decide a knockout
-    private int cont_nr;//number of contestants
+    private int n_players;//number of players in each team, defined in rg.config
+    private int n_players_pushing;//number of players in each team pushing at any given trial, defined in rg.config
+    private int n_trials;//number of trials, defined in rg.config
+    private int n_games;//number of games, defined in rg.config
+    private int knockDif;//number of knockout difference needed to win, defined in rg.config
+
 
 
     /**
@@ -46,13 +50,17 @@ public class Referee extends Thread {
                    IRefereeSiteReferee referee_site,
                    IContestantsBenchReferee contestants_bench,
                    IRepoReferee repo,
-                   int nock_dif, int cont_nr){
+                   int n_players, int n_players_pushing,
+                   int n_trials, int n_games, int knockDif){
         this.playground = playground;
         this.referee_site = referee_site;
         this.contestants_bench = contestants_bench;
         this.repo = repo;
-        this.nock_dif = nock_dif;
-        this.cont_nr = cont_nr;
+        this.n_players = n_players;
+        this.n_players_pushing = n_players_pushing;
+        this.n_trials = n_trials;
+        this.n_games = n_games;
+        this.knockDif = knockDif;
     }
 
 
@@ -68,9 +76,8 @@ public class Referee extends Thread {
         int gamesWon_T1=0;//score of games for team 1
         int gamesWon_T2=0;//score of games for team 2
 
-        //repo.updContestant_nr(this.cont_nr);//update the number of contestants in the repo
         RefState state = RefState.START_OF_THE_MATCH;
-        Boolean has_next_trial = true;
+        Boolean has_next_trial;
         Boolean MATCH_ENDED = false;//flag for end the life cycle
         repo.refereeLog(state, trial_number);//update refereee state in central info repository
 
@@ -103,7 +110,7 @@ public class Referee extends Thread {
                 case WAIT_FOR_TRIAL_CONCLUSION:
                     TrialStat unpack;
                     GameStat game_result=null;
-                    unpack = this.playground.assertTrialDecision(this.nock_dif);
+                    unpack = this.playground.assertTrialDecision(n_players_pushing, knockDif);
                     has_next_trial = unpack.isHas_next_trial();
                     repo.updtRopeCenter(unpack.getCenter_rope());//update rope center in central info repository
                     switch (unpack.getWonType()){
@@ -134,7 +141,7 @@ public class Referee extends Thread {
 
                     repo.refereeLog(state, trial_number);//update the referee state in central info repo
                     /*  if the trial decision says that there is a next trial, the referee has to call it  */
-                    if (has_next_trial == true) {
+                    if (has_next_trial) {
                         this.repo.updtRopeCenter(Integer.MAX_VALUE);//MAX_VALUE hides/resets the rope center in the log
                         this.contestants_bench.callTrial();//new trial
                         /*  when new trial is called, increment trial number  */
@@ -144,7 +151,7 @@ public class Referee extends Thread {
                     /*  if not, the referee needs to declare a game winner  */
                     else{
 
-                        game_result=this.referee_site.declareGameWinner(score_T1,score_T2,knock_out);
+                        game_result=this.referee_site.declareGameWinner(score_T1, score_T2, knock_out, n_games);
                         if(game_result.getWinnerTeam() == 1)
                         {
                             gamesWon_T1 +=1;//increase nr of games won by team 1
@@ -164,7 +171,7 @@ public class Referee extends Thread {
                     break;
                 case END_OF_A_GAME:
 
-                    if(this.referee_site.getN_games() > this.referee_site.getN_games_played()){//if less than 3 games played
+                    if(n_games > this.referee_site.getN_games_played()){//if less than 3 games played
                         this.referee_site.announceNewGame();//new game announced
                         repo.updGame_nr();//updte the nr of games in central info repo
                         state = RefState.START_OF_A_GAME;
