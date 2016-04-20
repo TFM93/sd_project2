@@ -31,10 +31,7 @@ public class Referee extends Thread {
     private IRefereeSiteReferee referee_site;//represents the referee site shared memory
     private IPlaygroundReferee playground;//represents the playground shared memory
     private IRepoReferee repo;//represents the general info repository of shared memory
-    private int n_players;//number of players in each team, defined in rg.config
-    private int n_players_pushing;//number of players in each team pushing at any given trial, defined in rg.config
-    private int n_trials;//number of trials, defined in rg.config
-    private int n_games;//number of games, defined in rg.config
+    private int nock_dif;
 
 
     /**
@@ -48,16 +45,12 @@ public class Referee extends Thread {
                    IRefereeSiteReferee referee_site,
                    IContestantsBenchReferee contestants_bench,
                    IRepoReferee repo,
-                   int n_players, int n_players_pushing,
-                   int n_trials, int n_games){
+                   int nock_dif){
         this.playground = playground;
         this.referee_site = referee_site;
         this.contestants_bench = contestants_bench;
         this.repo = repo;
-        this.n_players = n_players;
-        this.n_players_pushing = n_players_pushing;
-        this.n_trials = n_trials;
-        this.n_games = n_games;
+        this.nock_dif = nock_dif;
     }
 
 
@@ -107,7 +100,7 @@ public class Referee extends Thread {
                 case WAIT_FOR_TRIAL_CONCLUSION:
                     TrialStat unpack;
                     GameStat game_result=null;
-                    unpack = this.playground.assertTrialDecision();
+                    unpack = this.playground.assertTrialDecision(this.nock_dif);
                     has_next_trial = unpack.isHas_next_trial();
                     repo.updtRopeCenter(unpack.getCenter_rope());//update rope center in central info repository
                     switch (unpack.getWonType()){
@@ -171,13 +164,13 @@ public class Referee extends Thread {
                     if(this.referee_site.getN_games() > this.referee_site.getN_games_played()){//if less than 3 games played
                         this.referee_site.announceNewGame();//new game announced
                         repo.updGame_nr();//updte the nr of games in central info repo
-                        state = state.START_OF_A_GAME;
+                        state = RefState.START_OF_A_GAME;
                         repo.refereeLog(state, trial_number);//update the referee state in central info repo
                         repo.Addheader(false);//add header with the nr of games in central info repo
                         trial_number = 0;//reset nr of trials played
                         break;
                     }
-                    state = state.END_OF_A_MATCH;
+                    state = RefState.END_OF_A_MATCH;
                     int match_winner = this.contestants_bench.declareMatchWinner(gamesWon_T1,gamesWon_T2);//declaring the match winner
                     repo.refereeLog(state, trial_number);//update the referee state in central info repo
                     repo.printMatchResult(match_winner,gamesWon_T1,gamesWon_T2);//update the centrla info repo with the winner of the match

@@ -32,6 +32,7 @@ public class RopeGame {
         int players_pushing=0;
         int n_trials=0;
         int n_games=0;
+        int nockDif=0;
 
         try {
             Properties p = new Properties();
@@ -42,6 +43,8 @@ public class RopeGame {
             players_pushing = Integer.parseInt(p.getProperty("N_PLAYERS_PUSHING"));
             n_trials = Integer.parseInt(p.getProperty("N_TRIALS"));
             n_games = Integer.parseInt(p.getProperty("N_GAMES"));
+            nockDif = Integer.parseInt(p.getProperty("NOCKOUT_DIF"));
+
 
 
         } catch (IOException e) {
@@ -50,20 +53,20 @@ public class RopeGame {
         }
 
         Coach coach_team1 = new Coach(1, 1,
-                (IPlaygroundCoach) playground,
-                (IRefereeSiteCoach) refereeSite,
-                (IContestantsBenchCoach) bench,
-                (IRepoCoach) repo,
+                playground,
+                refereeSite,
+                bench,
+                repo,
                 players_team,
                 players_pushing,
                 n_trials,
                 n_games
         );
         Coach coach_team2 = new Coach(2, 2,
-                (IPlaygroundCoach) playground,
-                (IRefereeSiteCoach) refereeSite,
-                (IContestantsBenchCoach) bench,
-                (IRepoCoach) repo,
+                playground,
+                refereeSite,
+                bench,
+                repo,
                 players_team,
                 players_pushing,
                 n_trials,
@@ -71,14 +74,11 @@ public class RopeGame {
         );
 
         Referee ref = new Referee(
-                (IPlaygroundReferee) playground,
-                (IRefereeSiteReferee) refereeSite,
-                (IContestantsBenchReferee) bench,
-                (IRepoReferee) repo,
-                players_team,
-                players_pushing,
-                n_trials,
-                n_games);
+                playground,
+                refereeSite,
+                bench,
+                repo,
+                nockDif);
 
 
         Random rn = new Random();

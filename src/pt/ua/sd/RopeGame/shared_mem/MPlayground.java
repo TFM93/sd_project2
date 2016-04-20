@@ -126,9 +126,10 @@ public class MPlayground implements IPlaygroundContestant, IPlaygroundReferee, I
 
     /**
      * The referee waits until the contestants are done pulling the rope and the asserts the trial winner
+     * @param kDif knock out histerese , if the rope deslocation is bigger than this value then is a knockout
      * @return trial_stats
      */
-    public synchronized TrialStat assertTrialDecision() {
+    public synchronized TrialStat assertTrialDecision(int kDif) {
 
         boolean decision = false;
         WonType decision_type = WonType.NONE;
@@ -154,7 +155,7 @@ public class MPlayground implements IPlaygroundContestant, IPlaygroundReferee, I
             winner = 0;//none winner
 
         }
-        else if(center_rope> 4 || center_rope<-4)
+        else if(center_rope> kDif || center_rope<-kDif)
         {
             decision_type = WonType.KNOCKOUT;
         }

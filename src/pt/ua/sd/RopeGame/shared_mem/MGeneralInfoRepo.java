@@ -93,7 +93,7 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
      */
     public synchronized void Addheader(boolean first)
     {
-        String temp="";//temporary string
+        String temp;//temporary string
 
         if(first) {
             temp="                               Game of the Rope - Description of the internal state" +
@@ -122,13 +122,13 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
     public synchronized void coachLog(int team_id, CoachState state) {
         switch (state){
             case WAIT_FOR_REFEREE_COMMAND:
-                this.coach_state[team_id - 1] = coachStates.WRC;
+                coach_state[team_id - 1] = coachStates.WRC;
                 break;
             case ASSEMBLE_TEAM:
-                this.coach_state[team_id - 1] = coachStates.AST;
+                coach_state[team_id - 1] = coachStates.AST;
                 break;
             case WATCH_TRIAL:
-                this.coach_state[team_id - 1] = coachStates.WTR;
+                coach_state[team_id - 1] = coachStates.WTR;
                 break;
         }
 
@@ -185,7 +185,7 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
      */
     public synchronized void printMatchResult(int winner,int score1, int score2)
     {
-        String temp="";
+        String temp;
         if(score1 != score2)
         {
             temp = "Match was won by team"+ winner+" ("+score1+"-"+score2+").\n";
@@ -251,64 +251,64 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
         switch (state){
             case SEAT_AT_THE_BENCH:
                 if(team_id == 1){
-                    this.team1_state[id] = contestantStates.SAB;
-                    this.team1_strength[id] = strength;
+                    team1_state[id] = contestantStates.SAB;
+                    team1_strength[id] = strength;
 
-                    if(this.contestants_team1[0] == id){
-                        this.contestants_team1[0] = -1;
-                    }else if(this.contestants_team1[1] == id){
-                        this.contestants_team1[1] = -1;
-                    }else if(this.contestants_team1[2] == id){
-                        this.contestants_team1[2] = -1;
+                    if(contestants_team1[0] == id){
+                        contestants_team1[0] = -1;
+                    }else if(contestants_team1[1] == id){
+                        contestants_team1[1] = -1;
+                    }else if(contestants_team1[2] == id){
+                        contestants_team1[2] = -1;
                     }
                 }else if (team_id == 2){
-                    this.team2_state[id] = contestantStates.SAB;
-                    this.team2_strength[id] = strength;
+                    team2_state[id] = contestantStates.SAB;
+                    team2_strength[id] = strength;
 
-                    if(this.contestants_team2[0] == id){
-                        this.contestants_team2[0] = -1;
-                    }else if(this.contestants_team2[1] == id){
-                        this.contestants_team2[1] = -1;
-                    }else if(this.contestants_team2[2] == id){
-                        this.contestants_team2[2] = -1;
+                    if(contestants_team2[0] == id){
+                        contestants_team2[0] = -1;
+                    }else if(contestants_team2[1] == id){
+                        contestants_team2[1] = -1;
+                    }else if(contestants_team2[2] == id){
+                        contestants_team2[2] = -1;
                     }
                 }
 
                 break;
             case STAND_IN_POSITION:
                 if(team_id == 1){
-                    this.team1_state[id] = contestantStates.SIP;
-                    this.team1_strength[id] = strength;
+                   team1_state[id] = contestantStates.SIP;
+                    team1_strength[id] = strength;
 
-                    if(this.contestants_team1[0] == -1){
-                        this.contestants_team1[0] = id;
-                    }else if(this.contestants_team1[1] == -1){
-                        this.contestants_team1[1] = id;
-                    }else if(this.contestants_team1[2] == -1){
-                        this.contestants_team1[2] = id;
+                    if(contestants_team1[0] == -1){
+                        contestants_team1[0] = id;
+                    }else if(contestants_team1[1] == -1){
+                        contestants_team1[1] = id;
+                    }else if(contestants_team1[2] == -1){
+                        contestants_team1[2] = id;
                     }
                 }else if (team_id == 2){
-                    this.team2_state[id] = contestantStates.SIP;
-                    this.team2_strength[id] = strength;
+                    team2_state[id] = contestantStates.SIP;
+                    team2_strength[id] = strength;
 
-                    if(this.contestants_team2[0] == -1){
-                        this.contestants_team2[0] = id;
-                    }else if(this.contestants_team2[1] == -1){
-                        this.contestants_team2[1] = id;
-                    }else if(this.contestants_team2[2] == -1){
-                        this.contestants_team2[2] = id;
+                    if(contestants_team2[0] == -1){
+                        contestants_team2[0] = id;
+                    }else if(contestants_team2[1] == -1){
+                        contestants_team2[1] = id;
+                    }else if(contestants_team2[2] == -1){
+                        contestants_team2[2] = id;
                     }
                 }
                 break;
             case DO_YOUR_BEST:
                 if(team_id == 1){
-                    this.team1_state[id] = contestantStates.DYB;
-                    this.team1_strength[id] = strength;
+                    team1_state[id] = contestantStates.DYB;
+                    team1_strength[id] = strength;
 
 
                 }else if (team_id == 2){
-                    this.team2_state[id] = contestantStates.DYB;
-                    this.team2_strength[id] = strength;
+                    team2_state[id] = contestantStates.DYB;
+                    team2_strength[id] = strength;
 
 
                 }
@@ -373,7 +373,7 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
     /**
      * writes the text present in TO_WRITE buffer to file
      */
-    public synchronized void writeToFile(){
+    private synchronized void writeToFile(){
         //use buffering
 
         try {
@@ -393,7 +393,7 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
     /**
      * deletes the RopeGame.log file
      */
-    public void deleteFile()
+    private void deleteFile()
     {
         try {
             Files.delete(OUTPUT_FILE.toPath());
