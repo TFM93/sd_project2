@@ -26,7 +26,7 @@ public class RopeGame {
         MRefereeSite refereeSite = new MRefereeSite();
         MPlayground playground = new MPlayground();
         MContestantsBench bench = new MContestantsBench();
-        MGeneralInfoRepo repo = new MGeneralInfoRepo();
+
 
         int players_team=0;
         int players_pushing=0;
@@ -51,6 +51,9 @@ public class RopeGame {
             e.printStackTrace();
             System.exit(0);
         }
+
+
+        MGeneralInfoRepo repo = new MGeneralInfoRepo(players_team);
 
         Coach coach_team1 = new Coach(1, 1,
                 playground,
@@ -78,7 +81,8 @@ public class RopeGame {
                 refereeSite,
                 bench,
                 repo,
-                nockDif);
+                nockDif,
+                players_team);
 
 
         Random rn = new Random();

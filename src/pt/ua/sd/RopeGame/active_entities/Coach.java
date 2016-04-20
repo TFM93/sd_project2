@@ -65,7 +65,7 @@ public class Coach extends Thread {
      * Thread life cycle
      */
     public void run() {
-
+        //repo.updContestant_nr(this.n_players);
         CoachState state = CoachState.WAIT_FOR_REFEREE_COMMAND;//initial state
         repo.coachLog(this.team_id, state);//update repo
         boolean match_not_over = true;

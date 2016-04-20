@@ -54,8 +54,10 @@ public class MContestantsBench implements IContestantsBenchContestant, IContesta
     private int n_ready_contestants_started;//nr of contestants that started trial and are ready
     private boolean followed_coach_advice;//flag for follow coach advice, true when the advce is followed
     /*team strenght*/
-    private int[] team1_strength = {0, 0, 0, 0, 0};
-    private int[] team2_strength = {0, 0, 0, 0, 0};
+//    private int[] team1_strength = {0, 0, 0, 0, 0};
+    //private int[] team2_strength = {0, 0, 0, 0, 0};
+    private int[] team1_strength;
+    private int[] team2_strength;
 
     private boolean match_ended = false;//flag for match ended, true if ended
 
@@ -171,6 +173,16 @@ public class MContestantsBench implements IContestantsBenchContestant, IContesta
             }
         }
 
+
+        if(this.team1_strength == null){
+            this.team1_strength = new int[n_players];
+            Arrays.fill(this.team1_strength,0);
+        }
+
+        if(this.team2_strength == null){
+            this.team2_strength = new int[n_players];
+            Arrays.fill(this.team2_strength,0);
+        }
 
         if(team_id == 1){
             this.team1_strength[contestant_id] = strength;

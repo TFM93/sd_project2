@@ -51,11 +51,14 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
     private static int[] contestants_team1 = {-1, -1, -1};
     private static int[] contestants_team2 = {-1, -1, -1};
 
+//    private int contestant_nr=5;
+
     /**
      * Constructor
      */
-    public MGeneralInfoRepo()
+    public MGeneralInfoRepo(int contestant_nr)
     {
+
         LOG_LOCATION = "RopeGame.log";
         TO_WRITE="";//nothing needs to be written now
         OUTPUT_FILE = new File(LOG_LOCATION);
@@ -70,21 +73,45 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
             coach_state[i]= coachStates.NON;
         }
 
-        team1_state = new contestantStates[5];
-        team2_state = new contestantStates[5];
+        team1_state = new contestantStates[contestant_nr];
+        team2_state = new contestantStates[contestant_nr];
+        System.out.println("team 1 size: "+team1_state.length);
         for (int i=0;i<team1_state.length;i++) {
             team1_state[i]= contestantStates.NON;
             team2_state[i]= contestantStates.NON;
         }
 
-        team1_strength = new int[5];
-        team2_strength = new int[5];
+        team1_strength = new int[contestant_nr];
+        team2_strength = new int[contestant_nr];
+        System.out.println("team strengt size: " + team1_strength.length);
         for (int i=0;i<team1_strength.length;i++) {
             team1_strength[i] = 0;
             team2_strength[i] = 0;
         }
 
         Addheader(true);//add initial header
+    }
+
+    /**
+     * function to update the number of contestants in the game
+     * @param contestant_nr number of contestants per team
+     */
+    public synchronized void updContestant_nr(int contestant_nr)
+    {
+/*        this.contestant_nr= contestant_nr;
+        team1_state = new contestantStates[contestant_nr];
+        team2_state = new contestantStates[contestant_nr];
+        for (int i=0;i<team1_state.length;i++) {
+            team1_state[i]= contestantStates.NON;
+            team2_state[i]= contestantStates.NON;
+        }
+
+        team1_strength = new int[contestant_nr];
+        team2_strength = new int[contestant_nr];
+        for (int i=0;i<team1_strength.length;i++) {
+            team1_strength[i] = 0;
+            team2_strength[i] = 0;
+        }*/
     }
 
     /**

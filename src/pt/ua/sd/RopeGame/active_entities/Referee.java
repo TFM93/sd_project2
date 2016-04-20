@@ -31,7 +31,8 @@ public class Referee extends Thread {
     private IRefereeSiteReferee referee_site;//represents the referee site shared memory
     private IPlaygroundReferee playground;//represents the playground shared memory
     private IRepoReferee repo;//represents the general info repository of shared memory
-    private int nock_dif;
+    private int nock_dif;//number of the max deslocation of the rope at the end of trial to decide a knockout
+    private int cont_nr;//number of contestants
 
 
     /**
@@ -45,12 +46,13 @@ public class Referee extends Thread {
                    IRefereeSiteReferee referee_site,
                    IContestantsBenchReferee contestants_bench,
                    IRepoReferee repo,
-                   int nock_dif){
+                   int nock_dif, int cont_nr){
         this.playground = playground;
         this.referee_site = referee_site;
         this.contestants_bench = contestants_bench;
         this.repo = repo;
         this.nock_dif = nock_dif;
+        this.cont_nr = cont_nr;
     }
 
 
@@ -66,6 +68,7 @@ public class Referee extends Thread {
         int gamesWon_T1=0;//score of games for team 1
         int gamesWon_T2=0;//score of games for team 2
 
+        //repo.updContestant_nr(this.cont_nr);//update the number of contestants in the repo
         RefState state = RefState.START_OF_THE_MATCH;
         Boolean has_next_trial = true;
         Boolean MATCH_ENDED = false;//flag for end the life cycle

@@ -71,7 +71,7 @@ public class Contestant extends Thread {
      * Thread life cycle
      */
     public void run() {
-
+        //repo.updContestant_nr(this.n_players);
         ContestantState state = ContestantState.START;//initial state
         boolean[] unpack = new boolean[2];//for receive return from follow coach advice
         unpack[0]=false;//def
