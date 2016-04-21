@@ -22,6 +22,10 @@ public class CoachBenchMessage extends Message{
      * inform referee, enviado pelo coach
      */
     public static final int INFORMREF = 2;
+
+    /**
+     * private fields
+     */
     private int team_id;
     private int n_players;
     private int[] selected_contestants=null;
