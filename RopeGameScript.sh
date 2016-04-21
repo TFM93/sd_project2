@@ -75,7 +75,7 @@ sshpass -p $password ssh -f $username@$playgHostName java -jar jars/playg.jar $c
 sleep 2
 
 printf "\nStarting Referee Client ($refereeHostName) ...\n"
-sshpass -p $password ssh -f $username@$refereeHostName java -jar jars/entrepreneur.jar $configurationHostName $configurationPortNum
+sshpass -p $password ssh -f $username@$refereeHostName java -jar jars/referee.jar $configurationHostName $configurationPortNum
 sleep 2
 
 printf "\nStarting Coach Client ($coachHostName) ...\n"
