@@ -15,9 +15,19 @@ public class RefereeRefSiteMessage extends Message {
     private static final long serialVersionUID = 180415L;
 
     /**
-     * assert trial decision, enviado pelo refereee
+     * announce new game, enviado pelo refereee
      */
-    private static final int ATD=1;
+    private static final int ANG=1;
+
+    /**
+     * declare game winner, enviado pelo refereee
+     */
+    private static final int DGW=1;
+
+    /**
+     * get number of games played, enviado pelo refereee
+     */
+    private static final int GNGP=1;
 
     /**
      * terminate message, enviado pelo referee
@@ -29,6 +39,8 @@ public class RefereeRefSiteMessage extends Message {
      */
     private int score_T1=-1;
     private int score_T2 =-1;
+    private int knock_out=-1;
+    private int n_games=-1;
 
     public RefereeRefSiteMessage(int type){
         super(type);
@@ -36,6 +48,9 @@ public class RefereeRefSiteMessage extends Message {
 
     public RefereeRefSiteMessage(int type, int score_T1, int score_T2, int knock_out, int n_games){
         super(type);
-
+        this.score_T1=score_T1;
+        this.score_T2=score_T2;
+        this.knock_out=knock_out;
+        this.n_games=n_games;
     }
 }
