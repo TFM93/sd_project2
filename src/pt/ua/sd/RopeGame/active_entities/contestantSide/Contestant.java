@@ -1,4 +1,4 @@
-package pt.ua.sd.RopeGame.active_entities;
+package pt.ua.sd.RopeGame.active_entities.contestantSide;
 
 
 import pt.ua.sd.RopeGame.enums.ContestantState;
