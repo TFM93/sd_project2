@@ -95,12 +95,6 @@ public class Configuration {
      */
     private int nTrials;
 
-    /**
-     * Number of players
-     *
-     * @serialField nContestants
-     */
-    private int nContestants;
 
     /**
      * Number of players pushing the rope
@@ -208,4 +202,117 @@ public class Configuration {
         return logFileName;
     }
 
+
+    /**
+     * get referee site host name
+     * @return host name
+     */
+    public String getRefSiteHostName() {
+        return refSiteHostName;
+    }
+
+    /**
+     * get referee site port number
+     * @return port number
+     */
+    public int getRefSitePortNum() {
+        return refSitePortNum;
+    }
+
+    /**
+     * get bench host name
+     * @return host name
+     */
+    public String getBenchHostName() {
+        return benchHostName;
+    }
+
+    /**
+     * get bench port number
+     * @return port number
+     */
+    public int getBenchPortNum() {
+        return benchPortNum;
+    }
+
+    /**
+     * get playground host name
+     * @return host name
+     */
+    public String getPlayGHostName() {
+        return playGHostName;
+    }
+
+    /**
+     * get referee's host name
+     * @return host name
+     */
+    public String getRefHostName() {
+        return refHostName;
+    }
+
+    /**
+     * get coach host name
+     * @return host name
+     */
+    public String getCoachHostName() {
+        return coachHostName;
+    }
+
+    /**
+     * get contestant host name
+     * @return host name
+     */
+    public String getContestantHostName() {
+        return contestantHostName;
+    }
+
+    /**
+     * get playground port number
+     * @return port number
+     */
+    public int getPlayGPortNum() {
+        return playGPortNum;
+    }
+
+    /**
+     * get number of trials
+     * @return number of trials
+     */
+    public int getnTrials() {
+        return nTrials;
+    }
+
+
+    /**
+     * get number of players pushing the rope
+     * @return number of players pushing the rope
+     */
+    public int getnPlayersPushing() {
+        return nPlayersPushing;
+    }
+
+    /**
+     * get number of total games
+     * @return number of games
+     */
+    public int getnGames() {
+        return nGames;
+    }
+
+    /**
+     * get the maximum dealocation of the rope for the knockout
+     * @return knockout max dif from de center of rope
+     */
+    public int getKnockDif() {
+        return knockDif;
+    }
+
+    /**
+     * get the number of players
+     * @return number of players
+     */
+    public int getnPlayers() {
+        return nPlayers;
+    }
 }
