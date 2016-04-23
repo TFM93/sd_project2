@@ -9,7 +9,7 @@ public class ContestantPlaygroundMessage extends Message {
      * Serialization key
      * @serialField serialVerisonUID
      */
-    private static final long serialVersionUID = 180415L;
+    private static final long serialVersionUID = 200416L;
 
     /**
      * pull the rope, enviado pelo contestant

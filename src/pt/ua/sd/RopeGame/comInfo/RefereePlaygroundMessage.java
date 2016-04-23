@@ -10,7 +10,7 @@ public class RefereePlaygroundMessage extends Message {
      * Serialization key
      * @serialField serialVersionUID
      */
-    private static final long serialVersionUID = 180415L;
+    private static final long serialVersionUID = 200416L;
 
     /**
      * assert trial decision, enviado pelo refereee

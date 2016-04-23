@@ -8,7 +8,7 @@ public class RefereeBenchMessage extends Message{
      * Serialization key
      * @serialField serialVersionUID
      */
-    private static final long serialVersionUID = 180415L;
+    private static final long serialVersionUID = 200416L;
 
     /* Messages types */
 
