@@ -27,7 +27,7 @@ public class RefereeSiteSideInterface {
     private final int nTerminateMessagesToEnd;
 
     /**
-     * Instantiation of Shop interface
+     * Instantiation of Referee site interface
      * @param ref_site ref_site
      * @param nTerminateMessagesToEnd number of terminate messages to end
      */
@@ -47,16 +47,10 @@ public class RefereeSiteSideInterface {
 
         Message outMessage = null;
 
-        // Verify the instance type of the messase to determine if the sender is the
-        // Entrepreneur, a Crafsman or Customer
+        /*  only the Referee is able to call methods from the referee site  */
         if (inMessage instanceof RefereeRefSiteMessage) {
             outMessage = processAndReplyRefereeMessage((RefereeRefSiteMessage) inMessage);
         }
-        //else if (inMessage instanceof CoachRefSiteMessage) {
-        //    outMessage = processAndReplyCustomerMessage((CoachRefSiteMessage) inMessage);
-        //} else if (inMessage instanceof ContestantRefSiteMessage) {
-        //    outMessage = processAndReplyCraftsmanMessage((ContestantRefSiteMessage) inMessage);
-        //}
         else {
             throw new MessageExcept ("Invalid message instance.", inMessage);
         }
@@ -65,7 +59,7 @@ public class RefereeSiteSideInterface {
     }
 
     /**
-     * Processing of messages from Customers executing its task and generating an answer message.
+     * Processing of messages from the referee executing its task and generating an answer message.
      * @param inMessage message with the request
      * @return answer message
      * @throws MessageExcept if the message with the request is considered invalid
