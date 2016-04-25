@@ -110,7 +110,7 @@ public class RefereeClient {
         con.open();
 
         // Define out message
-        outMessage = new ConfigurationMessage(ConfigurationMessage.GETBENCHDOM);
+        outMessage = new ConfigurationMessage(ConfigurationMessage.GETBENCH);
 
         // Send message
         con.writeObject(outMessage);
@@ -119,7 +119,7 @@ public class RefereeClient {
         inMessage = (ConfigurationMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != ConfigurationMessage.GETBENCHDOMANSWER)) {
+        if ((inMessage.getMsgType() != ConfigurationMessage.GETBENCH_ANSWER)) {
             System.out.println("Invalid message type at " + RefereeClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -151,7 +151,7 @@ public class RefereeClient {
         con.open();
 
         // Define out message
-        outMessage = new ConfigurationMessage(ConfigurationMessage.PLAYGROUNDDOM);
+        outMessage = new ConfigurationMessage(ConfigurationMessage.GETPLAYGROUND);
 
         // Send message
         con.writeObject(outMessage);
@@ -160,7 +160,7 @@ public class RefereeClient {
         inMessage = (ConfigurationMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != ConfigurationMessage.GETWSHOPDOMANSWER)) {
+        if ((inMessage.getMsgType() != ConfigurationMessage.GETPLAYGROUND_ANSWER)) {
             System.out.println("Invalid message type at " + RefereeClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -192,7 +192,7 @@ public class RefereeClient {
         con.open();
 
         // Define out message
-        outMessage = new ConfigurationMessage(ConfigurationMessage.GETREFSITEDOM);
+        outMessage = new ConfigurationMessage(ConfigurationMessage.GET_REF_SITE);
 
         // Send message
         con.writeObject(outMessage);
@@ -201,7 +201,7 @@ public class RefereeClient {
         inMessage = (ConfigurationMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != ConfigurationMessage.GETREFSITEDOMANSWER)) {
+        if ((inMessage.getMsgType() != ConfigurationMessage.GET_REF_SITE_ANS)) {
             System.out.println("Invalid message type at " + RefereeClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -233,7 +233,7 @@ public class RefereeClient {
         con.open();
 
         // Define out message
-        outMessage = new ConfigurationMessage(ConfigurationMessage.GETREPODOM);
+        outMessage = new ConfigurationMessage(ConfigurationMessage.GETREP_DOM);
 
         // Send message
         con.writeObject(outMessage);
@@ -242,7 +242,7 @@ public class RefereeClient {
         inMessage = (ConfigurationMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != ConfigurationMessage.GETREPODOMANSWER)) {
+        if ((inMessage.getMsgType() != ConfigurationMessage.GETREP_ANS_DOM)) {
             System.out.println("Invalid message type at " + RefereeClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -255,6 +255,214 @@ public class RefereeClient {
         Domain conf = new Domain(inMessage.getHostName(), inMessage.getPortNumb());
 
         return conf;
+    }
+
+
+    /**
+     * Get number of players in team configuration.
+     * @return number of players in team
+     */
+    private static int getNPlayersTeamConfiguration(String configurationServerHostname, int configurationServerPortnum) {
+
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
+
+        // In and out message
+        ConfigurationMessage inMessage;
+        ConfigurationMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new ConfigurationMessage(ConfigurationMessage.GET_NPLAYERS);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (ConfigurationMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != ConfigurationMessage.GET_NPLAYERS)) {
+            System.out.println("Invalid message type at " + RefereeClient.class.getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
+
+        // Extract data from message
+        int n_players = inMessage.getArg1();
+
+        return n_players;
+    }
+
+    /**
+     * Get number of player pushing configuration.
+     * @return number of players pushing
+     */
+    private static int getNPlayersPushingConfiguration(String configurationServerHostname, int configurationServerPortnum) {
+
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
+
+        // In and out message
+        ConfigurationMessage inMessage;
+        ConfigurationMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new ConfigurationMessage(ConfigurationMessage.GET_NPLAYERS_PUSHING);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (ConfigurationMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != ConfigurationMessage.GET_NPLAYERS_PUSHING)) {
+            System.out.println("Invalid message type at " + RefereeClient.class.getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
+
+        // Extract data from message
+        int n_players_pushing = inMessage.getArg2();
+
+        return n_players_pushing;
+    }
+
+
+    /**
+     * Get number of games configuration.
+     * @return number of games
+     */
+    private static int getNGamesConfiguration(String configurationServerHostname, int configurationServerPortnum) {
+
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
+
+        // In and out message
+        ConfigurationMessage inMessage;
+        ConfigurationMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new ConfigurationMessage(ConfigurationMessage.GET_NGAMES);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (ConfigurationMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != ConfigurationMessage.GET_NGAMES)) {
+            System.out.println("Invalid message type at " + RefereeClient.class.getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
+
+        // Extract data from message
+        int n_games = inMessage.getArg4();
+
+        return n_games;
+    }
+
+
+    /**
+     * Get number of trials configuration.
+     * @return number of trials
+     */
+    private static int getNTrialsConfiguration(String configurationServerHostname, int configurationServerPortnum) {
+
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
+
+        // In and out message
+        ConfigurationMessage inMessage;
+        ConfigurationMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new ConfigurationMessage(ConfigurationMessage.GET_NTRIALS);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (ConfigurationMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != ConfigurationMessage.GET_NTRIALS_ANS)) {
+            System.out.println("Invalid message type at " + RefereeClient.class.getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
+
+        // Extract data from message
+        int n_trials = inMessage.getArg3();
+
+        return n_trials;
+    }
+
+    /**
+     * Get number of trials configuration.
+     * @return number of trials
+     */
+    private static int getKnockoutDifConfiguration(String configurationServerHostname, int configurationServerPortnum) {
+
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
+
+        // In and out message
+        ConfigurationMessage inMessage;
+        ConfigurationMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new ConfigurationMessage(ConfigurationMessage.GET_KNOCK_DIF);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (ConfigurationMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != ConfigurationMessage.GET_KNOCK_DIF_ANS)) {
+            System.out.println("Invalid message type at " + RefereeClient.class.getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
+
+        // Extract data from message
+        int knock_dif = inMessage.getArg5();
+
+        return knock_dif;
     }
 
     /**
