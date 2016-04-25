@@ -28,10 +28,10 @@ public class RepoServer {
         RepoProxy cliProxy;         // Agent service provider thread
 
         // Establish the service
- /*       scon = new ServerComChannel(conf.portNumb); // Creation of the listening channel
+        scon = new ServerComm(conf.getPortNumber()); // Creation of the listening channel
         scon.start();
-        repoSite = new MGeneralInfoRepo();                                    // Activation of the service
-        refSiteInterface = new RepoInterface(refereeSite, conf.nEntities);  // Activation of the service interface
+        repoSite = new MGeneralInfoRepo(conf.getNplayers(),conf.getPlayers_pushing(),conf.getNtrials(),conf.getNgames(),conf.getKnockdif());                                    // Activation of the service
+        refSiteInterface = new RepoInterface(repoSite, conf.getnEntities());  // Activation of the service interface
 
         System.out.println("Referee Site: The service was established");
         System.out.println("Referee Site: The server is listening");
@@ -41,7 +41,7 @@ public class RepoServer {
             sconi = scon.accept();                                    // Listening
             cliProxy = new RepoProxy(sconi, refSiteInterface);     // Agent service provider
             cliProxy.start();
-        }*/
+        }
     }
 
 
@@ -78,7 +78,7 @@ public class RepoServer {
         con.close();
 
 
-        RepoConfiguration conf = new RepoConfiguration(inMessage.getHostName(),inMessage.getPortNumb());
+        RepoConfiguration conf = new RepoConfiguration(inMessage.getHostName(),inMessage.getPortNumb(),inMessage.getArg1(),inMessage.getArg2(),inMessage.getArg3(),inMessage.getArg4(),inMessage.getArg5());
         return conf;
     }
 }
