@@ -35,10 +35,6 @@ public class RefereeRepoMessage extends Message {
      */
     public static final int PRINTMATCHRESULT = 4;
 
-    /**
-     * ack message
-     */
-    public static final int ACK=6;
 
     /**
      * terminate message
