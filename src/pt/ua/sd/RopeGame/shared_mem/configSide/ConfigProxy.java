@@ -1,18 +1,15 @@
-package pt.ua.sd.RopeGame.shared_mem.configSide;
+package pt.ua.sd.RopeGame.shared_mem.ConfigSide;
 
 import pt.ua.sd.RopeGame.comInfo.Message;
 import pt.ua.sd.RopeGame.comInfo.MessageExcept;
 
-/**
- * Created by tiagomagalhaes on 23/04/16.
- */
 public class ConfigProxy extends Thread{
 
     /**
      * canal de comunicação
      * @serialField sc
      */
-    private final ServerCom sc;
+    private final ServerComChannel sc;
 
 
     /**
@@ -21,26 +18,24 @@ public class ConfigProxy extends Thread{
      */
     private static int nInstances;
 
-    public ConfigProxy(ServerCom sc){
+    /**
+     * Instantiation of the configuration client proxy.
+     * @param sc communication channel
+     * @param configInterf interface to Configuration
+     */
+    public ConfigProxy(ServerComChannel sc, ConfigInterface configInterf){
+        super("Configuration_Proxy_" + getProxyId());
         this.sc=sc;
+        this.configInterf = configInterf;
     }
 
     /**
      * Interface to Configuration
      * @serialField configInterf
      */
-    private configInterface configInterf;
+    private final ConfigInterface configInterf;
 
-    /**
-     * Instantiation of the configuration client proxy.
-     * @param sc communication channel
-     * @param confint interface to Configuration
-     */
-    public ConfigProxy(ServerCom sc, configInterface confint) {
-        super("Configuration_Proxy_" + getProxyId());
-        this.sc = sc;
-        this.configInterf = confint;
-    }
+
 
 
 
@@ -78,13 +73,13 @@ public class ConfigProxy extends Thread{
      */
     private static int getProxyId() {
 
-        Class<pt.ua.sd.RopeGame.shared_mem.configSide.ConfigProxy> cl = null;
+        Class<pt.ua.sd.RopeGame.shared_mem.ConfigSide.ConfigProxy> cl = null;
         int proxyId;                            // intantiation identifier
 
         try {
-            cl = (Class<pt.ua.sd.RopeGame.shared_mem.configSide.ConfigProxy>) Class.forName("pt.ua.sd.RopeGame.shared_mem.configSide.ConfigProxy");
+            cl = (Class<pt.ua.sd.RopeGame.shared_mem.ConfigSide.ConfigProxy>) Class.forName("pt.ua.sd.RopeGame.shared_mem.ConfigSide.ConfigProxy");
         } catch (ClassNotFoundException e) {
-            System.out.println("The data type ConfigurationClientProxy wasn't found!");
+            System.out.println("The data type ConfigProxy wasn't found!");
             e.printStackTrace();
             System.exit(1);
         }

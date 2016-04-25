@@ -1,11 +1,8 @@
 package pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide;
 
 import pt.ua.sd.RopeGame.comInfo.ConfigurationMessage;
-import pt.ua.sd.RopeGame.shared_mem.configSide.ServerCom;
+import pt.ua.sd.RopeGame.shared_mem.ConfigSide.ServerComChannel;
 
-/**
- * Created by ivosilva on 24/04/16.
- */
 public class RefereeSiteServer {
 
     /**
@@ -31,11 +28,11 @@ public class RefereeSiteServer {
 
         MRefereeSite refereeSite;                        // Referee site
         RefereeSiteSideInterface refSiteInterface;       // Interface to Referee Site
-        ServerCom scon, sconi;            // Communication channels
+        ServerComChannel scon, sconi;            // Communication channels
         RefereeSiteClientProxy cliProxy;         // Agent service provider thread
 
         // Establish the service
-        scon = new ServerCom(conf.portNumb); // Creation of the listening channel
+        scon = new ServerComChannel(conf.portNumb); // Creation of the listening channel
         scon.start();
         refereeSite = new MRefereeSite();                                    // Activation of the service
         refSiteInterface = new RefereeSiteSideInterface(refereeSite, conf.nEntities);  // Activation of the service interface

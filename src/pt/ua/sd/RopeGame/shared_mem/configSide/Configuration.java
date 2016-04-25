@@ -1,4 +1,4 @@
-package pt.ua.sd.RopeGame.shared_mem.configSide;
+package pt.ua.sd.RopeGame.shared_mem.ConfigSide;
 
 import java.io.File;
 import java.io.FileInputStream;

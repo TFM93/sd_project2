@@ -2,11 +2,9 @@ package pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide;
 
 import pt.ua.sd.RopeGame.comInfo.Message;
 import pt.ua.sd.RopeGame.comInfo.MessageExcept;
-import pt.ua.sd.RopeGame.shared_mem.configSide.ServerCom;
+import pt.ua.sd.RopeGame.shared_mem.ConfigSide.ServerComChannel;
 
-/**
- * Created by ivosilva on 24/04/16.
- */
+
 public class RefereeSiteClientProxy extends Thread {
 
     /**
@@ -19,7 +17,7 @@ public class RefereeSiteClientProxy extends Thread {
      * Communication channel
      * @serialField sconi
      */
-    private final ServerCom sconi;
+    private final ServerComChannel sconi;
 
     /**
      * Interface to Referee Site
@@ -32,7 +30,7 @@ public class RefereeSiteClientProxy extends Thread {
      * @param sconi communication channel
      * @param refSiteInterface interface to referee site
      */
-    public RefereeSiteClientProxy(ServerCom sconi, RefereeSiteSideInterface refSiteInterface) {
+    public RefereeSiteClientProxy(ServerComChannel sconi, RefereeSiteSideInterface refSiteInterface) {
         super("Ref_Site_Proxy_" + getProxyId());
         this.sconi = sconi;
         this.refSiteInterface = refSiteInterface;
@@ -44,7 +42,7 @@ public class RefereeSiteClientProxy extends Thread {
     @Override
     public void run() {
 
-        Message inMessage = null;   // In message
+        Message inMessage;   // In message
         Message outMessage = null;  // Out message
 
         // Read input message

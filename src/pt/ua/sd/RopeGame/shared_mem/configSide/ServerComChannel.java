@@ -1,4 +1,4 @@
-package pt.ua.sd.RopeGame.shared_mem.configSide;
+package pt.ua.sd.RopeGame.shared_mem.ConfigSide;
 
 import java.io.*;
 import java.net.*;
@@ -9,7 +9,7 @@ import java.net.*;
  * protocolo TCP. A transferência de dados é baseada em objectos, um objecto de
  * cada vez.
  */
-public class ServerCom {
+public class ServerComChannel {
 
     /**
      * Socket de escuta
@@ -52,7 +52,7 @@ public class ServerCom {
      *
      * @param portNumb número do port de escuta do servidor
      */
-    public ServerCom(int portNumb) {
+    public ServerComChannel(int portNumb) {
         serverPortNumb = portNumb;
     }
 
@@ -62,7 +62,7 @@ public class ServerCom {
      * @param portNumb número do port de escuta do servidor
      * @param lSocket socket de escuta
      */
-    public ServerCom(int portNumb, ServerSocket lSocket) {
+    public ServerComChannel(int portNumb, ServerSocket lSocket) {
         serverPortNumb = portNumb;
         listeningSocket = lSocket;
     }
@@ -113,10 +113,10 @@ public class ServerCom {
      *
      * @return canal de comunicação
      */
-    public ServerCom accept() {
-        ServerCom scon;                                      // canal de comunicação
+    public ServerComChannel accept() {
+        ServerComChannel scon;                                      // canal de comunicação
 
-        scon = new ServerCom(serverPortNumb, listeningSocket);
+        scon = new ServerComChannel(serverPortNumb, listeningSocket);
         try {
             scon.commSocket = listeningSocket.accept();
         } catch (SocketException e) {
