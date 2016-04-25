@@ -107,6 +107,8 @@ public class RefereeSiteSideInterface {
                 break;
             case RefereeRefSiteMessage.GNGP:
                 /*  talk to tiago about this  */
+                int games_played = ref_site.getN_games_played();
+                outMessage = new RefereeRefSiteMessage(RefereeRefSiteMessage.GNGP_ANS, games_played);
                 break;
             case RefereeRefSiteMessage.TERMINATE:
                 nTerminateMessages++;
