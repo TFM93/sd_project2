@@ -1,13 +1,14 @@
-package pt.ua.sd.RopeGame.shared_mem.configSide;
+package pt.ua.sd.RopeGame.shared_mem.ConfigSide;
 
 import pt.ua.sd.RopeGame.comInfo.ConfigurationMessage;
 import pt.ua.sd.RopeGame.comInfo.Message;
 import pt.ua.sd.RopeGame.comInfo.MessageExcept;
+import pt.ua.sd.RopeGame.shared_mem.ConfigSide.Configuration;
 
 /**
  * Created by tiagomagalhaes on 25/04/16.
  */
-public class configInterface {
+public class ConfigInterface {
     /**
      * Repository (it is the service provided)
      * @serialField configuration
@@ -18,7 +19,7 @@ public class configInterface {
      * Instantiation of Configuration interface.
      * @param configuration configuration
      */
-    public configInterface(Configuration configuration) {
+    public ConfigInterface(Configuration configuration) {
         this.configuration = configuration;
     }
 
