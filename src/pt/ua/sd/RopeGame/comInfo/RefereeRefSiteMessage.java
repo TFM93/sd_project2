@@ -42,6 +42,13 @@ public class RefereeRefSiteMessage extends Message {
      */
     public static final int DGW_ANS = 5;
 
+
+    /**
+     * get number of games played
+     */
+    public static final int GNGP_ANS = 6;
+
+
     /**
      * private fields
      */
@@ -50,6 +57,7 @@ public class RefereeRefSiteMessage extends Message {
     private int knock_out=-1;
     private int n_games=-1;
     private GameStat stat=null;
+    private int n_games_played=-1;
 
     public RefereeRefSiteMessage(int type){
         super(type);
@@ -58,6 +66,11 @@ public class RefereeRefSiteMessage extends Message {
     public RefereeRefSiteMessage(int type, GameStat stat){
         super(type);
         this.stat = stat;
+    }
+
+    public RefereeRefSiteMessage(int type, int n_games_played){
+        super(type);
+        this.n_games_played = n_games_played;
     }
 
     public RefereeRefSiteMessage(int type, int score_T1, int score_T2, int knock_out, int n_games){

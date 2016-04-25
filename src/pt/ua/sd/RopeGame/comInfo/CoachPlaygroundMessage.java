@@ -15,18 +15,24 @@ public class CoachPlaygroundMessage extends Message {
     /**
      * review notes , enviado pelo coach
      */
-    private final static int REVIEWNOTES=1;
+    public final static int REVIEWNOTES=1;
     /**
      * terminate, enviado pelo cach
      */
-    private final static int TERMINATE=2;
+    public final static int TERMINATE=2;
     private int n_players_pushing;
+
+    /**
+     * review notes answer , enviado pelo coach
+     */
+    public final static int REVIEWNOTES_ANS=3;
 
     /**
      * private fields
      */
     private int[] selected_contestants;
     private int n_players;
+    private int[] chosen_contestants_after_review;
 
     /**
      * Inicialização da mensagem
@@ -42,6 +48,17 @@ public class CoachPlaygroundMessage extends Message {
         this.n_players_pushing = n_players_pushing;
     }
 
+
+    /**
+     * Inicialização da mensagem
+     * @param type tipo da mensagem
+     * @param chosen_contestants_after_review id dos contestants selecionados
+     */
+    public CoachPlaygroundMessage(int type, int[] chosen_contestants_after_review){
+        super(type);
+        this.chosen_contestants_after_review = chosen_contestants_after_review;
+    }
+
     public int getN_players() {
         return n_players;
     }
@@ -53,4 +70,6 @@ public class CoachPlaygroundMessage extends Message {
     public int getN_players_pushing() {
         return n_players_pushing;
     }
+
+    public int[] getChosen_contestants_after_review(){return chosen_contestants_after_review;}
 }

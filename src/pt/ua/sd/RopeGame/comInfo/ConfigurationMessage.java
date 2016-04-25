@@ -77,6 +77,16 @@ public class ConfigurationMessage extends Message {
 
     public static final int GET_REF_SITE_ANS=30;
 
+    /**
+     * Get referee site
+     */
+    public static final int GET_PLAYGROUND = 39;
+
+    /**
+     * Get referee site answer
+     */
+    public static final int GET_PLAYGROUND_ANS = 40;
+
     /* Messages Fields */
 
     /**
