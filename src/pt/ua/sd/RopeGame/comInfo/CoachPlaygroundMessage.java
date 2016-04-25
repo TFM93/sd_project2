@@ -52,6 +52,15 @@ public class CoachPlaygroundMessage extends Message {
     /**
      * Inicialização da mensagem
      * @param type tipo da mensagem
+     */
+    public CoachPlaygroundMessage(int type){
+        super(type);
+    }
+
+
+    /**
+     * Inicialização da mensagem
+     * @param type tipo da mensagem
      * @param chosen_contestants_after_review id dos contestants selecionados
      */
     public CoachPlaygroundMessage(int type, int[] chosen_contestants_after_review){

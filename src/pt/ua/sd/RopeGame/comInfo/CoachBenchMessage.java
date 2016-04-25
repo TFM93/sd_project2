@@ -44,6 +44,11 @@ public class CoachBenchMessage extends Message{
     private int team_id=-1;
     private int n_players=-1;
     private int[] selected_contestants=null;
+
+    public boolean isMatch_not_ended() {
+        return match_not_ended;
+    }
+
     private boolean match_not_ended = true;
 
     /**
