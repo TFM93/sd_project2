@@ -1,6 +1,7 @@
 package pt.ua.sd.RopeGame.active_entities.refereeSide;
 
 import pt.ua.sd.RopeGame.comInfo.RefereePlaygroundMessage;
+import pt.ua.sd.RopeGame.comInfo.RefereeRefSiteMessage;
 import pt.ua.sd.RopeGame.interfaces.IPlaygroundReferee;
 import pt.ua.sd.RopeGame.structures.TrialStat;
 
@@ -35,7 +36,37 @@ public class RefereePlaygroundBroker implements IPlaygroundReferee {
 
     @Override
     public TrialStat assertTrialDecision(int n_players_pushing, int knockDif) {
-        return null;
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
+
+        // In and out message
+        RefereePlaygroundMessage inMessage;
+        RefereePlaygroundMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new RefereePlaygroundMessage(RefereePlaygroundMessage.ATD, n_players_pushing, knockDif);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (RefereePlaygroundMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != RefereePlaygroundMessage.ATD_ANS)) {
+            System.out.println("Invalid message type at " + this.getClass().getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
+
+        TrialStat stat = inMessage.getStat();
+        return stat;
     }
 
 

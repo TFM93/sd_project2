@@ -37,32 +37,200 @@ public class RefereeRepoBroker implements IRepoReferee {
 
     @Override
     public void refereeLog(RefState state, int trial_number) {
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
 
+        // In and out message
+        RefereeRepoMessage inMessage;
+        RefereeRepoMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new RefereeRepoMessage(RefereeRepoMessage.REFEREELOG, state, trial_number);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (RefereeRepoMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != RefereeRepoMessage.ACK)) {
+            System.out.println("Invalid message type at " + this.getClass().getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
     }
 
     @Override
     public void Addheader(boolean first) {
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
 
+        // In and out message
+        RefereeRepoMessage inMessage;
+        RefereeRepoMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new RefereeRepoMessage(RefereeRepoMessage.ADDHEADER, first);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (RefereeRepoMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != RefereeRepoMessage.ACK)) {
+            System.out.println("Invalid message type at " + this.getClass().getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
     }
 
     @Override
     public void setResult(int team_id, WonType wonType, int nr_trials) {
+
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
+
+        // In and out message
+        RefereeRepoMessage inMessage;
+        RefereeRepoMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new RefereeRepoMessage(RefereeRepoMessage.SETRESULT, team_id, wonType, nr_trials);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (RefereeRepoMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != RefereeRepoMessage.ACK)) {
+            System.out.println("Invalid message type at " + this.getClass().getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
 
     }
 
     @Override
     public void printMatchResult(int winner, int score1, int score2) {
 
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
+
+        // In and out message
+        RefereeRepoMessage inMessage;
+        RefereeRepoMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new RefereeRepoMessage(RefereeRepoMessage.PRINTMATCHRESULT, winner, score1, score2);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (RefereeRepoMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != RefereeRepoMessage.ACK)) {
+            System.out.println("Invalid message type at " + this.getClass().getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
+
     }
 
     @Override
     public void updGame_nr() {
 
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
+
+        // In and out message
+        RefereeRepoMessage inMessage;
+        RefereeRepoMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new RefereeRepoMessage(RefereeRepoMessage.UPDATEGAMENR);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (RefereeRepoMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != RefereeRepoMessage.ACK)) {
+            System.out.println("Invalid message type at " + this.getClass().getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
+
     }
 
     @Override
     public void updtRopeCenter(int center) {
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
 
+        // In and out message
+        RefereeRepoMessage inMessage;
+        RefereeRepoMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new RefereeRepoMessage(RefereeRepoMessage.UPDATEROPECENTER, center);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (RefereeRepoMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != RefereeRepoMessage.ACK)) {
+            System.out.println("Invalid message type at " + this.getClass().getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
     }
 
     /**

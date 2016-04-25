@@ -103,4 +103,12 @@ public class RefereeRefSiteMessage extends Message {
     public int get_n_games(){
         return n_games;
     }
+
+    public GameStat getStat() {
+        return stat;
+    }
+
+    public int getN_games_played() {
+        return n_games_played;
+    }
 }

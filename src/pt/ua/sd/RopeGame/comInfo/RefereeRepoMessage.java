@@ -1,6 +1,7 @@
 package pt.ua.sd.RopeGame.comInfo;
 
 import pt.ua.sd.RopeGame.enums.RefState;
+import pt.ua.sd.RopeGame.enums.WonType;
 
 /**
  * Created by ivosilva on 23/04/16.
@@ -35,11 +36,22 @@ public class RefereeRepoMessage extends Message {
      */
     public static final int PRINTMATCHRESULT = 4;
 
+    /**
+     * Print match results (operation requested by Referee)
+     */
+    public static final int ADDHEADER = 5;
+
+
+    /**
+     * Print match results (operation requested by Referee)
+     */
+    public static final int SETRESULT = 6;
+
 
     /**
      * terminate message
      */
-    public static final int TERMINATE = 5;
+    public static final int TERMINATE = 7;
 
     /**
      * Game's trial number or rope center value
@@ -71,6 +83,27 @@ public class RefereeRepoMessage extends Message {
      * id of the team winner
      */
     private int winner = -1;
+
+
+
+    /**
+     * id of the team winner
+     */
+    private WonType wonType = null;
+
+
+
+    /**
+     * id of the team winner
+     */
+    private int n_trials = -1;
+
+
+
+    /**
+     * id of the team winner
+     */
+    private int team_id = -1;
 
 
     /**
@@ -123,6 +156,37 @@ public class RefereeRepoMessage extends Message {
     }
 
     /**
+     * Messages Instantiation.
+     *
+     * @param type message type
+     * @param team_id referee's trial number
+     * @param wonType referee's trial number
+     * @param n_trials referee's state
+     */
+    public RefereeRepoMessage(int type, int team_id, WonType wonType, int n_trials) {
+        super(type);
+        this.wonType = wonType;
+        this.n_trials = n_trials;
+        this.team_id = team_id;
+    }
+
+
+    /**
+     * Messages Instantiation.
+     *
+     * @param type message type
+     * @param team_id referee's trial number
+     * @param wonType referee's trial number
+     * @param n_trials referee's state
+     */
+    public RefereeRepoMessage(int type, int winner, int score1, int score2) {
+        super(type);
+        this.winner = winner;
+        this.score1 = score1;
+        this.score2 = score2;
+    }
+
+    /**
      * Get referee's trial number or rope center value
      * @return referee's trial number or rope center value
      */
@@ -156,5 +220,17 @@ public class RefereeRepoMessage extends Message {
 
     public int getScore1() {
         return score1;
+    }
+
+    public int getN_trials() {
+        return n_trials;
+    }
+
+    public WonType getWonType() {
+        return wonType;
+    }
+
+    public int getTeam_id() {
+        return team_id;
     }
 }
