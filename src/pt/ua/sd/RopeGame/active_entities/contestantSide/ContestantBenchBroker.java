@@ -3,6 +3,7 @@ package pt.ua.sd.RopeGame.active_entities.contestantSide;
 import pt.ua.sd.RopeGame.comInfo.ContestantBenchMessage;
 import pt.ua.sd.RopeGame.interfaces.IContestantsBenchContestant;
 
+
 /**
  * Created by tiagomagalhaes on 25/04/16.
  */
@@ -59,11 +60,71 @@ public class ContestantBenchBroker implements IContestantsBenchContestant {
 
     @Override
     public boolean[] followCoachAdvice(int contestant_id, int strength, int team_id, int n_players, int n_players_pushing) {
-        return new boolean[0];
+
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
+
+        // In and out message
+        ContestantBenchMessage inMessage;
+        ContestantBenchMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new ContestantBenchMessage(ContestantBenchMessage.FOLLOW_COACH_ADVICE);
+
+        // Send message
+        con.writeObject(outMessage);
+
+
+        // Get answer
+        inMessage = (ContestantBenchMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != ContestantBenchMessage.FOLLOW_COACH_ADVICE_ANS)) {
+            System.out.println("Invalid message type at " + ContestantBenchBroker.class.getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+
+        // Close connection
+        con.close();
+
+        return inMessage.getAdvice_followed();
     }
 
     @Override
     public void getReady(int n_players_pushing) {
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
 
+        // In and out message
+        ContestantBenchMessage inMessage;
+        ContestantBenchMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new ContestantBenchMessage(ContestantBenchMessage.GETREADY);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (ContestantBenchMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != ContestantBenchMessage.GETREADY_ANS)) {
+            System.out.println("Invalid message type at " + ContestantBenchBroker.class.getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+
+        // Close connection
+        con.close();
     }
 }

@@ -3,9 +3,7 @@ package pt.ua.sd.RopeGame.active_entities.contestantSide;
 import pt.ua.sd.RopeGame.comInfo.ContestantPlaygroundMessage;
 import pt.ua.sd.RopeGame.interfaces.IPlaygroundContestant;
 
-/**
- * Created by tiagomagalhaes on 25/04/16.
- */
+
 public class ContestantPlaygroundBroker implements IPlaygroundContestant {
 
 
@@ -59,16 +57,97 @@ public class ContestantPlaygroundBroker implements IPlaygroundContestant {
 
     @Override
     public void pullTheRope(int team_id, int strenght, int contestant_id, int n_players_pushing, int n_players) {
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
 
+        // In and out message
+        ContestantPlaygroundMessage inMessage;
+        ContestantPlaygroundMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new ContestantPlaygroundMessage(ContestantPlaygroundMessage.PULLROPE);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (ContestantPlaygroundMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != ContestantPlaygroundMessage.PULLROPE_ANS)) {
+            System.out.println("Invalid message type at " + this.getClass().getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
     }
 
     @Override
     public void iAmDone(int n_players_pushing) {
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
 
+        // In and out message
+        ContestantPlaygroundMessage inMessage;
+        ContestantPlaygroundMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new ContestantPlaygroundMessage(ContestantPlaygroundMessage.AMDONE);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (ContestantPlaygroundMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != ContestantPlaygroundMessage.AMDONE_ANS)) {
+            System.out.println("Invalid message type at " + this.getClass().getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
     }
 
     @Override
     public void seatDown(int n_players_pushing) {
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
 
+        // In and out message
+        ContestantPlaygroundMessage inMessage;
+        ContestantPlaygroundMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new ContestantPlaygroundMessage(ContestantPlaygroundMessage.SEATDOWN);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (ContestantPlaygroundMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != ContestantPlaygroundMessage.SEATDOWN_ANS)) {
+            System.out.println("Invalid message type at " + this.getClass().getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
     }
 }
