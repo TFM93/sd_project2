@@ -1,4 +1,4 @@
-package pt.ua.sd.RopeGame.shared_mem.repoSide;
+package pt.ua.sd.RopeGame.shared_mem.RepoSide;
 
 import pt.ua.sd.RopeGame.enums.CoachState;
 import pt.ua.sd.RopeGame.enums.ContestantState;
