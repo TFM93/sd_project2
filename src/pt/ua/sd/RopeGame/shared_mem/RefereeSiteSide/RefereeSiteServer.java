@@ -1,10 +1,8 @@
 package pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide;
 
 import pt.ua.sd.RopeGame.comInfo.ConfigurationMessage;
+import pt.ua.sd.RopeGame.shared_mem.ConfigSide.ServerComChannel;
 
-/**
- * Created by ivosilva on 24/04/16.
- */
 public class RefereeSiteServer {
 
     /**

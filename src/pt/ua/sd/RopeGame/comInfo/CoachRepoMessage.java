@@ -18,6 +18,8 @@ public class CoachRepoMessage extends Message{
      */
     public static final int COACHLOG = 1;
 
+    public static final int TERMINATE =2;
+
 
     /**
      * Coach's team id

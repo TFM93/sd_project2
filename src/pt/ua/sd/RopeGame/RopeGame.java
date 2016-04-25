@@ -4,7 +4,7 @@ import pt.ua.sd.RopeGame.active_entities.coachSide.Coach;
 import pt.ua.sd.RopeGame.active_entities.contestantSide.Contestant;
 import pt.ua.sd.RopeGame.active_entities.refereeSide.Referee;
 import pt.ua.sd.RopeGame.shared_mem.BenchSide.MContestantsBench;
-import pt.ua.sd.RopeGame.shared_mem.repoSide.MGeneralInfoRepo;
+import pt.ua.sd.RopeGame.shared_mem.RepoSide.MGeneralInfoRepo;
 import pt.ua.sd.RopeGame.shared_mem.PlaygroundSide.MPlayground;
 import pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide.MRefereeSite;
 

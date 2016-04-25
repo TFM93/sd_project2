@@ -26,6 +26,8 @@ public class ContestantRepoMessage extends Message{
      */
     public static final int UPDATEROPECENTER = 2;
 
+    public static final int TERMINATE =3;
+
     /**
      * Contestant's id or rope center value
      */

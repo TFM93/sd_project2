@@ -2,11 +2,9 @@ package pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide;
 
 import pt.ua.sd.RopeGame.comInfo.Message;
 import pt.ua.sd.RopeGame.comInfo.MessageExcept;
-import pt.ua.sd.RopeGame.shared_mem.configSide.ServerCom;
+import pt.ua.sd.RopeGame.shared_mem.ConfigSide.ServerComChannel;
 
-/**
- * Created by ivosilva on 24/04/16.
- */
+
 public class RefereeSiteClientProxy extends Thread {
 
     /**

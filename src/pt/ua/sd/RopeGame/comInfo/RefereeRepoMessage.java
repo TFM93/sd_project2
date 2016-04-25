@@ -35,10 +35,17 @@ public class RefereeRepoMessage extends Message {
      */
     public static final int PRINTMATCHRESULT = 4;
 
+
+    /**
+     * terminate message
+     */
+    public static final int TERMINATE = 5;
+
     /**
      * Game's trial number or rope center value
      */
     private int arg1 = -1;
+
 
     /**
      * Referee's state
@@ -49,6 +56,21 @@ public class RefereeRepoMessage extends Message {
      * Add header flag
      */
     private boolean arg3 = false;
+
+    /**
+     * score team 1
+     */
+    private int score1 = -1;
+
+    /**
+     * score team 2
+     */
+    private int score2 = -1;
+
+    /**
+     * id of the team winner
+     */
+    private int winner = -1;
 
 
     /**
@@ -82,6 +104,11 @@ public class RefereeRepoMessage extends Message {
         this.arg3 = arg3;
     }
 
+    public RefereeRepoMessage(int type,RefState state,int trialNr ){
+        super(type);
+        this.arg2 = state;
+        this.arg1 = trialNr;
+    }
     /**
      * Messages Instantiation.
      *
@@ -119,4 +146,15 @@ public class RefereeRepoMessage extends Message {
         return arg3;
     }
 
+    public int getWinner() {
+        return winner;
+    }
+
+    public int getScore2() {
+        return score2;
+    }
+
+    public int getScore1() {
+        return score1;
+    }
 }
