@@ -1,5 +1,7 @@
 package pt.ua.sd.RopeGame.comInfo;
 
+import pt.ua.sd.RopeGame.structures.GameStat;
+
 /**
  * Created by tiagomagalhaes on 21/04/16.
  */
@@ -12,27 +14,33 @@ public class RefereeRefSiteMessage extends Message {
      * Serialization key
      * @serialField serialVersionUID
      */
-    private static final long serialVersionUID = 200416L;
+    public static final long serialVersionUID = 200416L;
 
     /**
      * announce new game, enviado pelo refereee
      */
-    private static final int ANG=1;
+    public static final int ANG = 1;
 
     /**
      * declare game winner, enviado pelo refereee
      */
-    private static final int DGW=1;
+    public static final int DGW = 2;
 
     /**
      * get number of games played, enviado pelo refereee
      */
-    private static final int GNGP=1;
+    public static final int GNGP = 3;
 
     /**
      * terminate message, enviado pelo referee
      */
-    private static final int TERMINATE =2;
+    public static final int TERMINATE = 4;
+
+
+    /**
+     * decide game winner answer
+     */
+    public static final int DGW_ANS = 5;
 
     /**
      * private fields
@@ -41,9 +49,15 @@ public class RefereeRefSiteMessage extends Message {
     private int score_T2 =-1;
     private int knock_out=-1;
     private int n_games=-1;
+    private GameStat stat=null;
 
     public RefereeRefSiteMessage(int type){
         super(type);
+    }
+
+    public RefereeRefSiteMessage(int type, GameStat stat){
+        super(type);
+        this.stat = stat;
     }
 
     public RefereeRefSiteMessage(int type, int score_T1, int score_T2, int knock_out, int n_games){
@@ -52,5 +66,21 @@ public class RefereeRefSiteMessage extends Message {
         this.score_T2=score_T2;
         this.knock_out=knock_out;
         this.n_games=n_games;
+    }
+
+    public int get_score_t1(){
+        return score_T1;
+    }
+
+    public int get_score_t2(){
+        return score_T2;
+    }
+
+    public int get_knock_out(){
+        return knock_out;
+    }
+
+    public int get_n_games(){
+        return n_games;
     }
 }

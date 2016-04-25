@@ -191,6 +191,16 @@ public class ConfigurationMessage extends Message {
      */
     public static final int LOG_FILE_NAME_ANS = 36;
 
+    /**
+     * Get referee site
+     */
+    public static final int GET_REF_SITE = 37;
+
+    /**
+     * Get referee site answer
+     */
+    public static final int GET_REF_SITE_ANS = 38;
+
     /* Messages Fields */
 
     /**
