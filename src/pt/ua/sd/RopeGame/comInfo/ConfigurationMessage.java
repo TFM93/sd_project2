@@ -12,194 +12,67 @@ public class ConfigurationMessage extends Message {
     /* Messages types */
 
     /**
-     * Get number of players in team
+     * obter dados do repositorio-pedido
      */
-    public static final int N_PLAYERS_TEAM = 1;
+    public static final int GETREP=1;
 
     /**
-     * Get number of players in team answer
+     * obter dados do repositorio-resposta
      */
-    public static final int N_PLAYERS_TEAM_ANS = 2;
+    public static final int GETREP_ANSWER=2;
 
-    /**
-     * Get number of players pushing the rope
-     */
-    public static final int N_PLAYERS_PUSHING = 3;
+    public static final int GETREF_SITE=3;
 
-    /**
-     * Get number of players pushing the rope answer
-     */
-    public static final int N_PLAYERS_PUSHING_ANS = 4;
+    public static final int GETREF_SITE_ANSWER=4;
 
-    /**
-     * Get number of trials
-     */
-    public static final int N_TRIALS = 5;
+    public static final int GETBENCH=5;
 
-    /**
-     * Get number of trials answer
-     */
-    public static final int N_TRIALS_ANS = 6;
+    public static final int GETBENCH_ANSWER=6;
 
-    /**
-     * Get number of games
-     */
-    public static final int N_GAMES = 7;
+    public static final int GETPLAYGROUND=7;
 
-    /**
-     * Get number of games answer
-     */
-    public static final int N_GAMES_ANS = 8;
+    public static final int GETPLAYGROUND_ANSWER=8;
 
-    /**
-     * Get point difference for knockout win
-     */
-    public static final int KNOCKOUT_DIF = 9;
+    public static final int GETREP_DOM=9;
 
-    /**
-     * Get point difference for knockout win answer
-     */
-    public static final int KNOCKOUT_DIF_ANS = 10;
+    public static final int GETREP_ANS_DOM=10;
 
-    /**
-     * Get config host name
-     */
-    public static final int CONFIG_HOST_NAME = 11;
+    public static final int GETREF_SITE_DOM=11;
 
-    /**
-     * Get config host name answer
-     */
-    public static final int CONFIG_HOST_NAME_ANS = 12;
+    public static final int GETREF_SITE_ANS_DOM=12;
 
-    /**
-     * Get repository host name
-     */
-    public static final int REPO_HOST_NAME = 13;
+    public static final int GETBENCH_DOM=13;
 
-    /**
-     * Get repository host name answer
-     */
-    public static final int REPO_HOST_NAME_ANS = 14;
+    public static final int GETBENCH_ANS_DOM=14;
 
-    /**
-     * Get repository port number
-     */
-    public static final int REPO_PORT_NUM = 15;
+    public static final int GETPLAYG_DOM=15;
 
-    /**
-     * Get repository port number answer
-     */
-    public static final int REPO_PORT_NUM_ANS = 16;
+    public static final int GETPLAYG_ANS_DOM=16;
 
-    /**
-     * Get referee site host name
-     */
-    public static final int REFSITE_HOST_NAME = 17;
+    public static final int GET_NPLAYERS=17;
 
-    /**
-     * Get referee site host name answer
-     */
-    public static final int REFSITE_HOST_NAME_ANS = 18;
+    public static final int GET_NPLAYERS_ANS=18;
 
-    /**
-     * Get referee site port number
-     */
-    public static final int REFSITE_PORT_NUM = 19;
+    public static final int GET_NTRIALS=19;
 
-    /**
-     * Get referee site port number answer
-     */
-    public static final int REFSITE_PORT_NUM_ANS = 20;
+    public static final int GET_NTRIALS_ANS=20;
 
-    /**
-     * Get bench host name
-     */
-    public static final int BENCH_HOST_NAME = 21;
+    public static final int GET_NPLAYERS_PUSHING=21;
 
-    /**
-     * Get bench host name answer
-     */
-    public static final int BENCH_HOST_NAME_ANS = 22;
+    public static final int GET_NPLAYERS_PUSHING_ANSWER=22;
 
-    /**
-     * Get bench port number
-     */
-    public static final int BENCH_PORT_NUM = 23;
+    public static final int GET_NGAMES=27;
 
-    /**
-     * Get bench port number answer
-     */
-    public static final int BENCH_PORT_NUM_ANS = 24;
+    public static final int GET_NGAMES_ANS=28;
 
-    /**
-     * Get playground host name
-     */
-    public static final int PLAYG_HOST_NAME = 25;
+    public static final int GET_KNOCK_DIF=23;
 
-    /**
-     * Get playground host name answer
-     */
-    public static final int PLAYG_HOST_NAME_ANS = 26;
+    public static final int GET_KNOCK_DIF_ANS=24;
 
-    /**
-     * Get playground port number
-     */
-    public static final int PLAYG_PORT_NUM = 27;
+    public static final int GET_LOG_FILE_NAME=25;
 
-    /**
-     * Get playground port number
-     */
-    public static final int PLAYG_PORT_NUM_ANS = 28;
+    public static final int GET_LOG_FILE_NAME_ANS=26;
 
-    /**
-     * Get referee host name
-     */
-    public static final int REFEREE_HOST_NAME = 29;
-
-    /**
-     * Get referee host name answer
-     */
-    public static final int REFEREE_HOST_NAME_ANS = 30;
-
-    /**
-     * Get coach host name
-     */
-    public static final int COACH_HOST_NAME = 31;
-
-    /**
-     * Get coach host name answer
-     */
-    public static final int COACH_HOST_NAME_ANS = 32;
-
-    /**
-     * Get contestant host name
-     */
-    public static final int CONTESTANT_HOST_NAME = 33;
-
-    /**
-     * Get contestant host name answer
-     */
-    public static final int CONTESTANT_HOST_NAME_ANS = 34;
-
-    /**
-     * Get log file name
-     */
-    public static final int LOG_FILE_NAME = 35;
-
-    /**
-     * Get log file name answer
-     */
-    public static final int LOG_FILE_NAME_ANS = 36;
-
-    /**
-     * Get referee site
-     */
-    public static final int GET_REF_SITE = 37;
-
-    /**
-     * Get referee site answer
-     */
-    public static final int GET_REF_SITE_ANS = 38;
 
     /* Messages Fields */
 
@@ -261,6 +134,11 @@ public class ConfigurationMessage extends Message {
     public ConfigurationMessage(int type, int arg) {
         super(type);
         this.arg1 = arg;
+    }
+
+    public ConfigurationMessage(int type, String arg){
+        super(type);
+        this.logFileName=arg;
     }
 
     /**
