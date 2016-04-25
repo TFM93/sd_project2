@@ -59,6 +59,15 @@ public class RefereePlaygroundMessage extends Message {
         this.stat=stat;
     }
 
+
+    /**
+     * inicialização da mensagem
+     * @param type tipo de mensagem
+     */
+    public RefereePlaygroundMessage(int type){
+        super(type);
+    }
+
     public int getN_players_pushing() {
         return n_players_pushing;
     }
