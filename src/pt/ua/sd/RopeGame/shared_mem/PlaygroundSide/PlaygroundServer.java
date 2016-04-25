@@ -1,5 +1,7 @@
 package pt.ua.sd.RopeGame.shared_mem.PlaygroundSide;
 
+import pt.ua.sd.RopeGame.comInfo.ConfigurationMessage;
+
 /**
  * Created by ivosilva on 25/04/16.
  */
@@ -21,21 +23,21 @@ public class PlaygroundServer {
         int configurationServerPortnum = Integer.parseInt(args[1]);
 
         // Get ref site configuration
-        RefSiteConfiguration conf = getRefSiteConfiguration(configurationServerHostname, configurationServerPortnum);
+        PlaygroundConfiguration conf = getPlaygroundConfiguration(configurationServerHostname, configurationServerPortnum);
 
         // Get repository configuration
         //Domain repConf = getRepositoryConfiguration(configurationServerHostname, configurationServerPortnum);
 
-        MPlayground refereeSite;                        // Referee site
-        RefereeSiteSideInterface refSiteInterface;       // Interface to Referee Site
-        ServerCom scon, sconi;            // Communication channels
-        RefereeSiteClientProxy cliProxy;         // Agent service provider thread
+        MPlayground playground;                        // Referee site
+        PlaygroundSideInterface playgroundInterface;       // Interface to Referee Site
+        ServerComm scon, sconi;            // Communication channels
+        PlaygroundClientProxy cliProxy;         // Agent service provider thread
 
         // Establish the service
-        scon = new ServerCom(conf.portNumb); // Creation of the listening channel
+        scon = new ServerComm(conf.portNumb); // Creation of the listening channel
         scon.start();
-        refereeSite = new MRefereeSite();                                    // Activation of the service
-        refSiteInterface = new RefereeSiteSideInterface(refereeSite, conf.nEntities);  // Activation of the service interface
+        playground = new MPlayground();                                    // Activation of the service
+        playgroundInterface = new PlaygroundSideInterface(playground, conf.nEntities);  // Activation of the service interface
 
         System.out.println("Referee Site: The service was established");
         System.out.println("Referee Site: The server is listening");
@@ -43,7 +45,7 @@ public class PlaygroundServer {
         // Requests processing
         while (true) {
             sconi = scon.accept();                                    // Listening
-            cliProxy = new RefereeSiteClientProxy(sconi, refSiteInterface);     // Agent service provider
+            cliProxy = new PlaygroundClientProxy(sconi, playgroundInterface);     // Agent service provider
             cliProxy.start();
         }
     }
@@ -52,7 +54,7 @@ public class PlaygroundServer {
      * Get Referee Site configuration.
      * @return ref site configuration
      */
-    private static RefSiteConfiguration getRefSiteConfiguration(String configurationServerHostname, int configurationServerPortnum) {
+    private static PlaygroundConfiguration getPlaygroundConfiguration(String configurationServerHostname, int configurationServerPortnum) {
 
         // Instatiate a communication socket
         ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
@@ -74,8 +76,8 @@ public class PlaygroundServer {
         inMessage = (ConfigurationMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != ConfigurationMessage.GET_REF_SITE_ANS)) {
-            System.out.println("Invalid message type at " + RefereeSiteServer.class.getName());
+        if ((inMessage.getMsgType() != ConfigurationMessage.GET_PLAYGROUND_ANS)) {
+            System.out.println("Invalid message type at " + PlaygroundServer.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
@@ -84,7 +86,7 @@ public class PlaygroundServer {
         con.close();
 
         // Extract data from message
-        RefSiteConfiguration conf = new RefSiteConfiguration(inMessage.getHostName(), inMessage.getPortNumb(),
+        PlaygroundConfiguration conf = new PlaygroundConfiguration(inMessage.getHostName(), inMessage.getPortNumb(),
                 inMessage.getArg1());
 
         return conf;
@@ -94,7 +96,7 @@ public class PlaygroundServer {
      * This data type defines the Referee Site configuration.
      * It includes host name, port number and initialization parameters
      */
-    private static class RefSiteConfiguration {
+    private static class PlaygroundConfiguration {
 
         // Attributes
         String hostName;
@@ -102,7 +104,7 @@ public class PlaygroundServer {
         int nEntities;
 
         // Constructor
-        public RefSiteConfiguration(String hostName, int portNumb, int nEntities) {
+        public PlaygroundConfiguration(String hostName, int portNumb, int nEntities) {
             this.hostName = hostName;
             this.portNumb = portNumb;
             this.nEntities = nEntities;

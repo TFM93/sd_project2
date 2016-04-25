@@ -1,13 +1,12 @@
-package pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide;
+package pt.ua.sd.RopeGame.shared_mem.PlaygroundSide;
 
 import pt.ua.sd.RopeGame.comInfo.Message;
 import pt.ua.sd.RopeGame.comInfo.MessageExcept;
-import pt.ua.sd.RopeGame.shared_mem.configSide.ServerCom;
 
 /**
- * Created by ivosilva on 24/04/16.
+ * Created by ivosilva on 25/04/16.
  */
-public class RefereeSiteClientProxy extends Thread {
+public class PlaygroundClientProxy extends Thread{
 
     /**
      * Counter of released threads
@@ -19,20 +18,20 @@ public class RefereeSiteClientProxy extends Thread {
      * Communication channel
      * @serialField sconi
      */
-    private final ServerCom sconi;
+    private final ServerComm sconi;
 
     /**
      * Interface to Referee Site
      * @serialField refSiteInterface
      */
-    private final RefereeSiteSideInterface refSiteInterface;
+    private final PlaygroundSideInterface refSiteInterface;
 
     /**
      * Instantiation of the ref site client proxy.
      * @param sconi communication channel
      * @param refSiteInterface interface to referee site
      */
-    public RefereeSiteClientProxy(ServerCom sconi, RefereeSiteSideInterface refSiteInterface) {
+    public PlaygroundClientProxy(ServerComm sconi, PlaygroundSideInterface refSiteInterface) {
         super("Ref_Site_Proxy_" + getProxyId());
         this.sconi = sconi;
         this.refSiteInterface = refSiteInterface;
@@ -69,11 +68,11 @@ public class RefereeSiteClientProxy extends Thread {
      */
     private static int getProxyId() {
 
-        Class<pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide.RefereeSiteClientProxy> cl = null;
+        Class<pt.ua.sd.RopeGame.shared_mem.PlaygroundSide.PlaygroundClientProxy> cl = null;
         int proxyId;                            // intantiation identifier
 
         try {
-            cl = (Class<pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide.RefereeSiteClientProxy>) Class.forName("pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide.PlaygroundClientProxy");
+            cl = (Class<pt.ua.sd.RopeGame.shared_mem.PlaygroundSide.PlaygroundClientProxy>) Class.forName("pt.ua.sd.RopeGame.shared_mem.PlaygroundSide.PlaygroundClientProxy");
         } catch (ClassNotFoundException e) {
             System.out.println("The data type PlaygroundClientProxy wasn't found!");
             e.printStackTrace();
