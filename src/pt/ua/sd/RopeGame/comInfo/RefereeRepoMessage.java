@@ -222,15 +222,9 @@ public class RefereeRepoMessage extends Message {
         return score1;
     }
 
-    public int getN_trials() {
-        return n_trials;
-    }
+    public int getN_trials() { return n_trials; }
 
-    public WonType getWonType() {
-        return wonType;
-    }
+    public WonType getWonType() { return wonType; }
 
-    public int getTeam_id() {
-        return team_id;
-    }
+    public int getTeam_id() { return team_id; }
 }
