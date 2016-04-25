@@ -175,9 +175,9 @@ public class RefereeRepoMessage extends Message {
      * Messages Instantiation.
      *
      * @param type message type
-     * @param team_id referee's trial number
-     * @param wonType referee's trial number
-     * @param n_trials referee's state
+     * @param winner referee's trial number
+     * @param score1 referee's trial number
+     * @param score2 referee's state
      */
     public RefereeRepoMessage(int type, int winner, int score1, int score2) {
         super(type);

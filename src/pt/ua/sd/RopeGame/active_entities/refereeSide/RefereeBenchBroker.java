@@ -32,6 +32,7 @@ public class RefereeBenchBroker implements IContestantsBenchReferee {
     }
 
 
+
     @Override
     public void callTrial() {
 
