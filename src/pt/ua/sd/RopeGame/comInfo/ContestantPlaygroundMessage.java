@@ -14,20 +14,39 @@ public class ContestantPlaygroundMessage extends Message {
     /**
      * pull the rope, enviado pelo contestant
      */
-    private static final int PULLROPE=1;
+    public static final int PULLROPE=1;
 
     /**
      * am done, enviado pelo contestant
      */
-     private static final int AMDONE=2;
+    public static final int AMDONE=2;
     /**
      * seat down, enviado pelo contestant
      */
-    private static final int SEATDOWN=3;
+    public static final int SEATDOWN=3;
     /**
      * terminate message
      */
-    private static final int TERMINATE =4;
+    public static final int TERMINATE =4;
+    /**
+     * pull the rope, enviado pelo contestant
+     */
+    public static final int PULLROPE_ANS=5;
+
+    /**
+     * am done, enviado pelo contestant
+     */
+    public static final int AMDONE_ANS=6;
+    /**
+     * seat down, enviado pelo contestant
+     */
+    public static final int SEATDOWN_ANS=7;
+    /**
+     * terminate message
+     */
+
+
+
     /**
      * private fields
      */
@@ -63,6 +82,15 @@ public class ContestantPlaygroundMessage extends Message {
     public ContestantPlaygroundMessage(int type, int n_players_pushing){
         super(type);
         this.n_players_pushing=n_players_pushing;
+    }
+
+
+    /**
+     * inicialização da mensagem
+     * @param type tipo da mensagem
+     */
+    public ContestantPlaygroundMessage(int type){
+        super(type);
     }
 
     public int getN_players() {
