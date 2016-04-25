@@ -1,11 +1,11 @@
-package pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide;
+package pt.ua.sd.RopeGame.shared_mem.BenchSide;
 
 import pt.ua.sd.RopeGame.comInfo.ConfigurationMessage;
 
 /**
- * Created by ivosilva on 24/04/16.
+ * Created by ivosilva on 25/04/16.
  */
-public class RefereeSiteServer {
+public class BenchServer {
 
     /**
      * Main program.
@@ -15,7 +15,7 @@ public class RefereeSiteServer {
 
         // Get host name and port number of configuration server
         if (args.length < 2) {
-            System.out.println("Usage: java -jar refsite.jar <configuration host name> <configuration port number>");
+            System.out.println("Usage: java -jar bench.jar <configuration host name> <configuration port number>");
             System.exit(0);
         }
 
@@ -23,21 +23,21 @@ public class RefereeSiteServer {
         int configurationServerPortnum = Integer.parseInt(args[1]);
 
         // Get ref site configuration
-        RefSiteConfiguration conf = getRefSiteConfiguration(configurationServerHostname, configurationServerPortnum);
+        BenchConfiguration conf = getBenchConfiguration(configurationServerHostname, configurationServerPortnum);
 
         // Get repository configuration
         //Domain repConf = getRepositoryConfiguration(configurationServerHostname, configurationServerPortnum);
 
-        MRefereeSite refereeSite;                        // Referee site
-        RefereeSiteSideInterface refSiteInterface;       // Interface to Referee Site
+        MContestantsBench bench;                        // Referee site
+        BenchSideInterface benchInterface;       // Interface to Referee Site
         ServerComm scon, sconi;            // Communication channels
-        RefereeSiteClientProxy cliProxy;         // Agent service provider thread
+        BenchClientProxy cliProxy;         // Agent service provider thread
 
         // Establish the service
         scon = new ServerComm(conf.portNumb); // Creation of the listening channel
         scon.start();
-        refereeSite = new MRefereeSite();                                    // Activation of the service
-        refSiteInterface = new RefereeSiteSideInterface(refereeSite, conf.nEntities);  // Activation of the service interface
+        bench = new MContestantsBench();                                    // Activation of the service
+        benchInterface = new BenchSideInterface(bench, conf.nEntities);  // Activation of the service interface
 
         System.out.println("Referee Site: The service was established");
         System.out.println("Referee Site: The server is listening");
@@ -45,7 +45,7 @@ public class RefereeSiteServer {
         // Requests processing
         while (true) {
             sconi = scon.accept();                                    // Listening
-            cliProxy = new RefereeSiteClientProxy(sconi, refSiteInterface);     // Agent service provider
+            cliProxy = new BenchClientProxy(sconi, benchInterface);     // Agent service provider
             cliProxy.start();
         }
     }
@@ -54,7 +54,7 @@ public class RefereeSiteServer {
      * Get Referee Site configuration.
      * @return ref site configuration
      */
-    private static RefSiteConfiguration getRefSiteConfiguration(String configurationServerHostname, int configurationServerPortnum) {
+    private static BenchConfiguration getBenchConfiguration(String configurationServerHostname, int configurationServerPortnum) {
 
         // Instatiate a communication socket
         ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
@@ -76,8 +76,8 @@ public class RefereeSiteServer {
         inMessage = (ConfigurationMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != ConfigurationMessage.GET_REF_SITE_ANS)) {
-            System.out.println("Invalid message type at " + RefereeSiteServer.class.getName());
+        if ((inMessage.getMsgType() != ConfigurationMessage.GET_PLAYGROUND_ANS)) {
+            System.out.println("Invalid message type at " + BenchServer.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
@@ -86,7 +86,7 @@ public class RefereeSiteServer {
         con.close();
 
         // Extract data from message
-        RefSiteConfiguration conf = new RefSiteConfiguration(inMessage.getHostName(), inMessage.getPortNumb(),
+        BenchConfiguration conf = new BenchConfiguration(inMessage.getHostName(), inMessage.getPortNumb(),
                 inMessage.getArg1());
 
         return conf;
@@ -96,7 +96,7 @@ public class RefereeSiteServer {
      * This data type defines the Referee Site configuration.
      * It includes host name, port number and initialization parameters
      */
-    private static class RefSiteConfiguration {
+    private static class BenchConfiguration {
 
         // Attributes
         String hostName;
@@ -104,7 +104,7 @@ public class RefereeSiteServer {
         int nEntities;
 
         // Constructor
-        public RefSiteConfiguration(String hostName, int portNumb, int nEntities) {
+        public BenchConfiguration(String hostName, int portNumb, int nEntities) {
             this.hostName = hostName;
             this.portNumb = portNumb;
             this.nEntities = nEntities;

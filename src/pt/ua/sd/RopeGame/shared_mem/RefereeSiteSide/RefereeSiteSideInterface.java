@@ -98,7 +98,7 @@ public class RefereeSiteSideInterface {
         switch (inMessage.getMsgType()) {
             case RefereeRefSiteMessage.ANG:
                 ref_site.announceNewGame();
-                outMessage = new RefereeRefSiteMessage(RefereeRefSiteMessage.ACK);
+                outMessage = new RefereeRefSiteMessage(RefereeRefSiteMessage.ANG_ANS);
                 break;
             case RefereeRefSiteMessage.DGW:
                 GameStat stat = ref_site.declareGameWinner(inMessage.get_score_t1(), inMessage.get_score_t2(),

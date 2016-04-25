@@ -24,11 +24,27 @@ public class CoachBenchMessage extends Message{
     public static final int INFORMREF = 2;
 
     /**
+     * inform referee, enviado pelo coach
+     */
+    public static final int TERMINATE = 3;
+
+    /**
+     * call contestants, enviado pelo coach
+     */
+    public static final int CALLCONTESTANTS_ANS = 4;
+
+    /**
+     * inform referee, enviado pelo coach
+     */
+    public static final int INFORMREF_ANS = 5;
+
+    /**
      * private fields
      */
-    private int team_id;
-    private int n_players;
+    private int team_id=-1;
+    private int n_players=-1;
     private int[] selected_contestants=null;
+    private boolean match_not_ended = true;
 
     /**
      * Inicializacao da mensagem
@@ -50,7 +66,16 @@ public class CoachBenchMessage extends Message{
         this.selected_contestants = selected_contestants;
         this.n_players = n_players;
         this.team_id = team_id;
+    }
 
+    /**
+     * Inicializacao da mensagem
+     * @param type
+     * @param match_not_ended
+     */
+    public  CoachBenchMessage(int type, boolean match_not_ended){
+        super(type);
+        this.match_not_ended = match_not_ended;
     }
 
     public int getN_players() {

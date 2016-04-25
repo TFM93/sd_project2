@@ -15,26 +15,40 @@ public class RefereeBenchMessage extends Message{
     /**
      * call trial, enviado pelo referree
      */
-    private  final static int CALLTR=1;
+    public  final static int CALLTR=1;
     /**
      * start trial, enviado pelo referee
      */
-    private  final static int STARTTR=2;
+    public  final static int STARTTR=2;
     /**
      * declare match winner, enviado pelo referee
      */
-    private final static int DECLAREMATCHWIN=3;
+    public final static int DECLAREMATCHWIN=3;
 
     /**
      * terminate, enviado pelo referee
      */
-    private final static int TERMINATE=4;
+    public final static int TERMINATE=4;
+
+    /**
+     * call trial, enviado pelo referree
+     */
+    public  final static int CALLTR_ANS=5;
+    /**
+     * start trial, enviado pelo referee
+     */
+    public  final static int STARTTR_ANS=6;
+    /**
+     * declare match winner, enviado pelo referee
+     */
+    public final static int DECLAREMATCHWIN_ANS=7;
 
     /**
      * private fields
      */
-    private int games2;
-    private int games1;
+    private int games2=-1;
+    private int games1=-1;
+    private int winner=-1;
 
     public RefereeBenchMessage(int type){
         super(type);
@@ -46,6 +60,11 @@ public class RefereeBenchMessage extends Message{
         this.games2 = games2;
     }
 
+    public RefereeBenchMessage(int type,int winner){
+        super(type);
+        this.winner = winner;
+    }
+
     public int getGames2() {
         return games2;
     }
@@ -53,4 +72,6 @@ public class RefereeBenchMessage extends Message{
     public int getGames1() {
         return games1;
     }
+
+    public int getWinner(){return winner;}
 }

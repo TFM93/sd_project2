@@ -48,6 +48,13 @@ public class RefereeRefSiteMessage extends Message {
      */
     public static final int GNGP_ANS = 6;
 
+    /**
+     * get number of games played
+     */
+    public static final int ANG_ANS = 7;
+
+
+
 
     /**
      * private fields

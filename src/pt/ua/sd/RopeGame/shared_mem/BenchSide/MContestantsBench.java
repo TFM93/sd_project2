@@ -81,7 +81,7 @@ public class MContestantsBench implements IContestantsBenchContestant, IContesta
      * Coach sleeps while the trial was not called or the mach is not started yet and then
      * calls the contestants to play
      */
-    public synchronized boolean callContestants(int team_id,int[] selected_contestants, int n_players)
+    public synchronized boolean callContestants(int team_id, int[] selected_contestants, int n_players)
     {
         /*  if arrays are not initilialized  */
         if (new_team1_selected == null){

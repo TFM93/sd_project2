@@ -24,17 +24,17 @@ public class PlaygroundClientProxy extends Thread{
      * Interface to Referee Site
      * @serialField refSiteInterface
      */
-    private final PlaygroundSideInterface refSiteInterface;
+    private final PlaygroundSideInterface playgroundInterface;
 
     /**
      * Instantiation of the ref site client proxy.
      * @param sconi communication channel
-     * @param refSiteInterface interface to referee site
+     * @param playgroundInterface interface to referee site
      */
-    public PlaygroundClientProxy(ServerComm sconi, PlaygroundSideInterface refSiteInterface) {
+    public PlaygroundClientProxy(ServerComm sconi, PlaygroundSideInterface playgroundInterface) {
         super("Ref_Site_Proxy_" + getProxyId());
         this.sconi = sconi;
-        this.refSiteInterface = refSiteInterface;
+        this.playgroundInterface = playgroundInterface;
     }
 
     /**
@@ -51,7 +51,7 @@ public class PlaygroundClientProxy extends Thread{
 
         // Process message
         try {
-            outMessage = refSiteInterface.processAndReply(inMessage);
+            outMessage = playgroundInterface.processAndReply(inMessage);
         } catch (MessageExcept e) {
             System.out.println("Thread " + getName() + ": " + e.getMessage() + "!");
             System.exit(1);
