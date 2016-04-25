@@ -89,7 +89,7 @@ public class RefereeClient {
                 refSite.terminate();
                 repo.terminate();
             } catch (InterruptedException e) {}
-            System.out.println("Craftsman " + i + " terminated!");
+            System.out.println("Referee " + i + " terminated!");
         }
     }
 
