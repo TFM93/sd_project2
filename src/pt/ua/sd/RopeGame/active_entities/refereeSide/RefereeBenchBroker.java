@@ -32,19 +32,108 @@ public class RefereeBenchBroker implements IContestantsBenchReferee {
     }
 
 
+
     @Override
     public void callTrial() {
+
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
+
+        // In and out message
+        RefereeBenchMessage inMessage;
+        RefereeBenchMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new RefereeBenchMessage(RefereeBenchMessage.CALLTR);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (RefereeBenchMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != RefereeBenchMessage.CALLTR_ANS)) {
+            System.out.println("Invalid message type at " + this.getClass().getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
 
     }
 
     @Override
     public void startTrial() {
 
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
+
+        // In and out message
+        RefereeBenchMessage inMessage;
+        RefereeBenchMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new RefereeBenchMessage(RefereeBenchMessage.STARTTR);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (RefereeBenchMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != RefereeBenchMessage.STARTTR_ANS)) {
+            System.out.println("Invalid message type at " + this.getClass().getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
+
     }
 
     @Override
     public int declareMatchWinner(int games1, int games2) {
-        return 0;
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
+
+        // In and out message
+        RefereeBenchMessage inMessage;
+        RefereeBenchMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new RefereeBenchMessage(RefereeBenchMessage.DECLAREMATCHWIN, games1, games2);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (RefereeBenchMessage) con.readObject();
+
+        // Validate answer
+        if ((inMessage.getMsgType() != RefereeBenchMessage.DECLAREMATCHWIN_ANS)) {
+            System.out.println("Invalid message type at " + this.getClass().getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
+        // Close connection
+        con.close();
+
+        int match_winner = inMessage.getWinner();
+        return match_winner;
     }
 
     /**
