@@ -39,8 +39,8 @@ public class BenchServer {
         bench = new MContestantsBench();                                    // Activation of the service
         benchInterface = new BenchSideInterface(bench, conf.nEntities);  // Activation of the service interface
 
-        System.out.println("Referee Site: The service was established");
-        System.out.println("Referee Site: The server is listening");
+        System.out.println("Contestants Bench: The service was established");
+        System.out.println("Contestants Bench: The server is listening");
 
         // Requests processing
         while (true) {
@@ -51,8 +51,8 @@ public class BenchServer {
     }
 
     /**
-     * Get Referee Site configuration.
-     * @return ref site configuration
+     * Get Bench configuration.
+     * @return BenchConfiguration
      */
     private static BenchConfiguration getBenchConfiguration(String configurationServerHostname, int configurationServerPortnum) {
 
@@ -67,7 +67,7 @@ public class BenchServer {
         con.open();
 
         // Define out message
-        outMessage = new ConfigurationMessage(ConfigurationMessage.GET_REF_SITE);
+        outMessage = new ConfigurationMessage(ConfigurationMessage.GETBENCH);
 
         // Send message
         con.writeObject(outMessage);
@@ -76,7 +76,7 @@ public class BenchServer {
         inMessage = (ConfigurationMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != ConfigurationMessage.GET_PLAYGROUND_ANS)) {
+        if ((inMessage.getMsgType() != ConfigurationMessage.GETBENCH_ANSWER)) {
             System.out.println("Invalid message type at " + BenchServer.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);

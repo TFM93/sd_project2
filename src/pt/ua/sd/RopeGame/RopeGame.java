@@ -1,3 +1,4 @@
+/*
 package pt.ua.sd.RopeGame;
 
 import pt.ua.sd.RopeGame.active_entities.coachSide.Coach;
@@ -12,12 +13,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Random;
+*/
 /**
  * Main class of the project ROPE GAME <br>
  *  Created by tiago and ivosilva on 25-03-2016.<br>
  * <b><center><font size=6>Main class of the project</font></center></b><br>
  *  <b><center><font size=5>This class represents the main class of the project, is in this class that the shared memories are created and the threads launched.</font></center></b><br>
- */
+ *//*
+
 public class RopeGame {
     public static void main(String[] args) {
 
@@ -119,7 +122,9 @@ public class RopeGame {
         coach_team2.start();
         ref.start();
 
-        /*  threads join  */
+        */
+/*  threads join  *//*
+
 
         try {
             coach_team1.join();
@@ -150,3 +155,4 @@ public class RopeGame {
 
     }
 }
+*/

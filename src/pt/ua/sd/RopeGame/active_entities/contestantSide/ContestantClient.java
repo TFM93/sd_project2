@@ -64,7 +64,6 @@ public class ContestantClient {
         for(int i = 0; i < players_team; i++){
             cont_t1[i] = new Contestant(i, 1, rn.nextInt(20 - 10 + 1) + 10,
                     playground,
-                    null,
                     bench,
                     repo,
                     players_team,
@@ -78,7 +77,6 @@ public class ContestantClient {
         for(int i = 0; i < players_team; i++){
             cont_t2[i] = new Contestant(i, 1, rn.nextInt(20 - 10 + 1) + 10,
                     playground,
-                    null,
                     bench,
                     repo,
                     players_team,

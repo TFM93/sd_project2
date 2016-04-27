@@ -39,8 +39,8 @@ public class PlaygroundServer {
         playground = new MPlayground();                                    // Activation of the service
         playgroundInterface = new PlaygroundSideInterface(playground, conf.nEntities);  // Activation of the service interface
 
-        System.out.println("Referee Site: The service was established");
-        System.out.println("Referee Site: The server is listening");
+        System.out.println("Playground: The service was established");
+        System.out.println("Playground: The server is listening");
 
         // Requests processing
         while (true) {
@@ -51,8 +51,8 @@ public class PlaygroundServer {
     }
 
     /**
-     * Get Referee Site configuration.
-     * @return ref site configuration
+     * Get Playground configuration.
+     * @return playground configuration
      */
     private static PlaygroundConfiguration getPlaygroundConfiguration(String configurationServerHostname, int configurationServerPortnum) {
 
@@ -67,7 +67,7 @@ public class PlaygroundServer {
         con.open();
 
         // Define out message
-        outMessage = new ConfigurationMessage(ConfigurationMessage.GET_REF_SITE);
+        outMessage = new ConfigurationMessage(ConfigurationMessage.GETPLAYGROUND);
 
         // Send message
         con.writeObject(outMessage);
@@ -76,7 +76,7 @@ public class PlaygroundServer {
         inMessage = (ConfigurationMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != ConfigurationMessage.GET_PLAYGROUND_ANS)) {
+        if ((inMessage.getMsgType() != ConfigurationMessage.GETPLAYGROUND_ANSWER)) {
             System.out.println("Invalid message type at " + PlaygroundServer.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -93,7 +93,7 @@ public class PlaygroundServer {
     }
 
     /**
-     * This data type defines the Referee Site configuration.
+     * This data type defines the Playground configuration.
      * It includes host name, port number and initialization parameters
      */
     private static class PlaygroundConfiguration {

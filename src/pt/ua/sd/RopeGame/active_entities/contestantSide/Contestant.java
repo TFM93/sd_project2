@@ -1,6 +1,7 @@
 package pt.ua.sd.RopeGame.active_entities.contestantSide;
 
 
+import pt.ua.sd.RopeGame.comInfo.ContestantBenchMessage;
 import pt.ua.sd.RopeGame.enums.ContestantState;
 import pt.ua.sd.RopeGame.interfaces.IContestantsBenchContestant;
 import pt.ua.sd.RopeGame.interfaces.IPlaygroundContestant;
@@ -27,10 +28,9 @@ public class Contestant extends Thread {
     private int id;//represents the id of the coach
     private int team_id;//represents the id of the team
     private int strength;//represents the strenght of the current player
-    private IContestantsBenchContestant contestants_bench;//represents the bench shared memory
-    private IRefereeSiteContestant referee_site;//represents the referee site shared memory
-    private IPlaygroundContestant playground;//represents the playground shared memory
-    private IRepoContestant repo;//represents the general info repository of shared memory
+    private ContestantBenchBroker contestants_bench;//represents the bench shared memory
+    private ContestantPlaygroundBroker playground;//represents the playground shared memory
+    private ContestantRepoBroker repo;//represents the general info repository of shared memory
     private int n_players;//number of players in each team, defined in rg.config
     private int n_players_pushing;//number of players in each team pushing at any given trial, defined in rg.config
     private int n_trials;//number of trials, defined in rg.config
@@ -44,22 +44,19 @@ public class Contestant extends Thread {
      * @param team_id current team id
      * @param strength strengt of current player
      * @param playground playground shared memory instancy
-     * @param referee_site referee site shared memory instancy
      * @param contestants_bench contestants bench shared memory instancy
      * @param repo general info repository shared memory instancy
      */
     public Contestant(int id, int team_id, int strength,
-                      IPlaygroundContestant playground,
-                      IRefereeSiteContestant referee_site,
-                      IContestantsBenchContestant contestants_bench,
-                      IRepoContestant repo,
+                      ContestantPlaygroundBroker playground,
+                      ContestantBenchBroker contestants_bench,
+                      ContestantRepoBroker repo,
                       int n_players, int n_players_pushing,
                       int n_trials, int n_games, int knockDif){
         this.id = id;
         this.team_id = team_id;
         this.strength = strength;
         this.playground = playground;
-        this.referee_site = referee_site;
         this.contestants_bench = contestants_bench;
         this.repo = repo;
         this.n_players = n_players;

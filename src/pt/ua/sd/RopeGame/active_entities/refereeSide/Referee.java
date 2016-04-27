@@ -27,10 +27,10 @@ public class Referee extends Thread {
     /**
      * Internal Data
      */
-    private IContestantsBenchReferee contestants_bench;//represents the bench shared memory
-    private IRefereeSiteReferee referee_site;//represents the referee site shared memory
-    private IPlaygroundReferee playground;//represents the playground shared memory
-    private IRepoReferee repo;//represents the general info repository of shared memory
+    private RefereeBenchBroker contestants_bench;//represents the bench shared memory
+    private RefereeRefereeSiteBroker referee_site;//represents the referee site shared memory
+    private RefereePlaygroundBroker playground;//represents the playground shared memory
+    private RefereeRepoBroker repo;//represents the general info repository of shared memory
     private int n_players;//number of players in each team, defined in rg.config
     private int n_players_pushing;//number of players in each team pushing at any given trial, defined in rg.config
     private int n_trials;//number of trials, defined in rg.config
@@ -46,10 +46,10 @@ public class Referee extends Thread {
      * @param contestants_bench contestants bench shared memory instancy
      * @param repo general info repository shared memory instancy
      */
-    public Referee(IPlaygroundReferee playground,
-                   IRefereeSiteReferee referee_site,
-                   IContestantsBenchReferee contestants_bench,
-                   IRepoReferee repo,
+    public Referee(RefereePlaygroundBroker playground,
+                   RefereeRefereeSiteBroker referee_site,
+                   RefereeBenchBroker contestants_bench,
+                   RefereeRepoBroker repo,
                    int n_players, int n_players_pushing,
                    int n_trials, int n_games, int knockDif){
         this.playground = playground;

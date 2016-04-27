@@ -27,10 +27,10 @@ public class Coach extends Thread {
     private int id;//represents the id of the coach
     private int team_id;//represents the id of the team
     private int team_selected_contestants[];//each coach has 3 selected contestants to play
-    private IContestantsBenchCoach contestants_bench;//represents the bench shared memory
-    private IRefereeSiteCoach referee_site;//represents the referee site shared memory
-    private IPlaygroundCoach playground;//represents the playground shared memory
-    private IRepoCoach repo;//represents the general info repository of shared memory
+    private CoachBenchBroker contestants_bench;//represents the bench shared memory
+    private CoachRefereeSiteBroker referee_site;//represents the referee site shared memory
+    private CoachPlaygroundBroker playground;//represents the playground shared memory
+    private CoachRepoBroker repo;//represents the general info repository of shared memory
     private int n_players;//number of players in each team, defined in rg.config
     private int n_players_pushing;//number of players in each team pushing at any given trial, defined in rg.config
     private int n_trials;//number of trials, defined in rg.config
@@ -46,8 +46,8 @@ public class Coach extends Thread {
      * @param contestants_bench contestants bench shared memory instancy
      * @param repo general info repository shared memory instancy
      */
-    public Coach(int id, int team_id, IPlaygroundCoach playground, IRefereeSiteCoach referee_site,
-                 IContestantsBenchCoach contestants_bench, IRepoCoach repo, int n_players, int n_players_pushing,
+    public Coach(int id, int team_id, CoachPlaygroundBroker playground, CoachRefereeSiteBroker referee_site,
+                 CoachBenchBroker contestants_bench, CoachRepoBroker repo, int n_players, int n_players_pushing,
                  int n_trials, int n_games, int knockDif) {
         this.id = id;
         this.team_id = team_id;
@@ -68,6 +68,7 @@ public class Coach extends Thread {
     public void run() {
 
         CoachState state = CoachState.WAIT_FOR_REFEREE_COMMAND;//initial state
+
         repo.coachLog(this.team_id, state);//update repo
         boolean match_not_over = true;
 
