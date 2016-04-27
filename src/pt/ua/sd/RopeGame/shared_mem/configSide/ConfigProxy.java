@@ -19,6 +19,14 @@ public class ConfigProxy extends Thread{
     private static int nInstances;
 
     /**
+     * Interface to Configuration
+     * @serialField configInterf
+     */
+    private final ConfigInterface configInterf;
+
+
+
+    /**
      * Instantiation of the configuration client proxy.
      * @param sc communication channel
      * @param configInterf interface to Configuration
@@ -28,14 +36,6 @@ public class ConfigProxy extends Thread{
         this.sc=sc;
         this.configInterf = configInterf;
     }
-
-    /**
-     * Interface to Configuration
-     * @serialField configInterf
-     */
-    private final ConfigInterface configInterf;
-
-
 
 
 

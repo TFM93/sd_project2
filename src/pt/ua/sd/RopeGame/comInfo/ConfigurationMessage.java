@@ -146,7 +146,20 @@ public class ConfigurationMessage extends Message {
      */
     public ConfigurationMessage(int type, int arg) {
         super(type);
-        this.arg1 = arg;
+        if(type == GET_NPLAYERS_PUSHING_ANSWER){
+            this.arg2 = arg;
+        }
+        else if(type == GET_NTRIALS_ANS){
+            this.arg3 = arg;
+        }
+        else if(type == GET_NGAMES_ANS){
+            this.arg4=arg;
+        }
+        else if(type == GET_KNOCK_DIF_ANS){
+            this.arg5=arg;
+        }
+        else
+            this.arg1 = arg;
     }
 
     public ConfigurationMessage(int type, String arg){

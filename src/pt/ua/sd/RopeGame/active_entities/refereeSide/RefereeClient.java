@@ -2,9 +2,7 @@ package pt.ua.sd.RopeGame.active_entities.refereeSide;
 
 import pt.ua.sd.RopeGame.comInfo.ConfigurationMessage;
 
-/**
- * Created by ivosilva on 25/04/16.
- */
+
 public class RefereeClient {
 
     /**
@@ -24,30 +22,39 @@ public class RefereeClient {
 
         // Get bench configuration
         Domain benchConf = getBenchConfiguration(configurationServerHostname, configurationServerPortnum);
+        System.out.println("got conf bench");
 
         // Get playground configuration
         Domain playgroundConf = getPlaygroundConfiguration(configurationServerHostname, configurationServerPortnum);
+        System.out.println("got conf playg");
 
         // Get referee site configuration
         Domain refSiteConf = getRefereeSiteConfiguration(configurationServerHostname, configurationServerPortnum);
+        System.out.println("got conf refSite");
 
         // Get repo configuration
         Domain repoConf = getRepoConfiguration(configurationServerHostname, configurationServerPortnum);
+        System.out.println("got conf repo host " + repoConf.hostName+ " port " + repoConf.portNumb);
 
         // get number of players in team
         int players_team = getNPlayersTeamConfiguration(configurationServerHostname, configurationServerPortnum);
+        System.out.println("got conf players " + players_team);
 
         // get number of players pushing
         int players_pushing = getNPlayersPushingConfiguration(configurationServerHostname, configurationServerPortnum);
+        System.out.println("got conf players push " + players_pushing);
 
         // get number of games
         int n_games = getNGamesConfiguration(configurationServerHostname, configurationServerPortnum);
+        System.out.println("got conf games ->" + n_games);
 
         // get number of trials
         int n_trials = getNTrialsConfiguration(configurationServerHostname, configurationServerPortnum);
+        System.out.println("got conf ntrials ->" +n_trials);
 
         // get knockout difference
         int knockDif = getKnockoutDifConfiguration(configurationServerHostname, configurationServerPortnum);
+        System.out.println("got conf n knockdif-> "+knockDif);
 
         // Get number of referees
         //int nReferee = getNumberOfReferee(configurationServerHostname, configurationServerPortnum); // number of referees
@@ -108,6 +115,7 @@ public class RefereeClient {
 
         // Open connection
         con.open();
+        System.out.println("conn open");
 
         // Define out message
         outMessage = new ConfigurationMessage(ConfigurationMessage.GETBENCH);
@@ -117,7 +125,7 @@ public class RefereeClient {
 
         // Get answer
         inMessage = (ConfigurationMessage) con.readObject();
-
+        System.out.println("inMess " + inMessage.getMsgType());
         // Validate answer
         if ((inMessage.getMsgType() != ConfigurationMessage.GETBENCH_ANSWER)) {
             System.out.println("Invalid message type at " + RefereeClient.class.getName());
