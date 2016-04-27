@@ -284,7 +284,7 @@ public class RefereeClient {
         inMessage = (ConfigurationMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != ConfigurationMessage.GET_NPLAYERS)) {
+        if ((inMessage.getMsgType() != ConfigurationMessage.GET_NPLAYERS_ANS)) {
             System.out.println("Invalid message type at " + RefereeClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -325,7 +325,7 @@ public class RefereeClient {
         inMessage = (ConfigurationMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != ConfigurationMessage.GET_NPLAYERS_PUSHING)) {
+        if ((inMessage.getMsgType() != ConfigurationMessage.GET_NPLAYERS_PUSHING_ANSWER)) {
             System.out.println("Invalid message type at " + RefereeClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -367,7 +367,7 @@ public class RefereeClient {
         inMessage = (ConfigurationMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != ConfigurationMessage.GET_NGAMES)) {
+        if ((inMessage.getMsgType() != ConfigurationMessage.GET_NGAMES_ANS)) {
             System.out.println("Invalid message type at " + RefereeClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);

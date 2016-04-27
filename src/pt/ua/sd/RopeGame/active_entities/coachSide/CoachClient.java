@@ -2,9 +2,7 @@ package pt.ua.sd.RopeGame.active_entities.coachSide;
 
 import pt.ua.sd.RopeGame.comInfo.ConfigurationMessage;
 
-/**
- * Created by ivosilva on 25/04/16.
- */
+
 public class CoachClient {
 
     /**
@@ -24,28 +22,24 @@ public class CoachClient {
 
         // Get bench configuration
         Domain benchConf = getBenchConfiguration(configurationServerHostname, configurationServerPortnum);
-
         // Get playground configuration
         Domain playgroundConf = getPlaygroundConfiguration(configurationServerHostname, configurationServerPortnum);
-
         // Get referee site configuration
         Domain refSiteConf = getRefereeSiteConfiguration(configurationServerHostname, configurationServerPortnum);
-
         // Get repo configuration
         Domain repoConf = getRepoConfiguration(configurationServerHostname, configurationServerPortnum);
-
         // get number of players in team
         int players_team = getNPlayersTeamConfiguration(configurationServerHostname, configurationServerPortnum);
-
+        System.out.println("got conf");
         // get number of players pushing
         int players_pushing = getNPlayersPushingConfiguration(configurationServerHostname, configurationServerPortnum);
-
+        System.out.println("got conf");
         // get number of games
         int n_games = getNGamesConfiguration(configurationServerHostname, configurationServerPortnum);
-
+        System.out.println("got conf");
         // get number of trials
         int n_trials = getNTrialsConfiguration(configurationServerHostname, configurationServerPortnum);
-
+        System.out.println("got conf");
         // get knockout difference
         int knockDif = getKnockoutDifConfiguration(configurationServerHostname, configurationServerPortnum);
 
@@ -133,7 +127,7 @@ public class CoachClient {
 
         // Validate answer
         if ((inMessage.getMsgType() != ConfigurationMessage.GETBENCH_ANSWER)) {
-            System.out.println("Invalid message type at " + CoachClient.class.getName());
+            System.out.println("Invalid message type at " + CoachClient.class.getName() + "expected GETBENCH_ANSWER ::"+ inMessage.getMsgType());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
@@ -174,7 +168,7 @@ public class CoachClient {
 
         // Validate answer
         if ((inMessage.getMsgType() != ConfigurationMessage.GETPLAYGROUND_ANSWER)) {
-            System.out.println("Invalid message type at " + CoachClient.class.getName());
+            System.out.println("Invalid message type at " + CoachClient.class.getName() + "expected GETPLAYGROUND_ANSWER :: "+ inMessage.getMsgType());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
@@ -215,7 +209,7 @@ public class CoachClient {
 
         // Validate answer
         if ((inMessage.getMsgType() != ConfigurationMessage.GETREF_SITE_ANSWER)) {
-            System.out.println("Invalid message type at " + CoachClient.class.getName());
+            System.out.println("Invalid message type at " + CoachClient.class.getName() + "expected GETREF_SITE_ANSWER ::" + inMessage.getMsgType());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
@@ -297,7 +291,7 @@ public class CoachClient {
         inMessage = (ConfigurationMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != ConfigurationMessage.GET_NPLAYERS)) {
+        if ((inMessage.getMsgType() != ConfigurationMessage.GET_NPLAYERS_ANS)) {
             System.out.println("Invalid message type at " + CoachClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -338,7 +332,7 @@ public class CoachClient {
         inMessage = (ConfigurationMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != ConfigurationMessage.GET_NPLAYERS_PUSHING)) {
+        if ((inMessage.getMsgType() != ConfigurationMessage.GET_NPLAYERS_PUSHING_ANSWER)) {
             System.out.println("Invalid message type at " + CoachClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -380,7 +374,7 @@ public class CoachClient {
         inMessage = (ConfigurationMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != ConfigurationMessage.GET_NGAMES)) {
+        if ((inMessage.getMsgType() != ConfigurationMessage.GET_NGAMES_ANS)) {
             System.out.println("Invalid message type at " + CoachClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
