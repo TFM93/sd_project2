@@ -65,7 +65,7 @@ public class RefereeSiteServer {
         con.open();
 
         // Define out message
-        outMessage = new ConfigurationMessage(ConfigurationMessage.GET_REF_SITE);
+        outMessage = new ConfigurationMessage(ConfigurationMessage.GETREF_SITE);
 
         // Send message
         con.writeObject(outMessage);
@@ -74,7 +74,7 @@ public class RefereeSiteServer {
         inMessage = (ConfigurationMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != ConfigurationMessage.GET_REF_SITE_ANS)) {
+        if ((inMessage.getMsgType() != ConfigurationMessage.GETREF_SITE_ANSWER)) {
             System.out.println("Invalid message type at " + RefereeSiteServer.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);

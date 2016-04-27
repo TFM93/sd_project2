@@ -73,9 +73,9 @@ public class ConfigurationMessage extends Message {
 
     public static final int GET_LOG_FILE_NAME_ANS=26;
 
-    public static final int GET_REF_SITE = 29;
+   // public static final int GET_REF_SITE = 29;
 
-    public static final int GET_REF_SITE_ANS=30;
+    //public static final int GET_REF_SITE_ANS=30;
 
     /**
      * Get referee site
