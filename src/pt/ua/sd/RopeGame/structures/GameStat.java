@@ -9,11 +9,20 @@ import pt.ua.sd.RopeGame.enums.WonType;
  *
  */
 public class GameStat {
+    /**
+     * @serialField has_next_game
+     */
     private boolean has_next_game;
+    /**
+     * @serialField team
+     */
     private int team;
-    private WonType wonType;
+    /**
+     * @serialField wonType
+     */
+    private int wonType;
 
-    public GameStat(boolean has_next_game, int team, WonType wonType)
+    public GameStat(boolean has_next_game, int team, int wonType)
     {
         this.has_next_game = has_next_game;
         this.team = team;
@@ -41,7 +50,7 @@ public class GameStat {
      *
      * @return the {@link WonType} type of victory in the game
      */
-    public WonType getWonType() {
+    public int getWonType() {
         return wonType;
     }
 }

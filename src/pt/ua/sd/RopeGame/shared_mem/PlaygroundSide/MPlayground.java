@@ -192,7 +192,7 @@ public class MPlayground implements IPlaygroundContestant, IPlaygroundReferee, I
             decision=true;
         }
 
-        return new TrialStat(decision,winner, decision_type, center_rope);
+        return new TrialStat(decision,winner, decision_type.ordinal(), center_rope);
     }
 
     /**

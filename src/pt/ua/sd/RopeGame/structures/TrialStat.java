@@ -11,19 +11,22 @@ import pt.ua.sd.RopeGame.enums.WonType;
 public class TrialStat {
     /**
      *  The {@link Boolean } instance tells if has(true) or not(false) one next trial in the current game
+     *  @serialField has_next_trial
      */
     private boolean has_next_trial;
 
     /**
      *  The {@link int} represents the team id (1 or 2)
+     *  @serialField team
      */
     private int team;
     /**
-     *  The {@link WonType } instance represents the type of the result in the trial
+     *  The  int instance represents the type of the result in the trial
      */
-    private WonType wonType;
+    private int wonType;
     /**
      *  The {@link int } instance tells the center of the rope in the trial
+     *  @serialField center_rope
      */
     private  int center_rope;
 
@@ -31,7 +34,7 @@ public class TrialStat {
     /**
      *  Constructor
      */
-    public TrialStat(boolean has_next_trial, int team, WonType wonType, int center_rope)
+    public TrialStat(boolean has_next_trial, int team, int wonType, int center_rope)
     {
         this.has_next_trial = has_next_trial;
         this.team = team;
@@ -62,9 +65,9 @@ public class TrialStat {
     }
 
     /**
-     * @return the {@link WonType } instance that represents the type of the result in the trial
+     * @return the instance int that represents the type of the result in the trial
      */
-    public WonType getWonType() {
+    public int getWonType() {
         return wonType;
     }
 

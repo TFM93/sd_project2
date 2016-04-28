@@ -109,11 +109,14 @@ public class Referee extends Thread {
                     break;
                 case WAIT_FOR_TRIAL_CONCLUSION:
                     TrialStat unpack;
+                    WonType wt;//for trial result
+                    WonType gr = null;//for game result
                     GameStat game_result=null;
                     unpack = this.playground.assertTrialDecision(n_players_pushing, knockDif);
                     has_next_trial = unpack.isHas_next_trial();
                     repo.updtRopeCenter(unpack.getCenter_rope());//update rope center in central info repository
-                    switch (unpack.getWonType()){
+                    wt = WonType.values()[unpack.getWonType()];
+                    switch (wt){
                         case DRAW://if in trial was declared a draw increase both team scores
                             score_T1 +=1;
                             score_T2 +=1;
@@ -167,7 +170,8 @@ public class Referee extends Thread {
                     }
                     repo.refereeLog(state, trial_number);//update the referee state in central info repository
                     if(state == RefState.END_OF_A_GAME && game_result != null)
-                        this.repo.setResult(game_result.getWinnerTeam(),game_result.getWonType(),trial_number);
+                        gr = WonType.values()[game_result.getWonType()];
+                    this.repo.setResult(game_result.getWinnerTeam(),gr,trial_number);
                     break;
                 case END_OF_A_GAME:
 

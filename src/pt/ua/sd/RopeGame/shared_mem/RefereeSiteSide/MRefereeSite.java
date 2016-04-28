@@ -45,26 +45,25 @@ public class MRefereeSite implements IRefereeSiteCoach, IRefereeSiteReferee, IRe
      */
     public synchronized GameStat declareGameWinner(int score_T1, int score_T2, int knock_out, int n_games) {
         n_games_played +=1;//increase number of games played
-
         if(knock_out== 1 )
         {
-            return new GameStat((n_games_played<n_games),knock_out, WonType.KNOCKOUT);
+            return new GameStat((n_games_played<n_games),knock_out, WonType.KNOCKOUT.ordinal());
         }
         else if(knock_out == 2){
 
-            return new GameStat((n_games_played<n_games),knock_out, WonType.KNOCKOUT);
+            return new GameStat((n_games_played<n_games),knock_out, WonType.KNOCKOUT.ordinal());
         }
         else if(score_T1>score_T2)
         {
 
-            return new GameStat((n_games_played<n_games),1,WonType.POINTS);
+            return new GameStat((n_games_played<n_games),1,WonType.POINTS.ordinal());
         }
         else if(score_T1<score_T2){
 
-            return new GameStat((n_games_played<n_games),2,WonType.POINTS);
+            return new GameStat((n_games_played<n_games),2,WonType.POINTS.ordinal());
         }
 
-        return new GameStat((n_games_played<n_games),0,WonType.DRAW);
+        return new GameStat((n_games_played<n_games),0,WonType.DRAW.ordinal());
 
 
 
