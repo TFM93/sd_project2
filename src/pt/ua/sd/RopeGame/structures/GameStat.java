@@ -2,13 +2,10 @@ package pt.ua.sd.RopeGame.structures;
 
 import pt.ua.sd.RopeGame.enums.WonType;
 
-/**
- * Created by tiago and ivosilva on 25-03-2016.<br>
- *     <font size=4>This class represents the status of the game in a certain moment</font>
- *
- *
- */
-public class GameStat {
+import java.io.Serializable;
+
+
+public class GameStat implements Serializable{
     /**
      * @serialField has_next_game
      */
