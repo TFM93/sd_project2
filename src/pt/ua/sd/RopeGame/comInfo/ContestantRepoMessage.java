@@ -46,7 +46,7 @@ public class ContestantRepoMessage extends Message{
     /**
      * Contestant's state
      */
-    private ContestantState arg4 = null;
+    private int arg4 = -1;
 
 
     /**
@@ -78,7 +78,7 @@ public class ContestantRepoMessage extends Message{
      * @param arg3 coach's strength
      * @param arg4 coach's state
      */
-    public ContestantRepoMessage(int type, int arg1, int arg2, int arg3, ContestantState arg4) {
+    public ContestantRepoMessage(int type, int arg1, int arg2, int arg3, int arg4) {
         super(type);
         this.arg1 = arg1;
         this.arg2 = arg2;
@@ -114,7 +114,7 @@ public class ContestantRepoMessage extends Message{
      * Get contestant's state
      * @return contestant's state
      */
-    public ContestantState getArg4() {
+    public int getArg4() {
         return arg4;
     }
 

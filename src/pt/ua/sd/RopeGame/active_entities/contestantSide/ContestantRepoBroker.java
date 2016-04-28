@@ -59,11 +59,45 @@ public class ContestantRepoBroker implements IRepoContestant{
 
     @Override
     public void contestantLog(int id, int team_id, int strength, ContestantState state) {
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
 
+        // In and out message
+        ContestantRepoMessage inMessage;
+        ContestantRepoMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new ContestantRepoMessage(ContestantRepoMessage.CONTESTANTLOG,id,team_id,strength,state.ordinal());
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Close connection
+        con.close();
     }
 
     @Override
     public void updtRopeCenter(int new_val) {
+        // Instatiate a communication socket
+        ClientComm con = new ClientComm (hostName, portNum);
 
+        // In and out message
+        ContestantRepoMessage inMessage;
+        ContestantRepoMessage outMessage;
+
+        // Open connection
+        con.open();
+
+        // Define out message
+        outMessage = new ContestantRepoMessage(ContestantRepoMessage.UPDATEROPECENTER,new_val);
+
+        // Send message
+        con.writeObject(outMessage);
+
+        // Close connection
+        con.close();
     }
 }

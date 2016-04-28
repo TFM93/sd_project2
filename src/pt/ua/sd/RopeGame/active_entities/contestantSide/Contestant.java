@@ -94,6 +94,7 @@ public class Contestant extends Thread {
                         break;
                     }
                     state = ContestantState.STAND_IN_POSITION;//change state
+                    System.out.println("Contestant is updating repo... team id: " + this.team_id+"cont id:" + this.id);
                     repo.contestantLog(this.id, this.team_id, this.strength, state);//update central info repository
                     break;
                 case STAND_IN_POSITION:
