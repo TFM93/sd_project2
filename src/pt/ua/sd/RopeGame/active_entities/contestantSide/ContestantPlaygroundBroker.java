@@ -68,7 +68,7 @@ public class ContestantPlaygroundBroker implements IPlaygroundContestant {
         con.open();
 
         // Define out message
-        outMessage = new ContestantPlaygroundMessage(ContestantPlaygroundMessage.PULLROPE);
+        outMessage = new ContestantPlaygroundMessage(ContestantPlaygroundMessage.PULLROPE,team_id,strenght,contestant_id,n_players_pushing,n_players);
 
         // Send message
         con.writeObject(outMessage);
@@ -100,7 +100,7 @@ public class ContestantPlaygroundBroker implements IPlaygroundContestant {
         con.open();
 
         // Define out message
-        outMessage = new ContestantPlaygroundMessage(ContestantPlaygroundMessage.AMDONE);
+        outMessage = new ContestantPlaygroundMessage(ContestantPlaygroundMessage.AMDONE,n_players_pushing);
 
         // Send message
         con.writeObject(outMessage);
@@ -132,7 +132,7 @@ public class ContestantPlaygroundBroker implements IPlaygroundContestant {
         con.open();
 
         // Define out message
-        outMessage = new ContestantPlaygroundMessage(ContestantPlaygroundMessage.SEATDOWN);
+        outMessage = new ContestantPlaygroundMessage(ContestantPlaygroundMessage.SEATDOWN,n_players_pushing);
 
         // Send message
         con.writeObject(outMessage);

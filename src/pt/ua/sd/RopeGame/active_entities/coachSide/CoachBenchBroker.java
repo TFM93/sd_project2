@@ -52,7 +52,7 @@ public class CoachBenchBroker implements IContestantsBenchCoach {
         inMessage = (CoachBenchMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != CoachBenchMessage.CALLCONTESTANTS)) {
+        if ((inMessage.getMsgType() != CoachBenchMessage.CALLCONTESTANTS_ANS)) {
             System.out.println("Invalid message type at " + this.getClass().getName());
             System.out.println(inMessage.toString());
             System.exit(1);
@@ -87,7 +87,7 @@ public class CoachBenchBroker implements IContestantsBenchCoach {
         inMessage = (CoachBenchMessage) con.readObject();
 
         // Validate answer
-        if ((inMessage.getMsgType() != CoachBenchMessage.INFORMREF)) {
+        if ((inMessage.getMsgType() != CoachBenchMessage.INFORMREF_ANS)) {
             System.out.println("Invalid message type at " + this.getClass().getName());
             System.out.println(inMessage.toString());
             System.exit(1);

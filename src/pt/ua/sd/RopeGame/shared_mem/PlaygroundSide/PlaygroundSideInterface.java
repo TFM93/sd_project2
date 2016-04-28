@@ -129,7 +129,7 @@ public class PlaygroundSideInterface {
         switch (inMessage.getMsgType()) {
             case ContestantPlaygroundMessage.PULLROPE:
                 if (inMessage.getTeam_id() < 0) {
-                    throw new MessageExcept ("Invalid team id!", inMessage);
+                    throw new MessageExcept ("Invalid team id! on pull the rope. team id="+inMessage.getTeam_id(), inMessage);
                 }
                 if (inMessage.getStrength() < 0) {
                     throw new MessageExcept ("Invalid strength!", inMessage);
