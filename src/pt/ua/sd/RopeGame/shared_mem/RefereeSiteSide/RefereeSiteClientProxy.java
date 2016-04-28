@@ -71,7 +71,7 @@ public class RefereeSiteClientProxy extends Thread {
         int proxyId;                            // intantiation identifier
 
         try {
-            cl = (Class<pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide.RefereeSiteClientProxy>) Class.forName("pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide.PlaygroundClientProxy");
+            cl = (Class<pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide.RefereeSiteClientProxy>) Class.forName("pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide.RefereeSiteClientProxy");
         } catch (ClassNotFoundException e) {
             System.out.println("The data type PlaygroundClientProxy wasn't found!");
             e.printStackTrace();
