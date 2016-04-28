@@ -83,7 +83,7 @@ public class ContestantClient {
         }
 
         for(int i = 0; i < players_team; i++){
-            cont_t2[i] = new Contestant(i, 1, rn.nextInt(20 - 10 + 1) + 10,
+            cont_t2[i] = new Contestant(i, 2, rn.nextInt(20 - 10 + 1) + 10,
                     playground,
                     bench,
                     repo,
