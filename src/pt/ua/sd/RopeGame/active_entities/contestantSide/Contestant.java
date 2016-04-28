@@ -98,15 +98,21 @@ public class Contestant extends Thread {
                     repo.contestantLog(this.id, this.team_id, this.strength, state);//update central info repository
                     break;
                 case STAND_IN_POSITION:
+                    System.out.println("Contestant is getting ready... team id: " + this.team_id+"cont id:" + this.id);
                     contestants_bench.getReady(n_players_pushing);
                     state = ContestantState.DO_YOUR_BEST;//change state
+                    System.out.println("Contestant is updating repo... team id: " + this.team_id+"cont id:" + this.id);
                     repo.contestantLog(this.id, this.team_id, this.strength, state);//update central info repository
                     break;
                 case DO_YOUR_BEST:
+                    System.out.println("Contestant is pulling the rope... team id: " + this.team_id+"cont id:" + this.id);
                     playground.pullTheRope(this.team_id, this.strength, this.id, n_players_pushing, n_players);
+                    System.out.println("Contestant is updating repo... team id: " + this.team_id+"cont id:" + this.id);
                     repo.contestantLog(this.id, this.team_id, this.strength, state);//update central info repository
+                    System.out.println("Contestant is done.. team id: " + this.team_id+"cont id:" + this.id);
                     playground.iAmDone(n_players_pushing);
                     decrementStrength();//depois de am done decrementar a forca
+                    System.out.println("Contestant is seating down... team id: " + this.team_id+"cont id:" + this.id);
                     playground.seatDown(n_players_pushing);
                     state = ContestantState.START;//change state
                     break;
