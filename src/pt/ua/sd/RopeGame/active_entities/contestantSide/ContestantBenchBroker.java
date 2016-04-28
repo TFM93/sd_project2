@@ -72,7 +72,7 @@ public class ContestantBenchBroker implements IContestantsBenchContestant {
         con.open();
 
         // Define out message
-        outMessage = new ContestantBenchMessage(ContestantBenchMessage.FOLLOW_COACH_ADVICE);
+        outMessage = new ContestantBenchMessage(ContestantBenchMessage.FOLLOW_COACH_ADVICE,contestant_id,strength,team_id,n_players,n_players_pushing);
 
         // Send message
         con.writeObject(outMessage);
@@ -108,7 +108,7 @@ public class ContestantBenchBroker implements IContestantsBenchContestant {
         con.open();
 
         // Define out message
-        outMessage = new ContestantBenchMessage(ContestantBenchMessage.GETREADY);
+        outMessage = new ContestantBenchMessage(ContestantBenchMessage.GETREADY,n_players_pushing);
 
         // Send message
         con.writeObject(outMessage);

@@ -23,6 +23,10 @@ public class ConfigInterface {
         this.configuration = configuration;
     }
 
+    public int getTest(){
+        return configuration.getnPlayersPushing();
+    }
+
     /**
      * Processing of messages executing its task and generating an answer message.
      * @param inMessage message with the request
@@ -115,6 +119,7 @@ public class ConfigInterface {
                 outMessage = new ConfigurationMessage(ConfigurationMessage.GET_NTRIALS_ANS, configuration.getnTrials());
                 break;
             case ConfigurationMessage.GET_NPLAYERS_PUSHING:
+                System.out.println("NPLAYERS PUSHING " + configuration.getnPlayersPushing());
                 outMessage = new ConfigurationMessage(ConfigurationMessage.GET_NPLAYERS_PUSHING_ANSWER, configuration.getnPlayersPushing());
                 break;
             case ConfigurationMessage.GET_NPLAYERS:

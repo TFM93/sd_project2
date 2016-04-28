@@ -22,27 +22,39 @@ public class CoachClient {
 
         // Get bench configuration
         Domain benchConf = getBenchConfiguration(configurationServerHostname, configurationServerPortnum);
+        System.out.println("got conf bench");
+
         // Get playground configuration
         Domain playgroundConf = getPlaygroundConfiguration(configurationServerHostname, configurationServerPortnum);
+        System.out.println("got conf playg");
+
         // Get referee site configuration
         Domain refSiteConf = getRefereeSiteConfiguration(configurationServerHostname, configurationServerPortnum);
+        System.out.println("got conf refSite");
+
         // Get repo configuration
         Domain repoConf = getRepoConfiguration(configurationServerHostname, configurationServerPortnum);
+        System.out.println("got conf repo host " + repoConf.hostName+ " port " + repoConf.portNumb);
+
         // get number of players in team
         int players_team = getNPlayersTeamConfiguration(configurationServerHostname, configurationServerPortnum);
-        System.out.println("got conf");
+        System.out.println("got conf players " + players_team);
+
         // get number of players pushing
         int players_pushing = getNPlayersPushingConfiguration(configurationServerHostname, configurationServerPortnum);
-        System.out.println("got conf");
+        System.out.println("got conf players push " + players_pushing);
+
         // get number of games
         int n_games = getNGamesConfiguration(configurationServerHostname, configurationServerPortnum);
-        System.out.println("got conf");
+        System.out.println("got conf games ->" + n_games);
+
         // get number of trials
         int n_trials = getNTrialsConfiguration(configurationServerHostname, configurationServerPortnum);
-        System.out.println("got conf");
+        System.out.println("got conf ntrials ->" +n_trials);
+
         // get knockout difference
         int knockDif = getKnockoutDifConfiguration(configurationServerHostname, configurationServerPortnum);
-
+        System.out.println("got conf n knockdif-> "+knockDif);
         // Get number of referees
         //int nReferee = getNumberOfReferee(configurationServerHostname, configurationServerPortnum); // number of referees
         //int nReferee = 1;
