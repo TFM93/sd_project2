@@ -1,11 +1,18 @@
 package pt.ua.sd.RopeGame.structures;
 
-import pt.ua.sd.RopeGame.enums.WonType;
+
 
 import java.io.Serializable;
 
 
 public class GameStat implements Serializable{
+
+    /**
+     * Serialization key
+     * @serialField serialVersionUID
+     */
+    private static final long serialVersionUID = 200416L;
+
     /**
      * @serialField has_next_game
      */
@@ -45,7 +52,7 @@ public class GameStat implements Serializable{
 
     /**
      *
-     * @return the {@link WonType} type of victory in the game
+     * @return the int type of victory in the game
      */
     public int getWonType() {
         return wonType;

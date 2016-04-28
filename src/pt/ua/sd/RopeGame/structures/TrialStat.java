@@ -1,11 +1,17 @@
 package pt.ua.sd.RopeGame.structures;
 
-import pt.ua.sd.RopeGame.enums.WonType;
 
 import java.io.Serializable;
 
 
 public class TrialStat implements Serializable{
+
+    /**
+     * Serialization key
+     * @serialField serialVersionUID
+     */
+    private static final long serialVersionUID = 200416L;
+
     /**
      *  The {@link Boolean } instance tells if has(true) or not(false) one next trial in the current game
      *  @serialField has_next_trial

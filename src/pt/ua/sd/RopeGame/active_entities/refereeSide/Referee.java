@@ -169,9 +169,9 @@ public class Referee extends Thread {
 
                     }
                     repo.refereeLog(state, trial_number);//update the referee state in central info repository
-                    if(state == RefState.END_OF_A_GAME && game_result != null)
+                    if(state == RefState.END_OF_A_GAME && game_result != null){
                         gr = WonType.values()[game_result.getWonType()];
-                    this.repo.setResult(game_result.getWinnerTeam(),gr,trial_number);
+                        this.repo.setResult(game_result.getWinnerTeam(),gr,trial_number);}
                     break;
                 case END_OF_A_GAME:
 
