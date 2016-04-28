@@ -29,7 +29,7 @@ public class CoachRepoMessage extends Message{
     /**
      * Coach's state
      */
-    private CoachState arg2 = null;
+    private int arg2 = -1;
 
 
     /**
@@ -48,7 +48,7 @@ public class CoachRepoMessage extends Message{
      * @param arg1 coach's team id
      * @param arg2 coach's state
      */
-    public CoachRepoMessage(int type, int arg1, CoachState arg2) {
+    public CoachRepoMessage(int type, int arg1, int arg2) {
         super(type);
         this.arg1 = arg1;
         this.arg2 = arg2;
@@ -66,7 +66,7 @@ public class CoachRepoMessage extends Message{
      * Get coach's state
      * @return customer state, number of goods or customer id
      */
-    public CoachState getArg2() {
+    public int getArg2() {
         return arg2;
     }
 }

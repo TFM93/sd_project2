@@ -61,7 +61,7 @@ public class RefereeRefSiteMessage extends Message {
      */
     private int score_T1=-1;
     private int score_T2 =-1;
-    private int knock_out=-1;
+    private int knock_out=Integer.MAX_VALUE;
     private int n_games=-1;
     private GameStat stat=null;
     private int n_games_played=-1;

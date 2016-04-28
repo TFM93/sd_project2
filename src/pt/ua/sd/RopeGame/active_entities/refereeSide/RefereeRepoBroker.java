@@ -113,7 +113,7 @@ public class RefereeRepoBroker implements IRepoReferee {
         con.open();
 
         // Define out message
-        outMessage = new RefereeRepoMessage(RefereeRepoMessage.SETRESULT, team_id, wonType, nr_trials);
+        outMessage = new RefereeRepoMessage(RefereeRepoMessage.SETRESULT, team_id, wonType.ordinal(), nr_trials);
 
         // Send message
         con.writeObject(outMessage);

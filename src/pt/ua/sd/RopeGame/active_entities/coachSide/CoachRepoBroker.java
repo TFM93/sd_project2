@@ -45,7 +45,7 @@ public class CoachRepoBroker implements IRepoCoach {
         con.open();
 
         // Define out message
-        outMessage = new CoachRepoMessage(CoachRepoMessage.COACHLOG, team_id, state);
+        outMessage = new CoachRepoMessage(CoachRepoMessage.COACHLOG, team_id, state.ordinal());
 
         // Send message
         con.writeObject(outMessage);

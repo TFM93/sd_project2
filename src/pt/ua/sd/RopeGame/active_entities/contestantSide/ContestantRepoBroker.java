@@ -75,6 +75,15 @@ public class ContestantRepoBroker implements IRepoContestant{
         // Send message
         con.writeObject(outMessage);
 
+        // Get answer
+        inMessage = (ContestantRepoMessage) con.readObject();
+
+        if ((inMessage.getMsgType() != ContestantRepoMessage.ACK)) {
+            System.out.println("Invalid message type at " + this.getClass().getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
+
         // Close connection
         con.close();
     }
@@ -96,6 +105,15 @@ public class ContestantRepoBroker implements IRepoContestant{
 
         // Send message
         con.writeObject(outMessage);
+
+        // Get answer
+        inMessage = (ContestantRepoMessage) con.readObject();
+
+        if ((inMessage.getMsgType() != ContestantRepoMessage.ACK)) {
+            System.out.println("Invalid message type at " + this.getClass().getName());
+            System.out.println(inMessage.toString());
+            System.exit(1);
+        }
 
         // Close connection
         con.close();

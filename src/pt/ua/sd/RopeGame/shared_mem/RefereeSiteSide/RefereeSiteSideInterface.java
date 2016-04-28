@@ -73,7 +73,7 @@ public class RefereeSiteSideInterface {
             case RefereeRefSiteMessage.ANG:
                 break;
             case RefereeRefSiteMessage.DGW:
-                if (inMessage.get_knock_out() < 0) {
+                if (inMessage.get_knock_out() == Integer.MAX_VALUE) {
                     throw new MessageExcept ("Invalid knockout difference!", inMessage);
                 }
                 if (inMessage.get_n_games() < 0) {

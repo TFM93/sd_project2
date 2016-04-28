@@ -6,34 +6,35 @@ confFile=rg.config
 # Read configuration file
 while read line
 do
-    splitIndex=`expr index "$line" =`
+    splitIndex=(${line//=/ })
+    value=${line##*=}
 
-    if [[ "$line" =~ "REPO_HOST_NAME" ]]; then
-    	repositoryHostName=${line:$splitIndex}
+    if [[ "$splitIndex" =~ "REPO_HOST_NAME" ]]; then
+    	repositoryHostName=${value}
     elif [[ "$line" =~ "REPO_PORT_NUM" ]]; then
-    	repositoryPortNum=${line:$splitIndex}    
+    	repositoryPortNum=${value}
     elif [[ "$line" =~ "REFSITE_HOST_NAME" ]]; then
-    	refSiteHostName=${line:$splitIndex}
+    	refSiteHostName=${value}
     elif [[ "$line" =~ "REFSITE_PORT_NUM" ]]; then
-    	refSitePortNum=${line:$splitIndex}
+    	refSitePortNum=${value}
     elif [[ "$line" =~ "BENCH_HOST_NAME" ]]; then
-    	benchHostName=${line:$splitIndex}
+    	benchHostName=${value}
     elif [[ "$line" =~ "BENCH_PORT_NUM" ]]; then
-    	benchPortNum=${line:$splitIndex}
+    	benchPortNum=${value}
     elif [[ "$line" =~ "PLAYG_HOST_NAME" ]]; then
-    	playgHostName=${line:$splitIndex}
-    elif [[ "$line" =~ "PLAYG_HOST_NAME" ]]; then
-    	playgPortNum=${line:$splitIndex}
+    	playgHostName=${value}
+    elif [[ "$line" =~ "PLAYG_PORT_NUM" ]]; then
+    	playgPortNum=${value}
     elif [[ "$line" =~ "REFEREE_HOST_NAME" ]]; then
-    	refereeHostName=${line:$splitIndex}
+    	refereeHostName=${value}
     elif [[ "$line" =~ "COACH_HOST_NAME" ]]; then
-    	coachHostName=${line:$splitIndex}
+    	coachHostName=${value}
     elif [[ "$line" =~ "CONTESTANT_HOST_NAME" ]]; then
-    	contestantHostName=${line:$splitIndex}
+    	contestantHostName=${value}
     elif [[ "$line" =~ "CONFIG_HOST_NAME" ]]; then
-    	configurationHostName=${line:$splitIndex}
+    	configurationHostName=${value}
     elif [[ "$line" =~ "CONFIG_PORT_NUM" ]]; then
-    	configurationPortNum=${line:$splitIndex}
+    	configurationPortNum=${value}
     fi
 done < $confFile
 

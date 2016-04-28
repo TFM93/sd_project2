@@ -89,7 +89,7 @@ public class RefereeRepoMessage extends Message {
     /**
      * id of the team winner
      */
-    private WonType wonType = null;
+    private int wonType = -1;
 
 
 
@@ -159,32 +159,23 @@ public class RefereeRepoMessage extends Message {
      * Messages Instantiation.
      *
      * @param type message type
-     * @param team_id referee's trial number
-     * @param wonType referee's trial number
-     * @param n_trials referee's state
+     * @param team_idOrWinner referee's trial number
+     * @param wonTypeOrScore1 referee's trial number
+     * @param n_trialsOrScore2 referee's state
      */
-    public RefereeRepoMessage(int type, int team_id, WonType wonType, int n_trials) {
+    public RefereeRepoMessage(int type, int team_idOrWinner, int wonTypeOrScore1, int n_trialsOrScore2) {
         super(type);
-        this.wonType = wonType;
-        this.n_trials = n_trials;
-        this.team_id = team_id;
-    }
+        if(type==SETRESULT){
+            this.wonType = wonTypeOrScore1;
+            this.n_trials = n_trialsOrScore2;
+            this.team_id = team_idOrWinner;
+        }
+        else{
+            this.winner = team_idOrWinner;
+            this.score1 = wonTypeOrScore1;
+            this.score2 = n_trialsOrScore2;
+    }}
 
-
-    /**
-     * Messages Instantiation.
-     *
-     * @param type message type
-     * @param winner referee's trial number
-     * @param score1 referee's trial number
-     * @param score2 referee's state
-     */
-    public RefereeRepoMessage(int type, int winner, int score1, int score2) {
-        super(type);
-        this.winner = winner;
-        this.score1 = score1;
-        this.score2 = score2;
-    }
 
     /**
      * Get referee's trial number or rope center value
@@ -224,7 +215,7 @@ public class RefereeRepoMessage extends Message {
 
     public int getN_trials() { return n_trials; }
 
-    public WonType getWonType() { return wonType; }
+    public int getWonType() { return wonType; }
 
     public int getTeam_id() { return team_id; }
 }
