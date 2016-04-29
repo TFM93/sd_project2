@@ -20,7 +20,7 @@ public class CoachRefereeSiteBroker implements IRefereeSiteCoach {
     private final int portNum;
 
     /**
-     * Workshop Broker for Craftsman instantiation.
+     * Referee Site Broker for coach
      * @param hostName host name
      * @param portNum port number
      */

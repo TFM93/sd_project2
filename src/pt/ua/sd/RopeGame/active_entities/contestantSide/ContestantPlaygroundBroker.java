@@ -20,7 +20,7 @@ public class ContestantPlaygroundBroker implements IPlaygroundContestant {
     private final int portNum;
 
     /**
-     * Shop Broker for Craftsman instantiation.
+     * Playground Broker for contestant
      * @param hostName host name
      * @param portNum port number
      */

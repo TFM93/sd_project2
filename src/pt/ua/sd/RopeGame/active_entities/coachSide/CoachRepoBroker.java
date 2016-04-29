@@ -23,7 +23,7 @@ public class CoachRepoBroker implements IRepoCoach {
     private final int portNum;
 
     /**
-     * Workshop Broker for Craftsman instantiation.
+     * Repo Broker for coach
      * @param hostName host name
      * @param portNum port number
      */

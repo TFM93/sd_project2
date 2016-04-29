@@ -1,83 +1,83 @@
 package pt.ua.sd.RopeGame.shared_mem.RepoSide;
-
-
 import pt.ua.sd.RopeGame.comInfo.ConfigurationMessage;
+
+/**
+ * Central Information Repository Server
+ *
+ * Starts the Information Central Repository server to listen for incoming messages
+ *
+ */
 
 public class RepoServer {
 
     public static void main(String[] args){
 
-
-        // Get host name and port number of configuration server
+        /*  fetch information from configuration server  */
         if (args.length < 2) {
-            System.out.println("Usage: java -jar reposite.jar <configuration host name> <configuration port number>");
+            System.out.println("Usage: java -jar repository.jar <host name> <port number>");
             System.exit(0);
         }
-
-
         String configurationServerHostname = args[0];
         int configurationServerPortnum = Integer.parseInt(args[1]);
 
-        // Get ref site configuration
+        /*  get repository configuration  */
         RepoConfiguration conf = getRepoConfiguration(configurationServerHostname, configurationServerPortnum);
 
+        MGeneralInfoRepo repo;
+        RepoInterface repoInterface;
+        ServerComm scon, sconi;
+        RepoProxy cliProxy;
 
-        MGeneralInfoRepo repoSite;                        // Referee site
-        RepoInterface refSiteInterface;       // Interface to Referee Site
-        ServerComm scon, sconi;            // Communication channels
-        RepoProxy cliProxy;         // Agent service provider thread
-
-        // Establish the service
-        scon = new ServerComm(conf.getPortNumber()); // Creation of the listening channel
+        scon = new ServerComm(conf.getPortNumber());
         scon.start();
-        repoSite = new MGeneralInfoRepo(conf.getNplayers(),conf.getPlayers_pushing(),conf.getNtrials(),conf.getNgames(),conf.getKnockdif());                                    // Activation of the service
-        refSiteInterface = new RepoInterface(repoSite, conf.getnEntities());  // Activation of the service interface
+        repo = new MGeneralInfoRepo(conf.getNplayers(),conf.getPlayers_pushing(),conf.getNtrials(),conf.getNgames(),conf.getKnockdif());                                    // Activation of the service
+        repoInterface = new RepoInterface(repo, conf.getnEntities());
 
-        System.out.println("Referee Site: The service was established");
-        System.out.println("Referee Site: The server is listening");
+        System.out.println("Repository: The service was established");
+        System.out.println("Repository: The server is listening");
 
-        // Requests processing
+        /*  process requests  */
         while (true) {
-            sconi = scon.accept();                                    // Listening
-            cliProxy = new RepoProxy(sconi, refSiteInterface);     // Agent service provider
+            sconi = scon.accept();
+            cliProxy = new RepoProxy(sconi, repoInterface);
             cliProxy.start();
         }
     }
 
-
+    /**
+     * Get Repository configuration
+     * @param configServer Configuration server host name
+     * @param configPort Configuration server port
+     * @return Repository configuration
+     */
     private static RepoConfiguration getRepoConfiguration(String configServer,int configPort){
 
-
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (configServer, configPort);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ConfigurationMessage inMessage;
         ConfigurationMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message to get repository configuration  */
         outMessage = new ConfigurationMessage(ConfigurationMessage.GETREP);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ConfigurationMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != ConfigurationMessage.GETREP_ANSWER)) {
             System.out.println("Invalid message type at " + RepoServer.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
 
-
+        /*  return the configuration  */
         RepoConfiguration conf = new RepoConfiguration(inMessage.getHostName(),inMessage.getPortNumb(),inMessage.getArg1(),inMessage.getArg2(),inMessage.getArg3(),inMessage.getArg4(),inMessage.getArg5());
         return conf;
     }

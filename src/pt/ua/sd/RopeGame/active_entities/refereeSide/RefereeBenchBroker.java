@@ -22,7 +22,7 @@ public class RefereeBenchBroker implements IContestantsBenchReferee {
     private final int portNum;
 
     /**
-     * Shop Broker for Craftsman instantiation.
+     * Bench Broker for referee
      * @param hostName host name
      * @param portNum port number
      */

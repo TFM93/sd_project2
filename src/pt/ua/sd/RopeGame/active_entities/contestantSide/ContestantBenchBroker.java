@@ -23,7 +23,7 @@ public class ContestantBenchBroker implements IContestantsBenchContestant {
     private final int portNum;
 
     /**
-     * Shop Broker for Craftsman instantiation.
+     * Bench Broker for contestant
      * @param hostName host name
      * @param portNum port number
      */

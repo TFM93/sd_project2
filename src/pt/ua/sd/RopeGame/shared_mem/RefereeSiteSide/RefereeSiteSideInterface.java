@@ -15,21 +15,21 @@ public class RefereeSiteSideInterface {
     private final MRefereeSite ref_site;
 
     /**
-     * Number of terminated messages received
+     * Number of TERMINATE messages received
      * @serialField nTerminateMessages
      */
     private int nTerminateMessages;
 
     /**
-     * Number of terminated messages to end
+     * Number of TERMINATE messages left
      * @serialField nTerminateMessagesToEnd
      */
     private final int nTerminateMessagesToEnd;
 
     /**
-     * Instantiation of Referee site interface
-     * @param ref_site ref_site
-     * @param nTerminateMessagesToEnd number of terminate messages to end
+     * Referee site interface constructor method
+     * @param ref_site Referee Site
+     * @param nTerminateMessagesToEnd Number of TERMINATE messages left to end
      */
     public RefereeSiteSideInterface(MRefereeSite ref_site, int nTerminateMessagesToEnd) {
         this.ref_site = ref_site;
@@ -38,10 +38,10 @@ public class RefereeSiteSideInterface {
     }
 
     /**
-     * Processing of messages executing its task and generating an answer message.
-     * @param inMessage message with the request
-     * @return answer message
-     * @throws MessageExcept if the message with the request is considered invalid
+     * Process and reply the incoming messages
+     * @param inMessage Incoming message
+     * @return Outgoing message
+     * @throws MessageExcept Exception that shows that the incoming message is not valid
      */
     public Message processAndReply (Message inMessage) throws MessageExcept {
 
@@ -59,16 +59,16 @@ public class RefereeSiteSideInterface {
     }
 
     /**
-     * Processing of messages from the referee executing its task and generating an answer message.
-     * @param inMessage message with the request
-     * @return answer message
-     * @throws MessageExcept if the message with the request is considered invalid
+     * Process and reply the incoming messages from the coaches
+     * @param inMessage Incoming message
+     * @return Outgoing message
+     * @throws MessageExcept Exception that shows that the incoming message is not valid
      */
     private Message processAndReplyRefereeMessage(RefereeRefSiteMessage inMessage) throws MessageExcept {
 
         RefereeRefSiteMessage outMessage = null;
 
-        // Validate received message
+        /*  validate incoming messages  */
         switch (inMessage.getMsgType()) {
             case RefereeRefSiteMessage.ANG:
                 break;
@@ -94,7 +94,7 @@ public class RefereeSiteSideInterface {
                 throw new MessageExcept ("Invalid type!", inMessage);
         }
 
-        // Processing
+        /*  process and reply to the messages  */
         switch (inMessage.getMsgType()) {
             case RefereeRefSiteMessage.ANG:
                 ref_site.announceNewGame();

@@ -21,7 +21,7 @@ public class CoachBenchBroker implements IContestantsBenchCoach {
     private final int portNum;
 
     /**
-     * Workshop Broker for Craftsman instantiation.
+     * Bench broker for coach
      * @param hostName host name
      * @param portNum port number
      */

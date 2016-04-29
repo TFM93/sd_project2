@@ -4,12 +4,12 @@ import pt.ua.sd.RopeGame.comInfo.Message;
 import pt.ua.sd.RopeGame.comInfo.MessageExcept;
 
 /**
- * Created by ivosilva on 25/04/16.
+ * Playground Proxy
  */
 public class PlaygroundClientProxy extends Thread{
 
     /**
-     * Counter of released threads
+     * Count released threads
      * @serialField nProxy
      */
     private static int nProxy;
@@ -21,35 +21,35 @@ public class PlaygroundClientProxy extends Thread{
     private final ServerComm sconi;
 
     /**
-     * Interface to Referee Site
+     * Interface to Playground
      * @serialField refSiteInterface
      */
     private final PlaygroundSideInterface playgroundInterface;
 
     /**
-     * Instantiation of the ref site client proxy.
+     * Playground proxy constructor method
      * @param sconi communication channel
      * @param playgroundInterface interface to referee site
      */
     public PlaygroundClientProxy(ServerComm sconi, PlaygroundSideInterface playgroundInterface) {
-        super("Ref_Site_Proxy_" + getProxyId());
+        super("Playground_Proxy_" + getProxyId());
         this.sconi = sconi;
         this.playgroundInterface = playgroundInterface;
     }
 
     /**
-     * Life cycle of the agent service provider thread.
+     * Life cycle of the thread
      */
     @Override
     public void run() {
 
-        Message inMessage = null;   // In message
-        Message outMessage = null;  // Out message
+        Message inMessage = null;
+        Message outMessage = null;
 
-        // Read input message
+        /*  read input message  */
         inMessage = (Message) sconi.readObject();
 
-        // Process message
+        /*  process and reply to the input message  */
         try {
             outMessage = playgroundInterface.processAndReply(inMessage);
         } catch (MessageExcept e) {
@@ -57,19 +57,19 @@ public class PlaygroundClientProxy extends Thread{
             System.exit(1);
         }
 
-        // Send answer to client and close communication
+        /*  send the reply message and close the communication channel  */
         sconi.writeObject(outMessage);
         sconi.close();
     }
 
     /**
-     * Generation of instantiation identifier.
-     * @return instantiation identifier
+     * Gets proxy id
+     * @return Proxy id
      */
     private static int getProxyId() {
 
         Class<pt.ua.sd.RopeGame.shared_mem.PlaygroundSide.PlaygroundClientProxy> cl = null;
-        int proxyId;                            // intantiation identifier
+        int proxyId;
 
         try {
             cl = (Class<pt.ua.sd.RopeGame.shared_mem.PlaygroundSide.PlaygroundClientProxy>) Class.forName("pt.ua.sd.RopeGame.shared_mem.PlaygroundSide.PlaygroundClientProxy");

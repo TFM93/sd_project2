@@ -23,7 +23,7 @@ public class ContestantRepoBroker implements IRepoContestant{
     private final int portNum;
 
     /**
-     * Shop Broker for Craftsman instantiation.
+     * Repo Broker for contestant
      * @param hostName host name
      * @param portNum port number
      */

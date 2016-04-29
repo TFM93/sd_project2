@@ -4,11 +4,13 @@ import pt.ua.sd.RopeGame.comInfo.Message;
 import pt.ua.sd.RopeGame.comInfo.MessageExcept;
 import pt.ua.sd.RopeGame.shared_mem.ConfigSide.ServerComChannel;
 
-
+/**
+ * Referee Site Proxy
+ */
 public class RefereeSiteClientProxy extends Thread {
 
     /**
-     * Counter of released threads
+     * Count released threads
      * @serialField nProxy
      */
     private static int nProxy;
@@ -26,7 +28,7 @@ public class RefereeSiteClientProxy extends Thread {
     private final RefereeSiteSideInterface refSiteInterface;
 
     /**
-     * Instantiation of the ref site client proxy.
+     * Referee Site proxy constructor method
      * @param sconi communication channel
      * @param refSiteInterface interface to referee site
      */
@@ -37,7 +39,7 @@ public class RefereeSiteClientProxy extends Thread {
     }
 
     /**
-     * Life cycle of the agent service provider thread.
+     * Life cycle of the thread
      */
     @Override
     public void run() {
@@ -45,10 +47,10 @@ public class RefereeSiteClientProxy extends Thread {
         Message inMessage = null;   // In message
         Message outMessage = null;  // Out message
 
-        // Read input message
+        /*  read input message  */
         inMessage = (Message) sconi.readObject();
 
-        // Process message
+        /*  process and reply to the input message  */
         try {
             outMessage = refSiteInterface.processAndReply(inMessage);
         } catch (MessageExcept e) {
@@ -56,24 +58,24 @@ public class RefereeSiteClientProxy extends Thread {
             System.exit(1);
         }
 
-        // Send answer to client and close communication
+        /*  send the reply message and close the communication channel  */
         sconi.writeObject(outMessage);
         sconi.close();
     }
 
     /**
-     * Generation of instantiation identifier.
-     * @return instantiation identifier
+     * Gets proxy id
+     * @return Proxy id
      */
     private static int getProxyId() {
 
         Class<pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide.RefereeSiteClientProxy> cl = null;
-        int proxyId;                            // intantiation identifier
+        int proxyId;
 
         try {
             cl = (Class<pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide.RefereeSiteClientProxy>) Class.forName("pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide.RefereeSiteClientProxy");
         } catch (ClassNotFoundException e) {
-            System.out.println("The data type PlaygroundClientProxy wasn't found!");
+            System.out.println("The data type RefereeSiteClientProxy wasn't found!");
             e.printStackTrace();
             System.exit(1);
         }

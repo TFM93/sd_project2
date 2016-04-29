@@ -2,33 +2,34 @@ package pt.ua.sd.RopeGame.shared_mem.BenchSide;
 
 import pt.ua.sd.RopeGame.comInfo.*;
 
+
 /**
- * Created by ivosilva on 25/04/16.
+ * Interface to the Bench
  */
 public class BenchSideInterface {
 
     /**
-     * Referee Site
-     * @serialField referee site
+     * Bench
+     * @serialField Bench
      */
     private final MContestantsBench bench;
 
     /**
-     * Number of terminated messages received
+     * Number of TERMINATE messages received
      * @serialField nTerminateMessages
      */
     private int nTerminateMessages;
 
     /**
-     * Number of terminated messages to end
+     * Number of TERMINATE messages left
      * @serialField nTerminateMessagesToEnd
      */
     private final int nTerminateMessagesToEnd;
 
     /**
-     * Instantiation of Referee site interface
-     * @param bench ref_site
-     * @param nTerminateMessagesToEnd number of terminate messages to end
+     * Bench Interface constructor method
+     * @param bench Central Information Repository
+     * @param nTerminateMessagesToEnd Number of TERMINATE messages left to end
      */
     public BenchSideInterface(MContestantsBench bench, int nTerminateMessagesToEnd) {
         this.bench = bench;
@@ -37,15 +38,16 @@ public class BenchSideInterface {
     }
 
     /**
-     * Processing of messages executing its task and generating an answer message.
-     * @param inMessage message with the request
-     * @return answer message
-     * @throws MessageExcept if the message with the request is considered invalid
+     * Process and reply the incoming messages
+     * @param inMessage Incoming message
+     * @return Outgoing message
+     * @throws MessageExcept Exception that shows that the incoming message is not valid
      */
     public Message processAndReply (Message inMessage) throws MessageExcept {
 
         Message outMessage = null;
 
+        /*  Bench receives messages from coaches, contestants and the referee  */
         if (inMessage instanceof CoachBenchMessage) {
             outMessage = processAndReplyCoachMessage((CoachBenchMessage) inMessage);
         }
@@ -63,16 +65,16 @@ public class BenchSideInterface {
     }
 
     /**
-     * Processing of messages from the referee executing its task and generating an answer message.
-     * @param inMessage message with the request
-     * @return answer message
-     * @throws MessageExcept if the message with the request is considered invalid
+     * Process and reply the incoming messages from the coaches
+     * @param inMessage Incoming message
+     * @return Outgoing message
+     * @throws MessageExcept Exception that shows that the incoming message is not valid
      */
     private Message processAndReplyCoachMessage(CoachBenchMessage inMessage) throws MessageExcept {
 
         CoachBenchMessage outMessage = null;
 
-        // Validate received message
+        /*  validate incoming messages  */
         switch (inMessage.getMsgType()) {
             case CoachBenchMessage.CALLCONTESTANTS:
                 if (inMessage.getN_players() < 0) {
@@ -93,7 +95,7 @@ public class BenchSideInterface {
                 throw new MessageExcept ("Invalid type!", inMessage);
         }
 
-        // Processing
+        /*  process and reply to the messages  */
         switch (inMessage.getMsgType()) {
             case CoachBenchMessage.CALLCONTESTANTS:
                 System.out.println("Call contestants message received");
@@ -121,16 +123,16 @@ public class BenchSideInterface {
 
 
     /**
-     * Processing of messages from the referee executing its task and generating an answer message.
-     * @param inMessage message with the request
-     * @return answer message
-     * @throws MessageExcept if the message with the request is considered invalid
+     * Process and reply the incoming messages from the contestants
+     * @param inMessage Incoming message
+     * @return Outgoing message
+     * @throws MessageExcept Exception that shows that the incoming message is not valid
      */
     private Message processAndReplyContestantMessage(ContestantBenchMessage inMessage) throws MessageExcept {
 
         ContestantBenchMessage outMessage = null;
 
-        // Validate received message
+        /*  validate incoming messages  */
         switch (inMessage.getMsgType()) {
             case ContestantBenchMessage.FOLLOW_COACH_ADVICE:
                 System.out.println("follow coach advice received");
@@ -163,7 +165,7 @@ public class BenchSideInterface {
                 throw new MessageExcept ("Invalid type!", inMessage);
         }
 
-        // Processing
+        /*  process and reply to the messages  */
         switch (inMessage.getMsgType()) {
             case ContestantBenchMessage.FOLLOW_COACH_ADVICE:
                 boolean[] followed_advice = bench.followCoachAdvice(inMessage.getContestant_id(), inMessage.getStrength(), inMessage.getTeam_id(),
@@ -190,16 +192,16 @@ public class BenchSideInterface {
 
 
     /**
-     * Processing of messages from the referee executing its task and generating an answer message.
-     * @param inMessage message with the request
-     * @return answer message
-     * @throws MessageExcept if the message with the request is considered invalid
+     * Process and reply the incoming messages from the referee
+     * @param inMessage Incoming message
+     * @return Outgoing message
+     * @throws MessageExcept Exception that shows that the incoming message is not valid
      */
     private Message processAndReplyRefereeMessage(RefereeBenchMessage inMessage) throws MessageExcept {
 
         RefereeBenchMessage outMessage = null;
 
-        // Validate received message
+        /*  validate incoming messages  */
         switch (inMessage.getMsgType()) {
             case RefereeBenchMessage.CALLTR:
                 System.out.println("call trial received");
@@ -221,7 +223,7 @@ public class BenchSideInterface {
                 throw new MessageExcept ("Invalid type! " + inMessage.getMsgType(), inMessage);
         }
 
-        // Processing
+        /*  process and reply to the messages  */
         switch (inMessage.getMsgType()) {
             case RefereeBenchMessage.CALLTR:
                 bench.callTrial();

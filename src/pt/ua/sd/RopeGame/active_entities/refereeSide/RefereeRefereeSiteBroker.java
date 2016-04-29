@@ -22,7 +22,7 @@ public class RefereeRefereeSiteBroker implements IRefereeSiteReferee {
     private final int portNum;
 
     /**
-     * Shop Broker for Craftsman instantiation.
+     * Referee Site Broker for referee
      * @param hostName host name
      * @param portNum port number
      */

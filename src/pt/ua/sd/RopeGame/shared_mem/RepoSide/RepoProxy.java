@@ -3,10 +3,13 @@ package pt.ua.sd.RopeGame.shared_mem.RepoSide;
 import pt.ua.sd.RopeGame.comInfo.Message;
 import pt.ua.sd.RopeGame.comInfo.MessageExcept;
 
+/**
+ * Central Information Repository Proxy
+ */
 public class RepoProxy extends Thread {
 
     /**
-     * counter of released threads
+     * Count released threads
      * @serialField nInstance
      */
     private static int nInstance;
@@ -18,36 +21,37 @@ public class RepoProxy extends Thread {
     private final ServerComm sc;
 
     /**
-     * Interface to Central Repo Site
+     * Interface to central information repository
      * @serialField repoInterface
      */
     private final RepoInterface repoInterface;
 
     /**
-     * Instantiation of the central info repo client proxy
-     * @param sc server communication channel
-     * @param repoInterface interface to central repository
+     * Central information repository constructor method
+     * @param sc Server communication channel
+     * @param repoInterface Interface to central repository
      */
     public RepoProxy(ServerComm sc, RepoInterface repoInterface){
         super("Central_repo_Proxy_" + getProxyId());
-        this.sc =sc;
-        this.repoInterface=repoInterface;
+        this.sc = sc;
+        this.repoInterface = repoInterface;
 
     }
 
     /**
-     * Generation of instantiation identifier.
-     * @return instantiation identifier
+     * Gets proxy id
+     * @return Proxy id
      */
     private static int getProxyId() {
 
         Class<pt.ua.sd.RopeGame.shared_mem.RepoSide.RepoProxy> cl = null;
-        int proxyId;                            // intantiation identifier
+        int proxyId;
 
         try {
-            cl = (Class<pt.ua.sd.RopeGame.shared_mem.RepoSide.RepoProxy>) Class.forName("pt.ua.sd.RopeGame.shared_mem.RepoSide.RepoProxy");
+            cl = (Class<pt.ua.sd.RopeGame.shared_mem.RepoSide.RepoProxy>)
+                    Class.forName("pt.ua.sd.RopeGame.shared_mem.RepoSide.RepoProxy");
         } catch (ClassNotFoundException e) {
-            System.out.println("The data type PlaygroundClientProxy wasn't found!");
+            System.out.println("The data type RepoProxy wasn't found!");
             e.printStackTrace();
             System.exit(1);
         }
@@ -61,18 +65,18 @@ public class RepoProxy extends Thread {
     }
 
     /**
-     * Life cycle of the agent service provider thread.
+     * Life cycle of the thread
      */
     @Override
     public void run() {
 
-        Message inMessage;   // In message
-        Message outMessage = null;  // Out message
+        Message inMessage;
+        Message outMessage = null;
 
-        // Read input message
+        /*  read input message  */
         inMessage = (Message) sc.readObject();
 
-        // Process message
+        /*  process and reply to the input message  */
         try {
             outMessage = repoInterface.processAndReply(inMessage);
         } catch (MessageExcept e) {
@@ -80,7 +84,7 @@ public class RepoProxy extends Thread {
             System.exit(1);
         }
 
-        // Send answer to client and close communication
+        /*  send the reply message and close the communication channel  */
         sc.writeObject(outMessage);
         sc.close();
     }

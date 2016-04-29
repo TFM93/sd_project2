@@ -21,7 +21,7 @@ public class CoachPlaygroundBroker implements IPlaygroundCoach {
     private final int portNum;
 
     /**
-     * Workshop Broker for Craftsman instantiation.
+     * Playground Broker for coach instantiation.
      * @param hostName host name
      * @param portNum port number
      */

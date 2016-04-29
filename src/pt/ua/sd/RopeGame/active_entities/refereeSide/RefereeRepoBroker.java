@@ -1,14 +1,10 @@
 package pt.ua.sd.RopeGame.active_entities.refereeSide;
 
-import pt.ua.sd.RopeGame.comInfo.RefereeRefSiteMessage;
 import pt.ua.sd.RopeGame.comInfo.RefereeRepoMessage;
 import pt.ua.sd.RopeGame.enums.RefState;
 import pt.ua.sd.RopeGame.enums.WonType;
 import pt.ua.sd.RopeGame.interfaces.IRepoReferee;
 
-/**
- * Created by ivosilva on 25/04/16.
- */
 public class RefereeRepoBroker implements IRepoReferee {
 
 
@@ -25,7 +21,7 @@ public class RefereeRepoBroker implements IRepoReferee {
     private final int portNum;
 
     /**
-     * Shop Broker for Craftsman instantiation.
+     * Repo Broker for referee
      * @param hostName host name
      * @param portNum port number
      */

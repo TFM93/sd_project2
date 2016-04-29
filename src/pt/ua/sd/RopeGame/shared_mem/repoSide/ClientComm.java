@@ -3,6 +3,9 @@ package pt.ua.sd.RopeGame.shared_mem.RepoSide;
 import java.io.*;
 import java.net.*;
 
+/**
+ * Client communication channel
+ */
 public class ClientComm {
 
 
@@ -42,7 +45,7 @@ public class ClientComm {
         private ObjectOutputStream out = null;
 
         /**
-         *  Instantiation
+         *  Client Comm constructor method
          *
          *    @param hostName host name
          *    @param portNumb port number
@@ -54,9 +57,7 @@ public class ClientComm {
         }
 
         /**
-         *  Opening the communication channel.
-         *  Socket instantiation and association.
-         *  Open streams
+         *  Opening the communication channel, streams and socket
          *
          *    @return channel open or not
          */
@@ -112,9 +113,7 @@ public class ClientComm {
         }
 
         /**
-         *  Fecho do canal de comunicação.
-         *  Fecho dos streams de entrada e de saída do socket.
-         *  Fecho do socket de comunicação.
+         *  Close the communication channel, streams and socket
          */
 
         public void close (){
@@ -144,7 +143,7 @@ public class ClientComm {
         }
 
         /**
-         *  Read object from comm channel.
+         *  Read object from communication channel
          *
          *    @return read object
          */
@@ -163,7 +162,7 @@ public class ClientComm {
         }
 
         /**
-         *  Object write in comm channel.
+         *  Write object in communication channel
          *
          *    @param toServer object to be written
          */

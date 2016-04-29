@@ -3,6 +3,9 @@ package pt.ua.sd.RopeGame.shared_mem.BenchSide;
 import java.io.*;
 import java.net.*;
 
+/**
+ * Client communication channel
+ */
 public class ClientComm {
 
 

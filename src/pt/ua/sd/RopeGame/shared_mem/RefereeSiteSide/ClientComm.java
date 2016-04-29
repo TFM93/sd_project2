@@ -3,6 +3,10 @@ package pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide;
 import java.io.*;
 import java.net.*;
 
+
+/**
+ * Client communication channel
+ */
 public class ClientComm {
 
 

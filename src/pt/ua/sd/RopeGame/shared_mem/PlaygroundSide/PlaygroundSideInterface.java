@@ -1,35 +1,34 @@
 package pt.ua.sd.RopeGame.shared_mem.PlaygroundSide;
-
 import pt.ua.sd.RopeGame.comInfo.*;
 import pt.ua.sd.RopeGame.structures.TrialStat;
 
 /**
- * Created by ivosilva on 25/04/16.
+ * Interface to the Central Information Repository
  */
 public class PlaygroundSideInterface {
 
     /**
-     * Referee Site
-     * @serialField referee site
+     * Playground
+     * @serialField playground
      */
     private final MPlayground playground;
 
     /**
-     * Number of terminated messages received
+     * Number of TERMINATE messages received
      * @serialField nTerminateMessages
      */
     private int nTerminateMessages;
 
     /**
-     * Number of terminated messages to end
+     * Number of TERMINATE messages left
      * @serialField nTerminateMessagesToEnd
      */
     private final int nTerminateMessagesToEnd;
 
     /**
-     * Instantiation of Referee site interface
-     * @param playground ref_site
-     * @param nTerminateMessagesToEnd number of terminate messages to end
+     * Playground interface constructor method
+     * @param playground playground
+     * @param nTerminateMessagesToEnd number of TERMINATE messages left
      */
     public PlaygroundSideInterface(MPlayground playground, int nTerminateMessagesToEnd) {
         this.playground = playground;
@@ -38,15 +37,16 @@ public class PlaygroundSideInterface {
     }
 
     /**
-     * Processing of messages executing its task and generating an answer message.
-     * @param inMessage message with the request
-     * @return answer message
-     * @throws MessageExcept if the message with the request is considered invalid
+     * Process and reply the incoming messages
+     * @param inMessage Incoming message
+     * @return Outgoing message
+     * @throws MessageExcept Exception that shows that the incoming message is not valid
      */
     public Message processAndReply (Message inMessage) throws MessageExcept {
 
         Message outMessage = null;
 
+        /*  Playground receives messages from coaches, contestants and the referee  */
         if (inMessage instanceof CoachPlaygroundMessage) {
             outMessage = processAndReplyCoachMessage((CoachPlaygroundMessage) inMessage);
         }
@@ -64,16 +64,16 @@ public class PlaygroundSideInterface {
     }
 
     /**
-     * Processing of messages from the referee executing its task and generating an answer message.
-     * @param inMessage message with the request
-     * @return answer message
-     * @throws MessageExcept if the message with the request is considered invalid
+     * Process and reply the incoming messages from the coaches
+     * @param inMessage Incoming message
+     * @return Outgoing message
+     * @throws MessageExcept Exception that shows that the incoming message is not valid
      */
     private Message processAndReplyCoachMessage(CoachPlaygroundMessage inMessage) throws MessageExcept {
 
         CoachPlaygroundMessage outMessage = null;
 
-        // Validate received message
+        /*  validate incoming messages  */
         switch (inMessage.getMsgType()) {
             case CoachPlaygroundMessage.REVIEWNOTES:
                 if (inMessage.getN_players() < 0) {
@@ -92,7 +92,7 @@ public class PlaygroundSideInterface {
                 throw new MessageExcept ("Invalid type!", inMessage);
         }
 
-        // Processing
+        /*  process and reply to the messages  */
         switch (inMessage.getMsgType()) {
             case CoachPlaygroundMessage.REVIEWNOTES:
                 int[] chosen_players = playground.reviewNotes(inMessage.getSelected_contestants(),
@@ -114,18 +114,16 @@ public class PlaygroundSideInterface {
 
 
     /**
-     * Processing of messages from the referee executing its task and generating an answer message.
-     * @param inMessage message with the request
-     * @return answer message
-     * @throws MessageExcept if the message with the request is considered invalid
+     * Process and reply the incoming messages from the contestants
+     * @param inMessage Incoming message
+     * @return Outgoing message
+     * @throws MessageExcept Exception that shows that the incoming message is not valid
      */
     private Message processAndReplyContestantMessage(ContestantPlaygroundMessage inMessage) throws MessageExcept {
 
         ContestantPlaygroundMessage outMessage = null;
 
-        //int team_id, int strenght, int contestant_id, int n_players_pushing, int n_players
-
-        // Validate received message
+        /*  validate incoming messages  */
         switch (inMessage.getMsgType()) {
             case ContestantPlaygroundMessage.PULLROPE:
                 if (inMessage.getTeam_id() < 0) {
@@ -160,7 +158,7 @@ public class PlaygroundSideInterface {
                 throw new MessageExcept ("Invalid type!", inMessage);
         }
 
-        // Processing
+        /*  process and reply to the messages  */
         switch (inMessage.getMsgType()) {
             case ContestantPlaygroundMessage.PULLROPE:
                 playground.pullTheRope(inMessage.getTeam_id(), inMessage.getStrength(),
@@ -191,16 +189,16 @@ public class PlaygroundSideInterface {
 
 
     /**
-     * Processing of messages from the referee executing its task and generating an answer message.
-     * @param inMessage message with the request
-     * @return answer message
-     * @throws MessageExcept if the message with the request is considered invalid
+     * Process and reply the incoming messages from the referee
+     * @param inMessage Incoming message
+     * @return Outgoing message
+     * @throws MessageExcept Exception that shows that the incoming message is not valid
      */
     private Message processAndReplyRefereeMessage(RefereePlaygroundMessage inMessage) throws MessageExcept {
 
         RefereePlaygroundMessage outMessage = null;
 
-        // Validate received message
+        /*  validate incoming messages  */
         switch (inMessage.getMsgType()) {
             case RefereePlaygroundMessage.ATD:
                 if (inMessage.getN_players_pushing() < 0) {
@@ -216,7 +214,7 @@ public class PlaygroundSideInterface {
                 throw new MessageExcept ("Invalid type!", inMessage);
         }
 
-        // Processing
+        /*  process and reply to the messages  */
         switch (inMessage.getMsgType()) {
             case RefereePlaygroundMessage.ATD:
                 TrialStat trialStat = playground.assertTrialDecision(inMessage.getN_players_pushing(),

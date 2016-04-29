@@ -4,12 +4,12 @@ import pt.ua.sd.RopeGame.comInfo.Message;
 import pt.ua.sd.RopeGame.comInfo.MessageExcept;
 
 /**
- * Created by ivosilva on 25/04/16.
+ * Central Information Repository Proxy
  */
 public class BenchClientProxy extends Thread{
 
     /**
-     * Counter of released threads
+     * Count released threads
      * @serialField nProxy
      */
     private static int nProxy;
@@ -21,35 +21,35 @@ public class BenchClientProxy extends Thread{
     private final ServerComm sconi;
 
     /**
-     * Interface to Referee Site
-     * @serialField refSiteInterface
+     * Interface to Bench
+     * @serialField benchSideInterface
      */
     private final BenchSideInterface benchSideInterface;
 
     /**
-     * Instantiation of the ref site client proxy.
-     * @param sconi communication channel
-     * @param benchSideInterface interface to referee site
+     * Bench Proxy constructor method
+     * @param sconi Server communication channel
+     * @param benchSideInterface Interface to central repository
      */
     public BenchClientProxy(ServerComm sconi, BenchSideInterface benchSideInterface) {
-        super("Ref_Site_Proxy_" + getProxyId());
+        super("Bench_Proxy_" + getProxyId());
         this.sconi = sconi;
         this.benchSideInterface = benchSideInterface;
     }
 
     /**
-     * Life cycle of the agent service provider thread.
+     * Life cycle of the thread
      */
     @Override
     public void run() {
 
-        Message inMessage = null;   // In message
-        Message outMessage = null;  // Out message
+        Message inMessage = null;
+        Message outMessage = null;
 
-        // Read input message
+        /*  read input message  */
         inMessage = (Message) sconi.readObject();
 
-        // Process message
+        /*  process and reply to the input message  */
         try {
             outMessage = benchSideInterface.processAndReply(inMessage);
         } catch (MessageExcept e) {
@@ -57,19 +57,19 @@ public class BenchClientProxy extends Thread{
             System.exit(1);
         }
 
-        // Send answer to client and close communication
+        /*  send the reply message and close the communication channel  */
         sconi.writeObject(outMessage);
         sconi.close();
     }
 
     /**
-     * Generation of instantiation identifier.
-     * @return instantiation identifier
+     * Gets proxy id
+     * @return Proxy id
      */
     private static int getProxyId() {
 
         Class<pt.ua.sd.RopeGame.shared_mem.BenchSide.BenchClientProxy> cl = null;
-        int proxyId;                            // intantiation identifier
+        int proxyId;
 
         try {
             cl = (Class<pt.ua.sd.RopeGame.shared_mem.BenchSide.BenchClientProxy>) Class.forName("pt.ua.sd.RopeGame.shared_mem.BenchSide.BenchClientProxy");

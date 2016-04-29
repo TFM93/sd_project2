@@ -24,7 +24,7 @@ public class RefereePlaygroundBroker implements IPlaygroundReferee {
     private final int portNum;
 
     /**
-     * Shop Broker for Craftsman instantiation.
+     * Playground Broker for referee
      * @param hostName host name
      * @param portNum port number
      */
