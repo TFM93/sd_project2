@@ -56,33 +56,33 @@ sshpass -p $password ssh $username@$contestantHostName killall -u sd0203
 } &> /dev/null
 
 printf "\nStarting Configuration Server ($configurationHostName, $configurationPortNum) ...\n"
-sshpass -p $password ssh -f $username@$configurationHostName java -jar jars/configuration.jar $configurationPortNum $confFile
+sshpass -p $password ssh -f $username@$configurationHostName java -jar configuration.jar $configurationPortNum $confFile
 sleep 2
 
 printf "\nStarting Repository Server ($repositoryHostName, $repositoryPortNum) ...\n"
-sshpass -p $password ssh -f $username@$repositoryHostName java -jar jars/repository.jar $configurationHostName $configurationPortNum
+sshpass -p $password ssh -f $username@$repositoryHostName java -jar repository.jar $configurationHostName $configurationPortNum
 sleep 2
 
 printf "\nStarting RefereeSite Server ($refSiteHostName, $refSitePortNum) ...\n"
-sshpass -p $password ssh -f $username@$refSiteHostName java -jar jars/refSite.jar $configurationHostName $configurationPortNum
+sshpass -p $password ssh -f $username@$refSiteHostName java -jar refSite.jar $configurationHostName $configurationPortNum
 sleep 2
 
 printf "\nStarting Bench Server ($benchHostName, $benchPortNum) ...\n"
-sshpass -p $password ssh -f $username@$benchHostName java -jar jars/bench.jar $configurationHostName $configurationPortNum
+sshpass -p $password ssh -f $username@$benchHostName java -jar bench.jar $configurationHostName $configurationPortNum
 sleep 2
 
 printf "\nStarting PlayGround Server ($playgHostName, $playgPortNum) ...\n"
-sshpass -p $password ssh -f $username@$playgHostName java -jar jars/playg.jar $configurationHostName $configurationPortNum
+sshpass -p $password ssh -f $username@$playgHostName java -jar playg.jar $configurationHostName $configurationPortNum
 sleep 2
 
 printf "\nStarting Referee Client ($refereeHostName) ...\n"
-sshpass -p $password ssh -f $username@$refereeHostName java -jar jars/referee.jar $configurationHostName $configurationPortNum
+sshpass -p $password ssh -f $username@$refereeHostName java -jar referee.jar $configurationHostName $configurationPortNum
 sleep 2
 
 printf "\nStarting Coach Client ($coachHostName) ...\n"
-sshpass -p $password ssh -f $username@$coachHostName java -jar jars/coach.jar $configurationHostName $configurationPortNum
+sshpass -p $password ssh -f $username@$coachHostName java -jar coach.jar $configurationHostName $configurationPortNum
 sleep 2
 
 printf "\nStarting Contestant Client ($contestantHostName) ...\n"
-sshpass -p $password ssh -f $username@$contestantHostName java -jar jars/contestant.jar $configurationHostName $configurationPortNum
+sshpass -p $password ssh -f $username@$contestantHostName java -jar contestant.jar $configurationHostName $configurationPortNum
 sleep 2
