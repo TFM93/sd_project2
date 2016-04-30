@@ -17,17 +17,16 @@ package pt.ua.sd.RopeGame.shared_mem.PlaygroundSide;
     /**
      * number of entities
      */
-    int nEntities;
+    int n_terminates_to_end;
 
     /**
      * Playground Configuration constructor method
      * @param hostName host name
      * @param portNumb port number
-     * @param nEntities number of entities
      */
-     PlaygroundConfiguration(String hostName, int portNumb, int nEntities) {
+     PlaygroundConfiguration(String hostName, int portNumb) {
         this.hostName = hostName;
         this.portNumb = portNumb;
-        this.nEntities = nEntities;
+        this.n_terminates_to_end = 3;
     }
 }

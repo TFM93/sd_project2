@@ -32,7 +32,7 @@ public class PlaygroundServer {
         scon = new ServerComm(conf.portNumb);
         scon.start();
         playground = new MPlayground();
-        playgroundInterface = new PlaygroundSideInterface(playground, conf.nEntities);
+        playgroundInterface = new PlaygroundSideInterface(playground, conf.n_terminates_to_end);
 
         System.out.println("Playground: The service was established");
         System.out.println("Playground: The server is listening");
@@ -77,8 +77,7 @@ public class PlaygroundServer {
         con.close();
 
         /*  return the configuration  */
-        return new PlaygroundConfiguration(inMessage.getHostName(), inMessage.getPortNumb(),
-                inMessage.getArg1());
+        return new PlaygroundConfiguration(inMessage.getHostName(), inMessage.getPortNumb());
     }
 
 }

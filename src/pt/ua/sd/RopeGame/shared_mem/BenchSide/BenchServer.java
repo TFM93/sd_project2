@@ -32,7 +32,7 @@ public class BenchServer {
         scon = new ServerComm(conf.getPortNumb());
         scon.start();
         bench = new MContestantsBench();
-        benchInterface = new BenchSideInterface(bench, conf.getnEntities());
+        benchInterface = new BenchSideInterface(bench, conf.getN_terminates_to_receive());
 
         System.out.println("Contestants Bench: The service was established");
         System.out.println("Contestants Bench: The server is listening");
@@ -79,8 +79,7 @@ public class BenchServer {
         con.close();
 
         /*  return the configuration  */
-        return new BenchConfiguration(inMessage.getHostName(), inMessage.getPortNumb(),
-                inMessage.getArg1());
+        return new BenchConfiguration(inMessage.getHostName(), inMessage.getPortNumb());
     }
 
 

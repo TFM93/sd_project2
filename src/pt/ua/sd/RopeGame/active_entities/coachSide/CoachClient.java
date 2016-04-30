@@ -67,12 +67,13 @@ public class CoachClient {
         try {
             coach_team1.join();
             coach_team2.join();
-            bench.terminate();
-            playground.terminate();
-            repo.terminate();
+
         } catch (InterruptedException e) {
             System.out.println(e.toString());
         }
+        bench.terminate();
+        playground.terminate();
+        repo.terminate();
         System.out.println("Coach  terminated!");
     }
 

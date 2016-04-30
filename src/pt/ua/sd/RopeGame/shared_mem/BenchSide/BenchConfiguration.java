@@ -16,20 +16,19 @@ class BenchConfiguration {
     private final int portNumb;
 
     /**
-     * Number of entities of the repository
+     * Number of entities of the bench
      */
-    private final int nEntities;
+    private final int n_terminates_to_receive;
 
     /**
      * Bench Configuration constructor method
      * @param hostName host name
      * @param portNumb port number
-     * @param nEntities number of entities
      */
-    BenchConfiguration(String hostName, int portNumb, int nEntities) {
+     BenchConfiguration(String hostName, int portNumb) {
         this.hostName = hostName;
         this.portNumb = portNumb;
-        this.nEntities = nEntities;
+        this.n_terminates_to_receive = 3;
     }
 
 
@@ -41,7 +40,7 @@ class BenchConfiguration {
         return portNumb;
     }
 
-    int getnEntities() {
-        return nEntities;
+    public int getN_terminates_to_receive() {
+        return n_terminates_to_receive;
     }
 }
