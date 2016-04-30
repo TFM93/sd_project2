@@ -16,15 +16,15 @@ public class RefereeSiteSideInterface {
 
     /**
      * Number of TERMINATE messages received
-     * @serialField nTerminateMessages
+     * @serialField n_terminates
      */
-    private int nTerminateMessages;
+    private int n_terminates;
 
     /**
      * Number of TERMINATE messages left
-     * @serialField nTerminateMessagesToEnd
+     * @serialField n_terminates_to_end
      */
-    private final int nTerminateMessagesToEnd;
+    private final int n_terminates_to_end;
 
     /**
      * Referee site interface constructor method
@@ -33,8 +33,8 @@ public class RefereeSiteSideInterface {
      */
     public RefereeSiteSideInterface(MRefereeSite ref_site, int nTerminateMessagesToEnd) {
         this.ref_site = ref_site;
-        this.nTerminateMessages = 0;
-        this.nTerminateMessagesToEnd = nTerminateMessagesToEnd;
+        this.n_terminates = 0;
+        this.n_terminates_to_end = nTerminateMessagesToEnd;
     }
 
     /**
@@ -45,7 +45,7 @@ public class RefereeSiteSideInterface {
      */
     public Message processAndReply (Message inMessage) throws MessageExcept {
 
-        Message outMessage = null;
+        Message outMessage;
 
         /*  only the Referee is able to call methods from the referee site  */
         if (inMessage instanceof RefereeRefSiteMessage) {
@@ -106,13 +106,12 @@ public class RefereeSiteSideInterface {
                 outMessage = new RefereeRefSiteMessage(RefereeRefSiteMessage.DGW_ANS, stat);
                 break;
             case RefereeRefSiteMessage.GNGP:
-                /*  talk to tiago about this  */
                 int games_played = ref_site.getN_games_played();
                 outMessage = new RefereeRefSiteMessage(RefereeRefSiteMessage.GNGP_ANS, games_played);
                 break;
             case RefereeRefSiteMessage.TERMINATE:
-                nTerminateMessages++;
-                if (nTerminateMessages == nTerminateMessagesToEnd) {
+                n_terminates++;
+                if (n_terminates == n_terminates_to_end) {
                     System.out.println("Referee site terminated!");
                     System.exit(0);
                 }

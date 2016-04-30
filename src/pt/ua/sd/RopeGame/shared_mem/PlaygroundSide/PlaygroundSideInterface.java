@@ -15,25 +15,25 @@ public class PlaygroundSideInterface {
 
     /**
      * Number of TERMINATE messages received
-     * @serialField nTerminateMessages
+     * @serialField n_terminates
      */
-    private int nTerminateMessages;
+    private int n_terminates;
 
     /**
      * Number of TERMINATE messages left
-     * @serialField nTerminateMessagesToEnd
+     * @serialField n_terminates_to_end
      */
-    private final int nTerminateMessagesToEnd;
+    private final int n_terminates_to_end;
 
     /**
      * Playground interface constructor method
      * @param playground playground
-     * @param nTerminateMessagesToEnd number of TERMINATE messages left
+     * @param n_terminates_to_end number of TERMINATE messages left
      */
-    public PlaygroundSideInterface(MPlayground playground, int nTerminateMessagesToEnd) {
+    public PlaygroundSideInterface(MPlayground playground, int n_terminates_to_end) {
         this.playground = playground;
-        this.nTerminateMessages = 0;
-        this.nTerminateMessagesToEnd = nTerminateMessagesToEnd;
+        this.n_terminates = 0;
+        this.n_terminates_to_end = n_terminates_to_end;
     }
 
     /**
@@ -44,7 +44,7 @@ public class PlaygroundSideInterface {
      */
     public Message processAndReply (Message inMessage) throws MessageExcept {
 
-        Message outMessage = null;
+        Message outMessage;
 
         /*  Playground receives messages from coaches, contestants and the referee  */
         if (inMessage instanceof CoachPlaygroundMessage) {
@@ -101,8 +101,8 @@ public class PlaygroundSideInterface {
                 outMessage = new CoachPlaygroundMessage(CoachPlaygroundMessage.REVIEWNOTES_ANS, chosen_players);
                 break;
             case CoachPlaygroundMessage.TERMINATE:
-                nTerminateMessages++;
-                if (nTerminateMessages == nTerminateMessagesToEnd) {
+                n_terminates++;
+                if (n_terminates == n_terminates_to_end) {
                     System.out.println("Playground terminated!");
                     System.exit(0);
                 }
@@ -174,8 +174,8 @@ public class PlaygroundSideInterface {
                 outMessage = new ContestantPlaygroundMessage(ContestantPlaygroundMessage.SEATDOWN_ANS);
                 break;
             case ContestantPlaygroundMessage.TERMINATE:
-                nTerminateMessages++;
-                if (nTerminateMessages == nTerminateMessagesToEnd) {
+                n_terminates++;
+                if (n_terminates == n_terminates_to_end) {
                     System.out.println("Playground terminated!");
                     System.exit(0);
                 }
@@ -222,9 +222,9 @@ public class PlaygroundSideInterface {
                 outMessage = new RefereePlaygroundMessage(RefereePlaygroundMessage.ATD_ANS, trialStat);
                 break;
             case RefereePlaygroundMessage.TERMINATE:
-                nTerminateMessages++;
-                if (nTerminateMessages == nTerminateMessagesToEnd) {
-                    System.out.println("Referee site terminated!");
+                n_terminates++;
+                if (n_terminates == n_terminates_to_end) {
+                    System.out.println("Playground terminated!");
                     System.exit(0);
                 }
                 break;
