@@ -14,14 +14,14 @@ import pt.ua.sd.RopeGame.structures.TrialStat;
 
 /**
  * Referee thread<br>
- *<b><center><font size=6>Referee thread</font></center></b><br>
- *     <font size=4>This class represents the thread of the referee, his life cycle ends when
- *     the internal flag MATCH_ENDED takes the positive notation.</font>
+ *     This class represents the thread of the referee, his life cycle ends when
+ *     the internal flag MATCH_ENDED takes the positive notation.
  *     Notes:
- *     -> the access to the shared memories is limited by the interfaces present in the interfaces package.
- *     -> the default state is START_OF_THE_MATCH
+ *     - the access to the shared memories is limited by the interfaces present in the interfaces package.
+ *     - the default state is START_OF_THE_MATCH
  *
- *
+ * @author Ivo Silva (<a href="mailto:ivosilva@ua.pt">ivosilva@ua.pt</a>)
+ * @author Tiago Magalhaes (<a href="mailto:tiagoferreiramagalhaes@ua.pt">tiagoferreiramagalhaes@ua.pt</a>)
  */
 public class Referee extends Thread {
     /**
@@ -39,12 +39,18 @@ public class Referee extends Thread {
 
 
 
+
     /**
      * Constructor
      * @param playground playground shared memory instancy
      * @param referee_site referee site shared memory instancy
      * @param contestants_bench contestants bench shared memory instancy
      * @param repo general info repository shared memory instancy
+     * @param n_players number of players per team
+     * @param n_players_pushing number of players pushing the rope
+     * @param n_trials number of trials
+     * @param n_games number of games
+     * @param knockDif knockout difference
      */
     public Referee(RefereePlaygroundBroker playground,
                    RefereeRefereeSiteBroker referee_site,
@@ -110,7 +116,7 @@ public class Referee extends Thread {
                 case WAIT_FOR_TRIAL_CONCLUSION:
                     TrialStat unpack;
                     WonType wt;//for trial result
-                    WonType gr = null;//for game result
+                    WonType gr;//for game result
                     GameStat game_result=null;
                     unpack = this.playground.assertTrialDecision(n_players_pushing, knockDif);
                     has_next_trial = unpack.isHas_next_trial();
@@ -169,7 +175,7 @@ public class Referee extends Thread {
 
                     }
                     repo.refereeLog(state, trial_number);//update the referee state in central info repository
-                    if(state == RefState.END_OF_A_GAME && game_result != null){
+                    if(state == RefState.END_OF_A_GAME ){
                         gr = WonType.values()[game_result.getWonType()];
                         this.repo.setResult(game_result.getWinnerTeam(),gr,trial_number);}
                     break;

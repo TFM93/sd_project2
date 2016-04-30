@@ -11,14 +11,14 @@ import pt.ua.sd.RopeGame.interfaces.IRepoContestant;
 
 /**
  * Contestant thread<br>
- *<b><center><font size=6>Contestant thread</font></center></b><br>
- *     <font size=4>This class represents the thread of the contestant, his life cycle ends when
- *     the internal flag match_not_over takes the false notation.</font>
+ *     This class represents the thread of the contestant, his life cycle ends when
+ *     the internal flag match_not_over takes the false notation.
  *     Notes:
- *     -> the access to the shared memories is limited by the interfaces present in the interfaces package.
- *     -> the default state is SEAT_AT_THE_BENCH
+ *     - the access to the shared memories is limited by the interfaces present in the interfaces package.
+ *     - the default state is SEAT_AT_THE_BENCH
  *
- *
+ * @author Ivo Silva (<a href="mailto:ivosilva@ua.pt">ivosilva@ua.pt</a>)
+ * @author Tiago Magalhaes (<a href="mailto:tiagoferreiramagalhaes@ua.pt">tiagoferreiramagalhaes@ua.pt</a>)
  */
 public class Contestant extends Thread {
 
@@ -38,6 +38,7 @@ public class Contestant extends Thread {
     private int knockDif;//number of knockout difference needed to win, defined in rg.config
 
 
+
     /**
      * Constructor
      * @param id current contestant id
@@ -46,6 +47,11 @@ public class Contestant extends Thread {
      * @param playground playground shared memory instancy
      * @param contestants_bench contestants bench shared memory instancy
      * @param repo general info repository shared memory instancy
+     * @param n_players number of players per team
+     * @param n_players_pushing number of players pushing the rope
+     * @param n_trials number of trials
+     * @param n_games number of games
+     * @param knockDif knockout difference
      */
     public Contestant(int id, int team_id, int strength,
                       ContestantPlaygroundBroker playground,
@@ -83,7 +89,6 @@ public class Contestant extends Thread {
 
                 case SEAT_AT_THE_BENCH:
                     repo.updtRopeCenter(Integer.MAX_VALUE);//update central info repository the MAX_VALUE hides the log value
-                    System.out.println("Contestant is followingCoachAdvice... team id: " + this.team_id);
                     unpack = contestants_bench.followCoachAdvice(this.id,this.strength,this.team_id, this.n_players, this.n_players_pushing);
                     match_not_over = unpack[0];
                     if(unpack[1])
@@ -94,25 +99,18 @@ public class Contestant extends Thread {
                         break;
                     }
                     state = ContestantState.STAND_IN_POSITION;//change state
-                    System.out.println("Contestant is updating repo... team id: " + this.team_id+"cont id:" + this.id);
                     repo.contestantLog(this.id, this.team_id, this.strength, state);//update central info repository
                     break;
                 case STAND_IN_POSITION:
-                    System.out.println("Contestant is getting ready... team id: " + this.team_id+"cont id:" + this.id);
                     contestants_bench.getReady(n_players_pushing);
                     state = ContestantState.DO_YOUR_BEST;//change state
-                    System.out.println("Contestant is updating repo... team id: " + this.team_id+"cont id:" + this.id);
                     repo.contestantLog(this.id, this.team_id, this.strength, state);//update central info repository
                     break;
                 case DO_YOUR_BEST:
-                    System.out.println("Contestant is pulling the rope... team id: " + this.team_id+"cont id:" + this.id);
                     playground.pullTheRope(this.team_id, this.strength, this.id, n_players_pushing, n_players);
-                    System.out.println("Contestant is updating repo... team id: " + this.team_id+"cont id:" + this.id);
                     repo.contestantLog(this.id, this.team_id, this.strength, state);//update central info repository
-                    System.out.println("Contestant is done.. team id: " + this.team_id+"cont id:" + this.id);
                     playground.iAmDone(n_players_pushing);
                     decrementStrength();//depois de am done decrementar a forca
-                    System.out.println("Contestant is seating down... team id: " + this.team_id+"cont id:" + this.id);
                     playground.seatDown(n_players_pushing);
                     state = ContestantState.START;//change state
                     break;
@@ -153,7 +151,7 @@ public class Contestant extends Thread {
     /**
      *Decrements one unit of strenght on current contestant
      */
-    public void decrementStrength() {
+    private void decrementStrength() {
         if (this.strength > 0){
             this.strength--;
         }
@@ -162,7 +160,7 @@ public class Contestant extends Thread {
      *
      *Increments one unit of strenght on current contestant
      */
-    public void incrementStrength() {
+    private void incrementStrength() {
         this.strength++;
     }
 }

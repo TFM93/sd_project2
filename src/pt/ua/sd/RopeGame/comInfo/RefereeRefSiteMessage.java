@@ -14,7 +14,6 @@ public class RefereeRefSiteMessage extends Message {
 
     /**
      * Serialization key
-     * @serialField serialVersionUID
      */
     public static final long serialVersionUID = 200416L;
 

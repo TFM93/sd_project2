@@ -14,13 +14,11 @@ public class TrialStat implements Serializable{
 
     /**
      *  The {@link Boolean } instance tells if has(true) or not(false) one next trial in the current game
-     *  @serialField has_next_trial
      */
     private boolean has_next_trial;
 
     /**
      *  represents the team id (1 or 2)
-     *  @serialField team
      */
     private int team;
     /**
@@ -29,13 +27,16 @@ public class TrialStat implements Serializable{
     private int wonType;
     /**
      *  tells the center of the rope in the trial
-     *  @serialField center_rope
      */
     private  int center_rope;
 
 
     /**
-     *  Constructor
+     * constructor
+     * @param has_next_trial check if theres another trial coming
+     * @param team check team id
+     * @param wonType check the trial WIN/LOSS status and type
+     * @param center_rope check the position of the rope
      */
     public TrialStat(boolean has_next_trial, int team, int wonType, int center_rope)
     {

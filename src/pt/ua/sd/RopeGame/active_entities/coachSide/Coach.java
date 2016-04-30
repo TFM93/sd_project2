@@ -8,18 +8,18 @@ import pt.ua.sd.RopeGame.interfaces.IRepoCoach;
 
 /**
  * Coach thread<br>
- *<b><center><font size=6>Coach thread</font></center></b><br>
- *     <font size=4>This class represents the thread of the coach, her life cycle ends when
- *     the internal flag match_not_over takes the false notation.</font>
+ *     This class represents the thread of the coach, her life cycle ends when
+ *     the internal flag match_not_over takes the false notation.
  *     Notes:
- *     -> the access to the shared memories is limited by the interfaces present in the interfaces package.
- *     -> the default selected team to play is the first 3 contestants (id: 0,1 and 2).
- *     -> the default state is WAIT_FOR_REFEREE_COMMAND
+ *     - the access to the shared memories is limited by the interfaces present in the interfaces package.
+ *     - the default selected team to play is the first 3 contestants (id: 0,1 and 2).
+ *     - the default state is WAIT_FOR_REFEREE_COMMAND
  *
- *
+ * @author Ivo Silva (<a href="mailto:ivosilva@ua.pt">ivosilva@ua.pt</a>)
+ * @author Tiago Magalhaes (<a href="mailto:tiagoferreiramagalhaes@ua.pt">tiagoferreiramagalhaes@ua.pt</a>)
  */
 
-public class Coach extends Thread {
+ class Coach extends Thread {
 
     /**
      * Internal Data
@@ -37,6 +37,8 @@ public class Coach extends Thread {
     private int n_games;//number of games, defined in rg.config
     private int knockDif;//number of knockout difference needed to win, defined in rg.config
 
+
+
     /**
      * Constructor
      * @param id current coach id
@@ -45,8 +47,13 @@ public class Coach extends Thread {
      * @param referee_site referee site shared memory instancy
      * @param contestants_bench contestants bench shared memory instancy
      * @param repo general info repository shared memory instancy
+     * @param n_players number of players per team
+     * @param n_players_pushing number of players pushing the rope
+     * @param n_trials number of trials
+     * @param n_games number of games
+     * @param knockDif maximum distance to the center of rope to reach a knockout
      */
-    public Coach(int id, int team_id, CoachPlaygroundBroker playground, CoachRefereeSiteBroker referee_site,
+     Coach(int id, int team_id, CoachPlaygroundBroker playground, CoachRefereeSiteBroker referee_site,
                  CoachBenchBroker contestants_bench, CoachRepoBroker repo, int n_players, int n_players_pushing,
                  int n_trials, int n_games, int knockDif) {
         this.id = id;

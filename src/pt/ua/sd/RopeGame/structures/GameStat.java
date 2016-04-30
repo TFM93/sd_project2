@@ -14,18 +14,24 @@ public class GameStat implements Serializable{
     private static final long serialVersionUID = 200416L;
 
     /**
-     * @serialField has_next_game
+     * check if theres another game coming
      */
     private boolean has_next_game;
     /**
-     * @serialField team
+     * team id
      */
     private int team;
     /**
-     * @serialField wonType
+     * {@link Integer} representation of the ordinal of {@link pt.ua.sd.RopeGame.enums.WonType} data structure
      */
     private int wonType;
 
+    /**
+     * Constructor
+     * @param has_next_game to check if theres another game
+     * @param team to check team id
+     * @param wonType to check the Win/Loss status
+     */
     public GameStat(boolean has_next_game, int team, int wonType)
     {
         this.has_next_game = has_next_game;
@@ -52,7 +58,7 @@ public class GameStat implements Serializable{
 
     /**
      *
-     * @return the int type of victory in the game
+     * @return the {@link Integer} type of victory in the game
      */
     public int getWonType() {
         return wonType;
