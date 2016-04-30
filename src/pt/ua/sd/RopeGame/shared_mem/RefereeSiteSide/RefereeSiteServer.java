@@ -1,6 +1,5 @@
 package pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide;
 import pt.ua.sd.RopeGame.comInfo.ConfigurationMessage;
-import pt.ua.sd.RopeGame.shared_mem.ConfigSide.ServerComChannel;
 
 /**
  * Referee Site Server
@@ -32,7 +31,7 @@ public class RefereeSiteServer {
         scon = new ServerComm(conf.portNumb); // Creation of the listening channel
         scon.start();
         refereeSite = new MRefereeSite();
-        refSiteInterface = new RefereeSiteSideInterface(refereeSite, conf.nEntities);
+        refSiteInterface = new RefereeSiteSideInterface(refereeSite, conf.n_terminates_to_end);
 
         System.out.println("Referee Site: The service was established");
         System.out.println("Referee Site: The server is listening");
@@ -79,8 +78,7 @@ public class RefereeSiteServer {
         con.close();
 
         /*  return the configuration  */
-        RefSiteConfiguration conf = new RefSiteConfiguration(inMessage.getHostName(), inMessage.getPortNumb(),
-                inMessage.getArg1());
+        RefSiteConfiguration conf = new RefSiteConfiguration(inMessage.getHostName(), inMessage.getPortNumb());
         return conf;
     }
 }

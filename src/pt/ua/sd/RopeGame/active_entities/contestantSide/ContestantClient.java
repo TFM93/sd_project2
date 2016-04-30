@@ -110,13 +110,15 @@ public class ContestantClient {
             try {
                 cont_t1[i].join();
                 cont_t2[i].join();
-                bench.terminate();
-                playground.terminate();
-                //refSite.terminate();
-                repo.terminate();
+
             } catch (InterruptedException e) {}
-            System.out.println("Contestants with id " + i + " terminated!");
+
         }
+
+        bench.terminate();
+        playground.terminate();
+        repo.terminate();
+        System.out.println("Contestants terminated!");
 
     }
 

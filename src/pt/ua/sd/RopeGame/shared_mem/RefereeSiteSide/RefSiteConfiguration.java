@@ -16,17 +16,16 @@ public class RefSiteConfiguration {
     /**
      * number of entities
      */
-    int nEntities;
+    int n_terminates_to_end;
 
     /**
      * Referee Site Configuration constructor method
      * @param hostName host name
      * @param portNumb port number
-     * @param nEntities number of entities
      */
-    public RefSiteConfiguration(String hostName, int portNumb, int nEntities) {
+    public RefSiteConfiguration(String hostName, int portNumb) {
         this.hostName = hostName;
         this.portNumb = portNumb;
-        this.nEntities = nEntities;
+        this.n_terminates_to_end = 1;
     }
 }
