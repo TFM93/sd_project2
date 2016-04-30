@@ -16,25 +16,25 @@ class BenchSideInterface {
 
     /**
      * Number of TERMINATE messages received
-     * @serialField nTerminateMessages
+     * @serialField n_terminates
      */
-    private int nTerminateMessages;
+    private int n_terminates;
 
     /**
      * Number of TERMINATE messages left
-     * @serialField nTerminateMessagesToEnd
+     * @serialField n_terminates_to_end
      */
-    private final int nTerminateMessagesToEnd;
+    private final int n_terminates_to_end;
 
     /**
      * Bench Interface constructor method
      * @param bench Central Information Repository
-     * @param nTerminateMessagesToEnd Number of TERMINATE messages left to end
+     * @param n_terminates_to_end Number of TERMINATE messages left to end
      */
-    BenchSideInterface(MContestantsBench bench, int nTerminateMessagesToEnd) {
+     BenchSideInterface(MContestantsBench bench, int n_terminates_to_end) {
         this.bench = bench;
-        this.nTerminateMessages = 0;
-        this.nTerminateMessagesToEnd = nTerminateMessagesToEnd;
+        this.n_terminates = 0;
+        this.n_terminates_to_end = n_terminates_to_end;
     }
 
     /**
@@ -110,8 +110,8 @@ class BenchSideInterface {
                 outMessage = new CoachBenchMessage(CoachBenchMessage.INFORMREF_ANS);
                 break;
             case CoachBenchMessage.TERMINATE:
-                nTerminateMessages++;
-                if (nTerminateMessages == nTerminateMessagesToEnd) {
+                n_terminates++;
+                if (n_terminates == n_terminates_to_end) {
                     System.out.println("Bench terminated!");
                     System.exit(0);
                 }
@@ -177,8 +177,8 @@ class BenchSideInterface {
                 outMessage = new ContestantBenchMessage(ContestantBenchMessage.GETREADY_ANS);
                 break;
             case ContestantBenchMessage.TERMINATE:
-                nTerminateMessages++;
-                if (nTerminateMessages == nTerminateMessagesToEnd) {
+                n_terminates++;
+                if (n_terminates == n_terminates_to_end) {
                     System.out.println("Bench terminated!");
                     System.exit(0);
                 }
@@ -238,8 +238,8 @@ class BenchSideInterface {
                 outMessage = new RefereeBenchMessage(RefereeBenchMessage.DECLAREMATCHWIN_ANS, winner);
                 break;
             case RefereeBenchMessage.TERMINATE:
-                nTerminateMessages++;
-                if (nTerminateMessages == nTerminateMessagesToEnd) {
+                n_terminates++;
+                if (n_terminates == n_terminates_to_end) {
                     System.out.println("Bench terminated!");
                     System.exit(0);
                 }
