@@ -9,18 +9,16 @@ import pt.ua.sd.RopeGame.interfaces.IContestantsBenchContestant;
  *
  * Sends the desired messages to the Bench
  */
-public class ContestantBenchBroker implements IContestantsBenchContestant {
+class ContestantBenchBroker implements IContestantsBenchContestant {
 
 
     /**
      * Host name
-     * @serialfield hostName
      */
     private final String hostName;
 
     /**
      * Port number
-     * @serialfield portNum
      */
     private final int portNum;
 
@@ -29,7 +27,7 @@ public class ContestantBenchBroker implements IContestantsBenchContestant {
      * @param hostName host name
      * @param portNum port number
      */
-    public ContestantBenchBroker(String hostName, int portNum) {
+    ContestantBenchBroker(String hostName, int portNum) {
         this.hostName = hostName;
         this.portNum = portNum;
     }
@@ -43,7 +41,6 @@ public class ContestantBenchBroker implements IContestantsBenchContestant {
         ClientComm con = new ClientComm (hostName, portNum);
 
         /*  instantiate the configuration messages  */
-        ContestantBenchMessage inMessage;
         ContestantBenchMessage outMessage;
 
         /*  open connection  */

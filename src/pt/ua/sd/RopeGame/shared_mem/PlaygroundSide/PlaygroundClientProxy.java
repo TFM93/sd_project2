@@ -6,7 +6,7 @@ import pt.ua.sd.RopeGame.comInfo.MessageExcept;
 /**
  * Playground Proxy
  */
-public class PlaygroundClientProxy extends Thread{
+ class PlaygroundClientProxy extends Thread{
 
     /**
      * Count released threads
@@ -31,7 +31,7 @@ public class PlaygroundClientProxy extends Thread{
      * @param sconi communication channel
      * @param playgroundInterface interface to referee site
      */
-    public PlaygroundClientProxy(ServerComm sconi, PlaygroundSideInterface playgroundInterface) {
+     PlaygroundClientProxy(ServerComm sconi, PlaygroundSideInterface playgroundInterface) {
         super("Playground_Proxy_" + getProxyId());
         this.sconi = sconi;
         this.playgroundInterface = playgroundInterface;
@@ -43,7 +43,7 @@ public class PlaygroundClientProxy extends Thread{
     @Override
     public void run() {
 
-        Message inMessage = null;
+        Message inMessage;
         Message outMessage = null;
 
         /*  read input message  */

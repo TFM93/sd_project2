@@ -1,7 +1,6 @@
 package pt.ua.sd.RopeGame.active_entities.coachSide;
 
 import pt.ua.sd.RopeGame.comInfo.CoachRepoMessage;
-import pt.ua.sd.RopeGame.comInfo.RefereeRepoMessage;
 import pt.ua.sd.RopeGame.enums.CoachState;
 import pt.ua.sd.RopeGame.interfaces.IRepoCoach;
 
@@ -10,17 +9,15 @@ import pt.ua.sd.RopeGame.interfaces.IRepoCoach;
  *
  * Sends the desired messages to the Central Information Repository
  */
-public class CoachRepoBroker implements IRepoCoach {
+class CoachRepoBroker implements IRepoCoach {
 
     /**
      * Host name
-     * @serialfield hostName
      */
     private final String hostName;
 
     /**
      * Port number
-     * @serialfield portNum
      */
     private final int portNum;
 
@@ -29,7 +26,7 @@ public class CoachRepoBroker implements IRepoCoach {
      * @param hostName host name
      * @param portNum port number
      */
-    public CoachRepoBroker(String hostName, int portNum) {
+     CoachRepoBroker(String hostName, int portNum) {
         this.hostName = hostName;
         this.portNum = portNum;
     }
@@ -75,7 +72,6 @@ public class CoachRepoBroker implements IRepoCoach {
         ClientComm con = new ClientComm (hostName, portNum);
 
         /*  instantiate the configuration messages  */
-        CoachRepoMessage inMessage;
         CoachRepoMessage outMessage;
 
         /*  open connection  */

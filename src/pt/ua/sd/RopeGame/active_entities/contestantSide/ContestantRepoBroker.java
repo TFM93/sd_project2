@@ -9,18 +9,16 @@ import pt.ua.sd.RopeGame.interfaces.IRepoContestant;
  *
  * Sends the desired messages to the Repo
  */
-public class ContestantRepoBroker implements IRepoContestant{
+class ContestantRepoBroker implements IRepoContestant{
 
 
     /**
      * Host name
-     * @serialfield hostName
      */
     private final String hostName;
 
     /**
      * Port number
-     * @serialfield portNum
      */
     private final int portNum;
 
@@ -29,7 +27,7 @@ public class ContestantRepoBroker implements IRepoContestant{
      * @param hostName host name
      * @param portNum port number
      */
-    public ContestantRepoBroker(String hostName, int portNum) {
+    ContestantRepoBroker(String hostName, int portNum) {
         this.hostName = hostName;
         this.portNum = portNum;
     }
@@ -43,7 +41,6 @@ public class ContestantRepoBroker implements IRepoContestant{
         ClientComm con = new ClientComm (hostName, portNum);
 
         /*  instantiate the configuration messages  */
-        ContestantRepoMessage inMessage;
         ContestantRepoMessage outMessage;
 
         /*  open connection  */

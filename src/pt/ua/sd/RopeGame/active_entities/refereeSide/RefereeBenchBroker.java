@@ -8,18 +8,16 @@ import pt.ua.sd.RopeGame.interfaces.IContestantsBenchReferee;
  *
  * Sends the desired messages to the Bnech
  */
-public class RefereeBenchBroker implements IContestantsBenchReferee {
+class RefereeBenchBroker implements IContestantsBenchReferee {
 
 
     /**
      * Host name
-     * @serialfield hostName
      */
     private final String hostName;
 
     /**
      * Port number
-     * @serialfield portNum
      */
     private final int portNum;
 
@@ -28,7 +26,7 @@ public class RefereeBenchBroker implements IContestantsBenchReferee {
      * @param hostName host name
      * @param portNum port number
      */
-    public RefereeBenchBroker(String hostName, int portNum) {
+    RefereeBenchBroker(String hostName, int portNum) {
         this.hostName = hostName;
         this.portNum = portNum;
     }
@@ -132,9 +130,7 @@ public class RefereeBenchBroker implements IContestantsBenchReferee {
 
         /*  close the connection  */
         con.close();
-
-        int match_winner = inMessage.getWinner();
-        return match_winner;
+        return inMessage.getWinner();
     }
 
     /**
@@ -146,7 +142,6 @@ public class RefereeBenchBroker implements IContestantsBenchReferee {
         ClientComm con = new ClientComm (hostName, portNum);
 
         /*  instantiate the configuration messages  */
-        RefereeBenchMessage inMessage;
         RefereeBenchMessage outMessage;
 
         /*  open connection  */

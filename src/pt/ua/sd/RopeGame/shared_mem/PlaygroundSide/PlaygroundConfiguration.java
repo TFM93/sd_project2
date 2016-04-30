@@ -4,12 +4,12 @@ package pt.ua.sd.RopeGame.shared_mem.PlaygroundSide;
  * This data type defines the Playground configuration.
  * It includes host name, port number and initialization parameters
  */
-public class PlaygroundConfiguration {
+ class PlaygroundConfiguration {
 
     /**
      * Host name
      */
-    String hostName;
+     String hostName;
     /**
      * Port number
      */
@@ -25,7 +25,7 @@ public class PlaygroundConfiguration {
      * @param portNumb port number
      * @param nEntities number of entities
      */
-    public PlaygroundConfiguration(String hostName, int portNumb, int nEntities) {
+     PlaygroundConfiguration(String hostName, int portNumb, int nEntities) {
         this.hostName = hostName;
         this.portNumb = portNumb;
         this.nEntities = nEntities;

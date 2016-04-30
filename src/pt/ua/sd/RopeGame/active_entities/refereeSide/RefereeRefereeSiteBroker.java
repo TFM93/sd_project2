@@ -9,17 +9,15 @@ import pt.ua.sd.RopeGame.structures.GameStat;
  *
  * Sends the desired messages to the Referee Site
  */
-public class RefereeRefereeSiteBroker implements IRefereeSiteReferee {
+class RefereeRefereeSiteBroker implements IRefereeSiteReferee {
 
     /**
      * Host name
-     * @serialfield hostName
      */
     private final String hostName;
 
     /**
      * Port number
-     * @serialfield portNum
      */
     private final int portNum;
 
@@ -28,7 +26,7 @@ public class RefereeRefereeSiteBroker implements IRefereeSiteReferee {
      * @param hostName host name
      * @param portNum port number
      */
-    public RefereeRefereeSiteBroker(String hostName, int portNum) {
+     RefereeRefereeSiteBroker(String hostName, int portNum) {
         this.hostName = hostName;
         this.portNum = portNum;
     }
@@ -99,8 +97,7 @@ public class RefereeRefereeSiteBroker implements IRefereeSiteReferee {
         /*  close the connection  */
         con.close();
 
-        GameStat stats = inMessage.getStat();
-        return stats;
+        return inMessage.getStat();
     }
 
     /**
@@ -134,8 +131,7 @@ public class RefereeRefereeSiteBroker implements IRefereeSiteReferee {
         /*  close the connection  */
         con.close();
 
-        int n_games_played = inMessage.getN_games_played();
-        return n_games_played;
+        return inMessage.getN_games_played();
     }
 
     /**
@@ -147,7 +143,6 @@ public class RefereeRefereeSiteBroker implements IRefereeSiteReferee {
         ClientComm con = new ClientComm (hostName, portNum);
 
         /*  instantiate the configuration messages  */
-        RefereeRefSiteMessage inMessage;
         RefereeRefSiteMessage outMessage;
 
         /*  open connection  */

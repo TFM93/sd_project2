@@ -77,9 +77,8 @@ public class PlaygroundServer {
         con.close();
 
         /*  return the configuration  */
-        PlaygroundConfiguration conf = new PlaygroundConfiguration(inMessage.getHostName(), inMessage.getPortNumb(),
+        return new PlaygroundConfiguration(inMessage.getHostName(), inMessage.getPortNumb(),
                 inMessage.getArg1());
-        return conf;
     }
 
 }

@@ -1,13 +1,7 @@
 package pt.ua.sd.RopeGame.active_entities.contestantSide;
 
 
-import pt.ua.sd.RopeGame.comInfo.ContestantBenchMessage;
 import pt.ua.sd.RopeGame.enums.ContestantState;
-import pt.ua.sd.RopeGame.interfaces.IContestantsBenchContestant;
-import pt.ua.sd.RopeGame.interfaces.IPlaygroundContestant;
-import pt.ua.sd.RopeGame.interfaces.IRefereeSiteContestant;
-import pt.ua.sd.RopeGame.interfaces.IRepoContestant;
-
 
 /**
  * Contestant thread<br>
@@ -33,10 +27,6 @@ public class Contestant extends Thread {
     private ContestantRepoBroker repo;//represents the general info repository of shared memory
     private int n_players;//number of players in each team, defined in rg.config
     private int n_players_pushing;//number of players in each team pushing at any given trial, defined in rg.config
-    private int n_trials;//number of trials, defined in rg.config
-    private int n_games;//number of games, defined in rg.config
-    private int knockDif;//number of knockout difference needed to win, defined in rg.config
-
 
 
     /**
@@ -49,16 +39,12 @@ public class Contestant extends Thread {
      * @param repo general info repository shared memory instancy
      * @param n_players number of players per team
      * @param n_players_pushing number of players pushing the rope
-     * @param n_trials number of trials
-     * @param n_games number of games
-     * @param knockDif knockout difference
      */
     public Contestant(int id, int team_id, int strength,
                       ContestantPlaygroundBroker playground,
                       ContestantBenchBroker contestants_bench,
                       ContestantRepoBroker repo,
-                      int n_players, int n_players_pushing,
-                      int n_trials, int n_games, int knockDif){
+                      int n_players, int n_players_pushing){
         this.id = id;
         this.team_id = team_id;
         this.strength = strength;
@@ -67,9 +53,7 @@ public class Contestant extends Thread {
         this.repo = repo;
         this.n_players = n_players;
         this.n_players_pushing = n_players_pushing;
-        this.n_trials = n_trials;
-        this.n_games = n_games;
-        this.knockDif = knockDif;
+
     }
 
     /**
@@ -125,13 +109,6 @@ public class Contestant extends Thread {
 
     }
 
-    /**
-     *
-     * @return the {@link Integer} repesentation of the contestant id
-     */
-    public int getContestantId() {
-        return id;
-    }
     /**
      *
      * @return the {@link Integer} repesentation of the team id

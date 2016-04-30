@@ -14,12 +14,12 @@ import java.util.Arrays;
 
 /**
  * Logging repository<br>
- *<b><center><font size=6>Logging repository</font></center></b><br>
- *     <font size=4>This class represents the shared memory for the logging.
- *     The logging file is saved in the root of the project.
- *     Info saved on RopeGame.log
+ *     This class represents the shared memory for the logging.
+ *     The logging file is saved in the defined configuration path.
+ * @author Ivo Silva (<a href="mailto:ivosilva@ua.pt">ivosilva@ua.pt</a>)
+ * @author Tiago Magalhaes (<a href="mailto:tiagoferreiramagalhaes@ua.pt">tiagoferreiramagalhaes@ua.pt</a>)
  */
-public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoReferee{
+ class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoReferee{
 
     /**
      * Internal Data
@@ -27,15 +27,15 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
     private int referee_trial_number = 0;
     private static int PS_center = Integer.MAX_VALUE;//position of the center of rope
 
-    public enum refStates{//abreviation of referee states
+     private enum refStates{//abreviation of referee states
         SOM,SOG,TSR,WTC,EOM,EOG,NON
     }
 
-    public enum  coachStates{//abreviation of coach states
+     private enum  coachStates{//abreviation of coach states
         WRC,AST,WTR,NON
     }
 
-    public enum contestantStates{//abreviation of contestant states
+    private enum contestantStates{//abreviation of contestant states
         SAB,SIP,DYB,NON
     }
 
@@ -47,29 +47,28 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
     private static int[] team2_strength;//strenght of each contestant
     private static int game_nr;//number of the game
     private static File OUTPUT_FILE;//represents the log file
-    private String TO_WRITE="";//info that needs to be saved to file
-    private static String LOG_LOCATION;//location of the log file
+    private String TO_WRITE;//info that needs to be saved to file
     private static Writer output=null;
 
     private static int[] contestants_team1;
     private static int[] contestants_team2;
 
-    int players_team;
-    int players_pushing;
-    int n_trials;
-    int n_games;
-    int knockDif;
+
+    private int players_pushing;
+
 
     /**
      * Constructor
+     * @param players_team number of players per team
+     * @param players_pushing number of players pushing the rope
+     * @param n_trials number of trials
+     * @param n_games number of games
+     * @param knockDif maximum diference to the rope center to reach a knockout
      */
-    public MGeneralInfoRepo(int players_team, int players_pushing, int n_trials, int n_games, int knockDif)
+    MGeneralInfoRepo(int players_team, int players_pushing, int n_trials, int n_games, int knockDif)
     {
         this.players_pushing = players_pushing;
-        this.players_team = players_team;
-        this.n_games = n_games;
-        this.n_trials = n_trials;
-        this.knockDif = knockDif;
+
 
         if(contestants_team1 == null){
             contestants_team1 = new int[players_pushing];
@@ -81,7 +80,8 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
             Arrays.fill(contestants_team2, -1);
         }
 
-        LOG_LOCATION = "RopeGame.log";
+        String LOG_LOCATION = "RopeGame.log";
+        TO_WRITE = "";
         TO_WRITE="";//nothing needs to be written now
         OUTPUT_FILE = new File(LOG_LOCATION);
         if(OUTPUT_FILE.exists())//check if the file exists
@@ -393,7 +393,7 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
     /**
      * writes the text present in TO_WRITE buffer to file
      */
-    public synchronized void writeToFile(){
+    private synchronized void writeToFile(){
         //use buffering
 
         try {
@@ -413,7 +413,7 @@ public class MGeneralInfoRepo implements IRepoCoach, IRepoContestant, IRepoRefer
     /**
      * deletes the RopeGame.log file
      */
-    public void deleteFile()
+    private void deleteFile()
     {
         try {
             Files.delete(OUTPUT_FILE.toPath());

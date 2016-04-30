@@ -6,7 +6,7 @@ import pt.ua.sd.RopeGame.structures.GameStat;
 /**
  * Interface to the Referee Site
  */
-public class RefereeSiteSideInterface {
+ class RefereeSiteSideInterface {
 
     /**
      * Referee Site
@@ -31,7 +31,7 @@ public class RefereeSiteSideInterface {
      * @param ref_site Referee Site
      * @param nTerminateMessagesToEnd Number of TERMINATE messages left to end
      */
-    public RefereeSiteSideInterface(MRefereeSite ref_site, int nTerminateMessagesToEnd) {
+     RefereeSiteSideInterface(MRefereeSite ref_site, int nTerminateMessagesToEnd) {
         this.ref_site = ref_site;
         this.nTerminateMessages = 0;
         this.nTerminateMessagesToEnd = nTerminateMessagesToEnd;
@@ -45,7 +45,7 @@ public class RefereeSiteSideInterface {
      */
     public Message processAndReply (Message inMessage) throws MessageExcept {
 
-        Message outMessage = null;
+        Message outMessage;
 
         /*  only the Referee is able to call methods from the referee site  */
         if (inMessage instanceof RefereeRefSiteMessage) {

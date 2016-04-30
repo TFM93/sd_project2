@@ -1,7 +1,6 @@
 package pt.ua.sd.RopeGame.active_entities.refereeSide;
 
 import pt.ua.sd.RopeGame.comInfo.RefereePlaygroundMessage;
-import pt.ua.sd.RopeGame.comInfo.RefereeRefSiteMessage;
 import pt.ua.sd.RopeGame.interfaces.IPlaygroundReferee;
 import pt.ua.sd.RopeGame.structures.TrialStat;
 
@@ -10,18 +9,16 @@ import pt.ua.sd.RopeGame.structures.TrialStat;
  *
  * Sends the desired messages to the Playgrounds
  */
-public class RefereePlaygroundBroker implements IPlaygroundReferee {
+ class RefereePlaygroundBroker implements IPlaygroundReferee {
 
 
     /**
      * Host name
-     * @serialfield hostName
      */
     private final String hostName;
 
     /**
      * Port number
-     * @serialfield portNum
      */
     private final int portNum;
 
@@ -30,7 +27,7 @@ public class RefereePlaygroundBroker implements IPlaygroundReferee {
      * @param hostName host name
      * @param portNum port number
      */
-    public RefereePlaygroundBroker(String hostName, int portNum) {
+     RefereePlaygroundBroker(String hostName, int portNum) {
         this.hostName = hostName;
         this.portNum = portNum;
     }
@@ -69,8 +66,7 @@ public class RefereePlaygroundBroker implements IPlaygroundReferee {
         /*  close the connection  */
         con.close();
 
-        TrialStat stat = inMessage.getStat();
-        return stat;
+        return inMessage.getStat();
     }
 
 
@@ -83,7 +79,6 @@ public class RefereePlaygroundBroker implements IPlaygroundReferee {
         ClientComm con = new ClientComm (hostName, portNum);
 
         /*  instantiate the configuration messages  */
-        RefereePlaygroundMessage inMessage;
         RefereePlaygroundMessage outMessage;
 
         /*  open connection  */

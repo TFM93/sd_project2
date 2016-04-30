@@ -10,18 +10,16 @@ import pt.ua.sd.RopeGame.interfaces.IRepoReferee;
  *
  * Sends the desired messages to the Repo
  */
-public class RefereeRepoBroker implements IRepoReferee {
+class RefereeRepoBroker implements IRepoReferee {
 
 
     /**
      * Host name
-     * @serialfield hostName
      */
     private final String hostName;
 
     /**
      * Port number
-     * @serialfield portNum
      */
     private final int portNum;
 
@@ -30,7 +28,7 @@ public class RefereeRepoBroker implements IRepoReferee {
      * @param hostName host name
      * @param portNum port number
      */
-    public RefereeRepoBroker(String hostName, int portNum) {
+    RefereeRepoBroker(String hostName, int portNum) {
         this.hostName = hostName;
         this.portNum = portNum;
     }
@@ -247,7 +245,6 @@ public class RefereeRepoBroker implements IRepoReferee {
         ClientComm con = new ClientComm (hostName, portNum);
 
         /*  instantiate the configuration messages  */
-        RefereeRepoMessage inMessage;
         RefereeRepoMessage outMessage;
 
         /*  open connection  */

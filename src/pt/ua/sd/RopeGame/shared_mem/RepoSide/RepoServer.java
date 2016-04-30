@@ -78,7 +78,6 @@ public class RepoServer {
         con.close();
 
         /*  return the configuration  */
-        RepoConfiguration conf = new RepoConfiguration(inMessage.getHostName(),inMessage.getPortNumb(),inMessage.getArg1(),inMessage.getArg2(),inMessage.getArg3(),inMessage.getArg4(),inMessage.getArg5());
-        return conf;
+        return new RepoConfiguration(inMessage.getHostName(),inMessage.getPortNumb(),inMessage.getArg1(),inMessage.getArg2(),inMessage.getArg3(),inMessage.getArg4(),inMessage.getArg5());
     }
 }

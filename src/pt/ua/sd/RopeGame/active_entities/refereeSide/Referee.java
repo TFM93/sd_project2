@@ -3,10 +3,6 @@ package pt.ua.sd.RopeGame.active_entities.refereeSide;
 
 import pt.ua.sd.RopeGame.enums.RefState;
 import pt.ua.sd.RopeGame.enums.WonType;
-import pt.ua.sd.RopeGame.interfaces.IContestantsBenchReferee;
-import pt.ua.sd.RopeGame.interfaces.IPlaygroundReferee;
-import pt.ua.sd.RopeGame.interfaces.IRefereeSiteReferee;
-import pt.ua.sd.RopeGame.interfaces.IRepoReferee;
 import pt.ua.sd.RopeGame.structures.GameStat;
 import pt.ua.sd.RopeGame.structures.TrialStat;
 
@@ -31,9 +27,7 @@ public class Referee extends Thread {
     private RefereeRefereeSiteBroker referee_site;//represents the referee site shared memory
     private RefereePlaygroundBroker playground;//represents the playground shared memory
     private RefereeRepoBroker repo;//represents the general info repository of shared memory
-    private int n_players;//number of players in each team, defined in rg.config
     private int n_players_pushing;//number of players in each team pushing at any given trial, defined in rg.config
-    private int n_trials;//number of trials, defined in rg.config
     private int n_games;//number of games, defined in rg.config
     private int knockDif;//number of knockout difference needed to win, defined in rg.config
 
@@ -46,25 +40,20 @@ public class Referee extends Thread {
      * @param referee_site referee site shared memory instancy
      * @param contestants_bench contestants bench shared memory instancy
      * @param repo general info repository shared memory instancy
-     * @param n_players number of players per team
      * @param n_players_pushing number of players pushing the rope
-     * @param n_trials number of trials
      * @param n_games number of games
      * @param knockDif knockout difference
      */
     public Referee(RefereePlaygroundBroker playground,
                    RefereeRefereeSiteBroker referee_site,
                    RefereeBenchBroker contestants_bench,
-                   RefereeRepoBroker repo,
-                   int n_players, int n_players_pushing,
-                   int n_trials, int n_games, int knockDif){
+                   RefereeRepoBroker repo, int n_players_pushing,
+                    int n_games, int knockDif){
         this.playground = playground;
         this.referee_site = referee_site;
         this.contestants_bench = contestants_bench;
         this.repo = repo;
-        this.n_players = n_players;
         this.n_players_pushing = n_players_pushing;
-        this.n_trials = n_trials;
         this.n_games = n_games;
         this.knockDif = knockDif;
     }
@@ -183,7 +172,7 @@ public class Referee extends Thread {
 
                     if(n_games > this.referee_site.getN_games_played()){//if less than 3 games played
                         this.referee_site.announceNewGame();//new game announced
-                        repo.updGame_nr();//updte the nr of games in central info repo
+                        repo.updGame_nr();//update the nr of games in central info repo
                         state = RefState.START_OF_A_GAME;
                         repo.refereeLog(state, trial_number);//update the referee state in central info repo
                         repo.Addheader(false);//add header with the nr of games in central info repo

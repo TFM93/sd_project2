@@ -72,9 +72,6 @@ public class ServerComm {
     public void start() {
         try {
             listeningSocket = new ServerSocket(serverPortNumb);
-        } catch (BindException e){
-            e.printStackTrace();
-            System.exit(1);
         } catch (IOException e){
             e.printStackTrace();
             System.exit(1);

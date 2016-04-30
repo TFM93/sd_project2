@@ -180,7 +180,7 @@ public class Configuration {
      *
      * @return repository host name
      */
-    public String getRepositoryHostName() {
+    String getRepositoryHostName() {
         return repositoryHostName;
     }
 
@@ -189,7 +189,7 @@ public class Configuration {
      *
      * @return repository port number
      */
-    public int getRepositoryPortNum() {
+     int getRepositoryPortNum() {
         return repositoryPortNum;
     }
 
@@ -198,7 +198,7 @@ public class Configuration {
      *
      * @return log file name
      */
-    public String getLogFileName() {
+     String getLogFileName() {
         return logFileName;
     }
 
@@ -207,7 +207,7 @@ public class Configuration {
      * get referee site host name
      * @return host name
      */
-    public String getRefSiteHostName() {
+     String getRefSiteHostName() {
         return refSiteHostName;
     }
 
@@ -215,7 +215,7 @@ public class Configuration {
      * get referee site port number
      * @return port number
      */
-    public int getRefSitePortNum() {
+     int getRefSitePortNum() {
         return refSitePortNum;
     }
 
@@ -223,7 +223,7 @@ public class Configuration {
      * get bench host name
      * @return host name
      */
-    public String getBenchHostName() {
+     String getBenchHostName() {
         return benchHostName;
     }
 
@@ -231,7 +231,7 @@ public class Configuration {
      * get bench port number
      * @return port number
      */
-    public int getBenchPortNum() {
+     int getBenchPortNum() {
         return benchPortNum;
     }
 
@@ -239,7 +239,7 @@ public class Configuration {
      * get playground host name
      * @return host name
      */
-    public String getPlayGHostName() {
+     String getPlayGHostName() {
         return playGHostName;
     }
 
@@ -271,7 +271,7 @@ public class Configuration {
      * get playground port number
      * @return port number
      */
-    public int getPlayGPortNum() {
+     int getPlayGPortNum() {
         return playGPortNum;
     }
 
@@ -279,7 +279,7 @@ public class Configuration {
      * get number of trials
      * @return number of trials
      */
-    public int getnTrials() {
+     int getnTrials() {
         return nTrials;
     }
 
@@ -288,7 +288,7 @@ public class Configuration {
      * get number of players pushing the rope
      * @return number of players pushing the rope
      */
-    public int getnPlayersPushing() {
+     int getnPlayersPushing() {
         return nPlayersPushing;
     }
 
@@ -296,7 +296,7 @@ public class Configuration {
      * get number of total games
      * @return number of games
      */
-    public int getnGames() {
+     int getnGames() {
         return nGames;
     }
 
@@ -304,7 +304,7 @@ public class Configuration {
      * get the maximum dealocation of the rope for the knockout
      * @return knockout max dif from de center of rope
      */
-    public int getKnockDif() {
+     int getKnockDif() {
         return knockDif;
     }
 
@@ -312,7 +312,7 @@ public class Configuration {
      * get the number of players
      * @return number of players
      */
-    public int getnPlayers() {
+     int getnPlayers() {
         return nPlayers;
     }
 }

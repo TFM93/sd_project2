@@ -79,8 +79,7 @@ public class RefereeSiteServer {
         con.close();
 
         /*  return the configuration  */
-        RefSiteConfiguration conf = new RefSiteConfiguration(inMessage.getHostName(), inMessage.getPortNumb(),
+        return new RefSiteConfiguration(inMessage.getHostName(), inMessage.getPortNumb(),
                 inMessage.getArg1());
-        return conf;
     }
 }

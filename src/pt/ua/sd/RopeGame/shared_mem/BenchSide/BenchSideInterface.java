@@ -6,7 +6,7 @@ import pt.ua.sd.RopeGame.comInfo.*;
 /**
  * Interface to the Bench
  */
-public class BenchSideInterface {
+class BenchSideInterface {
 
     /**
      * Bench
@@ -31,7 +31,7 @@ public class BenchSideInterface {
      * @param bench Central Information Repository
      * @param nTerminateMessagesToEnd Number of TERMINATE messages left to end
      */
-    public BenchSideInterface(MContestantsBench bench, int nTerminateMessagesToEnd) {
+    BenchSideInterface(MContestantsBench bench, int nTerminateMessagesToEnd) {
         this.bench = bench;
         this.nTerminateMessages = 0;
         this.nTerminateMessagesToEnd = nTerminateMessagesToEnd;
@@ -45,7 +45,7 @@ public class BenchSideInterface {
      */
     public Message processAndReply (Message inMessage) throws MessageExcept {
 
-        Message outMessage = null;
+        Message outMessage;
 
         /*  Bench receives messages from coaches, contestants and the referee  */
         if (inMessage instanceof CoachBenchMessage) {

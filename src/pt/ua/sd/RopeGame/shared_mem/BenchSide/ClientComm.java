@@ -173,10 +173,6 @@ public class ClientComm {
 
             try{
                 out.writeObject (toServer);
-            }
-            catch (InvalidClassException | NotSerializableException e) {
-                e.printStackTrace ();
-                System.exit (1);
             } catch (IOException e) {
                 e.printStackTrace ();
                 System.exit (1);

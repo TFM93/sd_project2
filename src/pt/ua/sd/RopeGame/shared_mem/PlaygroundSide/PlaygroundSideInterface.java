@@ -5,7 +5,7 @@ import pt.ua.sd.RopeGame.structures.TrialStat;
 /**
  * Interface to the Central Information Repository
  */
-public class PlaygroundSideInterface {
+ class PlaygroundSideInterface {
 
     /**
      * Playground
@@ -30,7 +30,7 @@ public class PlaygroundSideInterface {
      * @param playground playground
      * @param nTerminateMessagesToEnd number of TERMINATE messages left
      */
-    public PlaygroundSideInterface(MPlayground playground, int nTerminateMessagesToEnd) {
+     PlaygroundSideInterface(MPlayground playground, int nTerminateMessagesToEnd) {
         this.playground = playground;
         this.nTerminateMessages = 0;
         this.nTerminateMessagesToEnd = nTerminateMessagesToEnd;
@@ -44,7 +44,7 @@ public class PlaygroundSideInterface {
      */
     public Message processAndReply (Message inMessage) throws MessageExcept {
 
-        Message outMessage = null;
+        Message outMessage ;
 
         /*  Playground receives messages from coaches, contestants and the referee  */
         if (inMessage instanceof CoachPlaygroundMessage) {

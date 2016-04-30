@@ -8,18 +8,16 @@ import pt.ua.sd.RopeGame.interfaces.IPlaygroundContestant;
  *
  * Sends the desired messages to the Repo
  */
-public class ContestantPlaygroundBroker implements IPlaygroundContestant {
+class ContestantPlaygroundBroker implements IPlaygroundContestant {
 
 
     /**
      * Host name
-     * @serialfield hostName
      */
     private final String hostName;
 
     /**
      * Port number
-     * @serialfield portNum
      */
     private final int portNum;
 
@@ -28,7 +26,7 @@ public class ContestantPlaygroundBroker implements IPlaygroundContestant {
      * @param hostName host name
      * @param portNum port number
      */
-    public ContestantPlaygroundBroker(String hostName, int portNum) {
+    ContestantPlaygroundBroker(String hostName, int portNum) {
         this.hostName = hostName;
         this.portNum = portNum;
     }
@@ -43,7 +41,6 @@ public class ContestantPlaygroundBroker implements IPlaygroundContestant {
         ClientComm con = new ClientComm (hostName, portNum);
 
         /*  instantiate the configuration messages  */
-        ContestantPlaygroundMessage inMessage;
         ContestantPlaygroundMessage outMessage;
 
         /*  open connection  */

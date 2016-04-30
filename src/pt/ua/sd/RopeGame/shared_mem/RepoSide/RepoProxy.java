@@ -6,7 +6,7 @@ import pt.ua.sd.RopeGame.comInfo.MessageExcept;
 /**
  * Central Information Repository Proxy
  */
-public class RepoProxy extends Thread {
+ class RepoProxy extends Thread {
 
     /**
      * Count released threads
@@ -31,7 +31,7 @@ public class RepoProxy extends Thread {
      * @param sc Server communication channel
      * @param repoInterface Interface to central repository
      */
-    public RepoProxy(ServerComm sc, RepoInterface repoInterface){
+     RepoProxy(ServerComm sc, RepoInterface repoInterface){
         super("Central_repo_Proxy_" + getProxyId());
         this.sc = sc;
         this.repoInterface = repoInterface;

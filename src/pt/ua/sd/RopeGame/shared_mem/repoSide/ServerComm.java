@@ -72,9 +72,6 @@ public class ServerComm {
     public void start() {
         try {
             listeningSocket = new ServerSocket(serverPortNumb);
-        } catch (BindException e){
-            e.printStackTrace();
-            System.exit(1);
         } catch (IOException e){
             e.printStackTrace();
             System.exit(1);
@@ -104,9 +101,6 @@ public class ServerComm {
         scon = new ServerComm(serverPortNumb, listeningSocket);
         try {
             scon.commSocket = listeningSocket.accept();
-        } catch (SocketException e) {
-            e.printStackTrace();
-            System.exit(1);
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
@@ -165,13 +159,7 @@ public class ServerComm {
 
         try {
             fromClient = in.readObject();
-        } catch (InvalidClassException e) {
-            e.printStackTrace();
-            System.exit(1);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | IOException e) {
             e.printStackTrace();
             System.exit(1);
         }
@@ -187,12 +175,6 @@ public class ServerComm {
     public void writeObject(Object toClient) {
         try {
             out.writeObject(toClient);
-        } catch (InvalidClassException e) {
-            e.printStackTrace();
-            System.exit(1);
-        } catch (NotSerializableException e) {
-            e.printStackTrace();
-            System.exit(1);
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);

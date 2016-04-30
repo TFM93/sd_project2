@@ -32,10 +32,6 @@ public class ContestantClient {
         Domain playgroundConf = getPlaygroundConfiguration(configurationServerHostname, configurationServerPortnum);
         System.out.println("got conf playg");
 
-        // Get referee site configuration
-        Domain refSiteConf = getRefereeSiteConfiguration(configurationServerHostname, configurationServerPortnum);
-        System.out.println("got conf refSite");
-
         // Get repo configuration
         Domain repoConf = getRepoConfiguration(configurationServerHostname, configurationServerPortnum);
         System.out.println("got conf repo host " + repoConf.hostName+ " port " + repoConf.portNumb);
@@ -77,11 +73,7 @@ public class ContestantClient {
                     bench,
                     repo,
                     players_team,
-                    players_pushing,
-                    n_trials,
-                    n_games,
-                    knockDif);
-           // cont_t1[i].start();
+                    players_pushing);
         }
 
         for(int i = 0; i < players_team; i++){
@@ -90,11 +82,7 @@ public class ContestantClient {
                     bench,
                     repo,
                     players_team,
-                    players_pushing,
-                    n_trials,
-                    n_games,
-                    knockDif);
-            //cont_t2[i].start();
+                    players_pushing);
         }
 
 
@@ -102,7 +90,7 @@ public class ContestantClient {
         for (int i = 0; i < players_team; i++) {
             cont_t1[i].start();
             cont_t2[i].start();
-            System.out.println("Contestants with " + i + " started!");
+            System.out.println("Contestants with id " + i + " started!");
         }
 
         // Wait for end of the simulation
@@ -112,9 +100,10 @@ public class ContestantClient {
                 cont_t2[i].join();
                 bench.terminate();
                 playground.terminate();
-                //refSite.terminate();
                 repo.terminate();
-            } catch (InterruptedException e) {}
+            } catch (InterruptedException e) {
+                System.out.println();
+            }
             System.out.println("Contestants with id " + i + " terminated!");
         }
 
@@ -152,9 +141,7 @@ public class ContestantClient {
         con.close();
 
         /*  get data from message  */
-        Domain conf = new Domain(inMessage.getHostName(), inMessage.getPortNumb());
-
-        return conf;
+        return new Domain(inMessage.getHostName(), inMessage.getPortNumb());
 
     }
 
@@ -189,45 +176,8 @@ public class ContestantClient {
         con.close();
 
         /*  get data from message  */
-        Domain conf = new Domain(inMessage.getHostName(), inMessage.getPortNumb());
 
-        return conf;
-
-    }
-    /**
-     * Get Referee Site configuration.
-     * @return ref site server host name and port number
-     */
-    private static Domain getRefereeSiteConfiguration(String configurationServerHostname, int configurationServerPortnum) {
-        /*  create communication socket  */
-        ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
-
-        /*  instantiate the configuration messages  */
-        ConfigurationMessage inMessage;
-        ConfigurationMessage outMessage;
-
-        /*  open connection  */
-        con.open();
-
-        /*  send get referee site message  */
-        outMessage = new ConfigurationMessage(ConfigurationMessage.GETREF_SITE);
-        con.writeObject(outMessage);
-
-        /*  get and validate response message  */
-        inMessage = (ConfigurationMessage) con.readObject();
-        if ((inMessage.getMsgType() != ConfigurationMessage.GETREF_SITE_ANSWER)) {
-            System.out.println("Invalid message type at " + ContestantClient.class.getName());
-            System.out.println(inMessage.toString());
-            System.exit(1);
-        }
-
-        /*  close the connection  */
-        con.close();
-
-        /*  get data from message  */
-        Domain conf = new Domain(inMessage.getHostName(), inMessage.getPortNumb());
-
-        return conf;
+        return new Domain(inMessage.getHostName(), inMessage.getPortNumb());
 
     }
 
@@ -262,9 +212,8 @@ public class ContestantClient {
         con.close();
 
         /*  get data from message  */
-        Domain conf = new Domain(inMessage.getHostName(), inMessage.getPortNumb());
 
-        return conf;
+        return new Domain(inMessage.getHostName(), inMessage.getPortNumb());
     }
 
 
@@ -299,9 +248,8 @@ public class ContestantClient {
         con.close();
 
         /*  get data from message  */
-        int n_players = inMessage.getArg1();
 
-        return n_players;
+        return inMessage.getArg1();
     }
 
     /**
@@ -336,9 +284,7 @@ public class ContestantClient {
         con.close();
 
         /*  get data from message  */
-        int n_players_pushing = inMessage.getArg2();
-
-        return n_players_pushing;
+        return inMessage.getArg2();
     }
 
 
@@ -374,9 +320,7 @@ public class ContestantClient {
         con.close();
 
         /*  get data from message  */
-        int n_games = inMessage.getArg4();
-
-        return n_games;
+        return inMessage.getArg4();
     }
 
 
@@ -412,9 +356,7 @@ public class ContestantClient {
         con.close();
 
         /*  get data from message  */
-        int n_trials = inMessage.getArg3();
-
-        return n_trials;
+        return inMessage.getArg3();
     }
 
     /**
@@ -449,9 +391,7 @@ public class ContestantClient {
         con.close();
 
         /*  get data from message  */
-        int knock_dif = inMessage.getArg5();
-
-        return knock_dif;
+        return inMessage.getArg5();
     }
 
 }

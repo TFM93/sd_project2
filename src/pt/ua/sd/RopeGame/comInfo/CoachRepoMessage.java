@@ -1,6 +1,5 @@
 package pt.ua.sd.RopeGame.comInfo;
 
-import pt.ua.sd.RopeGame.enums.CoachState;
 
 /**
  * Message spec between coaches and repo

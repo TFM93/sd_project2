@@ -3,7 +3,7 @@ package pt.ua.sd.RopeGame.shared_mem.BenchSide;
 /**
  * Bench configuration class
  */
-public class BenchConfiguration {
+class BenchConfiguration {
 
     /**
      * Server host name
@@ -26,7 +26,7 @@ public class BenchConfiguration {
      * @param portNumb port number
      * @param nEntities number of entities
      */
-    public BenchConfiguration(String hostName, int portNumb, int nEntities) {
+    BenchConfiguration(String hostName, int portNumb, int nEntities) {
         this.hostName = hostName;
         this.portNumb = portNumb;
         this.nEntities = nEntities;
@@ -41,7 +41,7 @@ public class BenchConfiguration {
         return portNumb;
     }
 
-    public int getnEntities() {
+    int getnEntities() {
         return nEntities;
     }
 }

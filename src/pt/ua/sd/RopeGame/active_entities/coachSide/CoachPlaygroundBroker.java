@@ -8,17 +8,15 @@ import pt.ua.sd.RopeGame.interfaces.IPlaygroundCoach;
  *
  * Sends the desired messages to the Playground
  */
-public class CoachPlaygroundBroker implements IPlaygroundCoach {
+class CoachPlaygroundBroker implements IPlaygroundCoach {
 
     /**
      * Host name
-     * @serialfield hostName
      */
     private final String hostName;
 
     /**
      * Port number
-     * @serialfield portNum
      */
     private final int portNum;
 
@@ -27,7 +25,7 @@ public class CoachPlaygroundBroker implements IPlaygroundCoach {
      * @param hostName host name
      * @param portNum port number
      */
-    public CoachPlaygroundBroker(String hostName, int portNum) {
+    CoachPlaygroundBroker(String hostName, int portNum) {
         this.hostName = hostName;
         this.portNum = portNum;
     }
@@ -67,8 +65,7 @@ public class CoachPlaygroundBroker implements IPlaygroundCoach {
         /*  close the connection  */
         con.close();
 
-        int[] new_team = inMessage.getChosen_contestants_after_review();
-        return new_team;
+        return inMessage.getChosen_contestants_after_review();
     }
 
     /**
@@ -80,7 +77,6 @@ public class CoachPlaygroundBroker implements IPlaygroundCoach {
         ClientComm con = new ClientComm (hostName, portNum);
 
         /*  instantiate the configuration messages  */
-        CoachPlaygroundMessage inMessage;
         CoachPlaygroundMessage outMessage;
 
         /*  open connection  */

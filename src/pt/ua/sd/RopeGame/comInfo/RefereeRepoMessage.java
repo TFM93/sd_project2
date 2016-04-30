@@ -150,18 +150,6 @@ public class RefereeRepoMessage extends Message {
         this.arg2 = state;
         this.arg1 = trialNr;
     }
-    /**
-     * Messages Instantiation.
-     *
-     * @param type message type
-     * @param arg1 referee's trial number
-     * @param arg2 referee's state
-     */
-    public RefereeRepoMessage(int type, int arg1, RefState arg2) {
-        super(type);
-        this.arg1 = arg1;
-        this.arg2 = arg2;
-    }
 
     /**
      * Messages Instantiation.
@@ -201,13 +189,6 @@ public class RefereeRepoMessage extends Message {
         return arg2;
     }
 
-    /**
-     * Get referee's add header flag
-     * @return referee's add header flag
-     */
-    public boolean getArg3() {
-        return arg3;
-    }
 
     public int getWinner() {
         return winner;

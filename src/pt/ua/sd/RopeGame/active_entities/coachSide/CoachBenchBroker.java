@@ -7,18 +7,18 @@ import pt.ua.sd.RopeGame.interfaces.IContestantsBenchCoach;
  * Coaches' Bench Broker
  *
  * Sends the desired messages to the Bench
+ * @author Ivo Silva (<a href="mailto:ivosilva@ua.pt">ivosilva@ua.pt</a>)
+ * @author Tiago Magalhaes (<a href="mailto:tiagoferreiramagalhaes@ua.pt">tiagoferreiramagalhaes@ua.pt</a>)
  */
-public class CoachBenchBroker implements IContestantsBenchCoach {
+class CoachBenchBroker implements IContestantsBenchCoach {
 
     /**
      * Host name
-     * @serialfield hostName
      */
     private final String hostName;
 
     /**
      * Port number
-     * @serialfield portNum
      */
     private final int portNum;
 
@@ -27,7 +27,7 @@ public class CoachBenchBroker implements IContestantsBenchCoach {
      * @param hostName host name
      * @param portNum port number
      */
-    public CoachBenchBroker(String hostName, int portNum) {
+    CoachBenchBroker(String hostName, int portNum) {
         this.hostName = hostName;
         this.portNum = portNum;
     }
@@ -66,8 +66,7 @@ public class CoachBenchBroker implements IContestantsBenchCoach {
         /*  close the connection  */
         con.close();
 
-        boolean match_not_ended = inMessage.isMatch_not_ended();
-        return match_not_ended;
+        return inMessage.isMatch_not_ended();
     }
 
     /**
@@ -110,7 +109,6 @@ public class CoachBenchBroker implements IContestantsBenchCoach {
         ClientComm con = new ClientComm (hostName, portNum);
 
         /*  instantiate the configuration messages  */
-        CoachBenchMessage inMessage;
         CoachBenchMessage outMessage;
 
         /*  open connection  */

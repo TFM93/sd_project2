@@ -9,7 +9,6 @@ import pt.ua.sd.RopeGame.structures.TrialStat;
 
 import java.util.Arrays;
 
-import static java.lang.Thread.sleep;
 
 /**
  * Playground - It is where contestants do the actual rope pulling. It is also where the referee
@@ -19,8 +18,7 @@ import static java.lang.Thread.sleep;
 
 public class MPlayground implements IPlaygroundContestant, IPlaygroundReferee, IPlaygroundCoach {
 
-    //private int n_contestant_pulls_team1[] = {0,0,0,0,0};
-    //private int n_contestant_pulls_team2[] = {0,0,0,0,0};
+
     private int n_contestant_pulls_team1[];
     private int n_contestant_pulls_team2[];
     private int ready_to_push;
@@ -108,7 +106,6 @@ public class MPlayground implements IPlaygroundContestant, IPlaygroundReferee, I
                 this.finished_pushing = 0;
                 this.push_at_all_force = false;
             }
-            return;
         }
         else if (team_id == 2){
             center_rope += strenght;//positive value for push to the right
@@ -126,9 +123,7 @@ public class MPlayground implements IPlaygroundContestant, IPlaygroundReferee, I
                 this.push_at_all_force = false;
             }
 
-            return;
         }
-        return;
     }
 
 
@@ -138,8 +133,8 @@ public class MPlayground implements IPlaygroundContestant, IPlaygroundReferee, I
      */
     public synchronized TrialStat assertTrialDecision(int n_players_pushing, int knockDif) {
 
-        boolean decision = false;
-        WonType decision_type = WonType.NONE;
+        boolean decision ;
+        WonType decision_type;
         int winner = -1;
 
         /*  wait for contestants to get be done pulling the rope  */

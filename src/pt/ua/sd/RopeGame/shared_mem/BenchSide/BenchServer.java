@@ -79,9 +79,8 @@ public class BenchServer {
         con.close();
 
         /*  return the configuration  */
-        BenchConfiguration conf = new BenchConfiguration(inMessage.getHostName(), inMessage.getPortNumb(),
+        return new BenchConfiguration(inMessage.getHostName(), inMessage.getPortNumb(),
                 inMessage.getArg1());
-        return conf;
     }
 
 

@@ -4,7 +4,7 @@ package pt.ua.sd.RopeGame.shared_mem.RefereeSiteSide;
  * This data type defines the Referee Site configuration.
  * It includes host name, port number and initialization parameters
  */
-public class RefSiteConfiguration {
+ class RefSiteConfiguration {
     /**
      * Host name
      */
@@ -24,7 +24,7 @@ public class RefSiteConfiguration {
      * @param portNumb port number
      * @param nEntities number of entities
      */
-    public RefSiteConfiguration(String hostName, int portNumb, int nEntities) {
+     RefSiteConfiguration(String hostName, int portNumb, int nEntities) {
         this.hostName = hostName;
         this.portNumb = portNumb;
         this.nEntities = nEntities;

@@ -3,12 +3,11 @@ package pt.ua.sd.RopeGame.shared_mem.ConfigSide;
 import pt.ua.sd.RopeGame.comInfo.ConfigurationMessage;
 import pt.ua.sd.RopeGame.comInfo.Message;
 import pt.ua.sd.RopeGame.comInfo.MessageExcept;
-import pt.ua.sd.RopeGame.shared_mem.ConfigSide.Configuration;
 
 /**
  * Interface to the Configuration Server
  */
-public class ConfigInterface {
+class ConfigInterface {
     /**
      * Configuration
      * @serialField configuration
@@ -19,7 +18,7 @@ public class ConfigInterface {
      * Configuration interface constructor method
      * @param configuration configuration
      */
-    public ConfigInterface(Configuration configuration) {
+    ConfigInterface(Configuration configuration) {
         this.configuration = configuration;
     }
 
@@ -116,7 +115,6 @@ public class ConfigInterface {
                 outMessage = new ConfigurationMessage(ConfigurationMessage.GET_NTRIALS_ANS, configuration.getnTrials());
                 break;
             case ConfigurationMessage.GET_NPLAYERS_PUSHING:
-                System.out.println("NPLAYERS PUSHING " + configuration.getnPlayersPushing());
                 outMessage = new ConfigurationMessage(ConfigurationMessage.GET_NPLAYERS_PUSHING_ANSWER, configuration.getnPlayersPushing());
                 break;
             case ConfigurationMessage.GET_NPLAYERS:

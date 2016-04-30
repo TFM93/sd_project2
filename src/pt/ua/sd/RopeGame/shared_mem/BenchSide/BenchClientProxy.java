@@ -6,7 +6,7 @@ import pt.ua.sd.RopeGame.comInfo.MessageExcept;
 /**
  * Central Information Repository Proxy
  */
-public class BenchClientProxy extends Thread{
+class BenchClientProxy extends Thread{
 
     /**
      * Count released threads
@@ -31,7 +31,7 @@ public class BenchClientProxy extends Thread{
      * @param sconi Server communication channel
      * @param benchSideInterface Interface to central repository
      */
-    public BenchClientProxy(ServerComm sconi, BenchSideInterface benchSideInterface) {
+    BenchClientProxy(ServerComm sconi, BenchSideInterface benchSideInterface) {
         super("Bench_Proxy_" + getProxyId());
         this.sconi = sconi;
         this.benchSideInterface = benchSideInterface;
@@ -43,7 +43,7 @@ public class BenchClientProxy extends Thread{
     @Override
     public void run() {
 
-        Message inMessage = null;
+        Message inMessage;
         Message outMessage = null;
 
         /*  read input message  */

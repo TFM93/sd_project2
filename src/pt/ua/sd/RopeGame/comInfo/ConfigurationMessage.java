@@ -71,10 +71,6 @@ public class ConfigurationMessage extends Message {
      */
     public static final int GETREF_SITE_DOM=11;
 
-    /**
-     * get referee site domain answer
-     */
-    public static final int GETREF_SITE_ANS_DOM=12;
 
     /**
      * get bench domain
@@ -82,19 +78,9 @@ public class ConfigurationMessage extends Message {
     public static final int GETBENCH_DOM=13;
 
     /**
-     * get bench domain answer
-     */
-    public static final int GETBENCH_ANS_DOM=14;
-
-    /**
      * get playground domain
      */
     public static final int GETPLAYG_DOM=15;
-
-    /**
-     * get playground domain answer
-     */
-    public static final int GETPLAYG_ANS_DOM=16;
 
     /**
      * get number of players
@@ -156,16 +142,6 @@ public class ConfigurationMessage extends Message {
      */
     public static final int GET_LOG_FILE_NAME_ANS=26;
 
-
-    /**
-     * Get referee site
-     */
-    public static final int GET_PLAYGROUND = 39;
-
-    /**
-     * Get referee site answer
-     */
-    public static final int GET_PLAYGROUND_ANS = 40;
 
     /* Messages Fields */
 
@@ -347,13 +323,7 @@ public class ConfigurationMessage extends Message {
         return arg5;
     }
 
-    /**
-     * Get log file name.
-     * @return log file name
-     */
-    public String getLogFileName() {
-        return logFileName;
-    }
+
 
 
 }

@@ -6,7 +6,7 @@ import pt.ua.sd.RopeGame.comInfo.MessageExcept;
 /**
  * Configuration Proxy
  */
-public class ConfigProxy extends Thread{
+ class ConfigProxy extends Thread{
 
     /**
      * Communication channel
@@ -34,7 +34,7 @@ public class ConfigProxy extends Thread{
      * @param sc communication channel
      * @param configInterf interface to Configuration
      */
-    public ConfigProxy(ServerComChannel sc, ConfigInterface configInterf){
+     ConfigProxy(ServerComChannel sc, ConfigInterface configInterf){
         super("Configuration_Proxy_" + getProxyId());
         this.sc=sc;
         this.configInterf = configInterf;

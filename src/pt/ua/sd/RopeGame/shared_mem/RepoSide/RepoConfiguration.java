@@ -3,7 +3,7 @@ package pt.ua.sd.RopeGame.shared_mem.RepoSide;
 /**
  * Central Information Repository configuration class
  */
-public class RepoConfiguration {
+ class RepoConfiguration {
     /**
      * Server host name
      */
@@ -47,7 +47,7 @@ public class RepoConfiguration {
      * @param n_games Number of games in a match
      * @param knock_dif Point differential needed to win by knockout
      */
-    public RepoConfiguration(String hostName, int portNumb, int nplayers, int players_pushing, int n_trials, int n_games, int knock_dif){
+     RepoConfiguration(String hostName, int portNumb, int nplayers, int players_pushing, int n_trials, int n_games, int knock_dif){
         this.hostName=hostName;
         this.portNumber=portNumb;
         this.nplayers=nplayers;
@@ -70,7 +70,7 @@ public class RepoConfiguration {
      * Get port number
      * @return port number
      */
-    public int getPortNumber() {
+     int getPortNumber() {
         return portNumber;
     }
 
@@ -86,7 +86,7 @@ public class RepoConfiguration {
      * Get number of games
      * @return number of games
      */
-    public int getNgames() {
+     int getNgames() {
         return ngames;
     }
 
@@ -94,7 +94,7 @@ public class RepoConfiguration {
      * Get number of trials
      * @return number of trials
      */
-    public int getNtrials() {
+     int getNtrials() {
         return ntrials;
     }
 
@@ -102,7 +102,7 @@ public class RepoConfiguration {
      * Get number of players pushing the rope
      * @return number of players pushing the rope
      */
-    public int getPlayers_pushing() {
+     int getPlayers_pushing() {
         return players_pushing;
     }
 
@@ -110,7 +110,7 @@ public class RepoConfiguration {
      * Get number of players
      * @return number of players
      */
-    public int getNplayers() {
+     int getNplayers() {
         return nplayers;
     }
 
@@ -118,7 +118,7 @@ public class RepoConfiguration {
      * Get number of entities
      * @return number of entities
      */
-    public int getnEntities() {
+     int getnEntities() {
         return nEntities;
     }
 }

@@ -1,8 +1,5 @@
 package pt.ua.sd.RopeGame.comInfo;
 
-import pt.ua.sd.RopeGame.active_entities.contestantSide.Contestant;
-import pt.ua.sd.RopeGame.enums.ContestantState;
-
 /**
  * Contestant Repository message
  *

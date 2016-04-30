@@ -49,7 +49,7 @@ public class ServerComChannel {
      *
      * @param portNumb numero do port de escuta do servidor
      */
-    public ServerComChannel(int portNumb) {
+     ServerComChannel(int portNumb) {
         serverPortNumb = portNumb;
     }
 
@@ -59,7 +59,7 @@ public class ServerComChannel {
      * @param portNumb numero do port de escuta do servidor
      * @param lSocket socket de escuta
      */
-    public ServerComChannel(int portNumb, ServerSocket lSocket) {
+     private ServerComChannel(int portNumb, ServerSocket lSocket) {
         serverPortNumb = portNumb;
         listeningSocket = lSocket;
     }
