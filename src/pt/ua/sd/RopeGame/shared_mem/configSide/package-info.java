@@ -1,4 +1,4 @@
 /**
- * Classes da maquina de configuração
+ * Config machine classes
  */
 package pt.ua.sd.RopeGame.shared_mem.ConfigSide;

@@ -1,5 +1,5 @@
 /**
- * Classes para definir mensagens.
+ * Communication messages definition
  */
 
 

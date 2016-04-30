@@ -19,7 +19,7 @@ public class TrialStat implements Serializable{
     private boolean has_next_trial;
 
     /**
-     *  The {@link int} represents the team id (1 or 2)
+     *  represents the team id (1 or 2)
      *  @serialField team
      */
     private int team;
@@ -28,7 +28,7 @@ public class TrialStat implements Serializable{
      */
     private int wonType;
     /**
-     *  The {@link int } instance tells the center of the rope in the trial
+     *  tells the center of the rope in the trial
      *  @serialField center_rope
      */
     private  int center_rope;
