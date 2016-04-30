@@ -1,7 +1,9 @@
 package pt.ua.sd.RopeGame.comInfo;
 
 /**
- * Created by tiagomagalhaes on 21/04/16.
+ * Contestant Playground message
+ *
+ * Specifies messages for contestant and playground communication
  */
 public class ContestantPlaygroundMessage extends Message {
 
@@ -12,39 +14,35 @@ public class ContestantPlaygroundMessage extends Message {
     private static final long serialVersionUID = 200416L;
 
     /**
-     * pull the rope, enviado pelo contestant
+     * pull the rope
      */
     public static final int PULLROPE=1;
 
     /**
-     * am done, enviado pelo contestant
+     * am done
      */
     public static final int AMDONE=2;
     /**
-     * seat down, enviado pelo contestant
+     * seat down
      */
     public static final int SEATDOWN=3;
     /**
-     * terminate message
+     * terminate execution
      */
     public static final int TERMINATE =4;
     /**
-     * pull the rope, enviado pelo contestant
+     * pull the rope answer
      */
     public static final int PULLROPE_ANS=5;
 
     /**
-     * am done, enviado pelo contestant
+     * am done answer
      */
     public static final int AMDONE_ANS=6;
     /**
-     * seat down, enviado pelo contestant
+     * seat down answer
      */
     public static final int SEATDOWN_ANS=7;
-    /**
-     * terminate message
-     */
-
 
 
     /**
@@ -57,13 +55,13 @@ public class ContestantPlaygroundMessage extends Message {
     private int n_players=-1;
 
     /**
-     * inicialização da mensagem
-     * @param type tipo de mensagem
-     * @param team_id  id da equipa
-     * @param strength força do contestant
-     * @param contestant_id   id do contestant
-     * @param n_players_pushing numero de contestants a puxar a corda
-     * @param n_players numero de players
+     * Message init
+     * @param type message type
+     * @param team_id  team id
+     * @param strength contestant strength
+     * @param contestant_id contestant id
+     * @param n_players_pushing number of players pushing the rope
+     * @param n_players number of players
      */
     public ContestantPlaygroundMessage(int type,int team_id, int strength, int contestant_id, int n_players_pushing, int n_players){
         super(type);
@@ -75,9 +73,9 @@ public class ContestantPlaygroundMessage extends Message {
     }
 
     /**
-     * inicialização da mensagem
-     * @param type tipo da mensagem
-     * @param n_players_pushing numero de contestants a puxar a corda
+     * Message init
+     * @param type message type
+     * @param n_players_pushing number of players pushing the rope
      */
     public ContestantPlaygroundMessage(int type, int n_players_pushing){
         super(type);
@@ -86,8 +84,8 @@ public class ContestantPlaygroundMessage extends Message {
 
 
     /**
-     * inicialização da mensagem
-     * @param type tipo da mensagem
+     * Message init
+     * @param type message type
      */
     public ContestantPlaygroundMessage(int type){
         super(type);

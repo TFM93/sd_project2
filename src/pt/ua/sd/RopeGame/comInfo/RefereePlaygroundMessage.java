@@ -3,7 +3,9 @@ package pt.ua.sd.RopeGame.comInfo;
 import pt.ua.sd.RopeGame.structures.TrialStat;
 
 /**
- * Created by tiagomagalhaes on 21/04/16.
+ * Referee Playground message
+ *
+ * Specifies messages for referee and playground communication
  */
 public class RefereePlaygroundMessage extends Message {
 
@@ -15,7 +17,7 @@ public class RefereePlaygroundMessage extends Message {
     private static final long serialVersionUID = 200416L;
 
     /**
-     * assert trial decision, enviado pelo refereee
+     * assert trial decision
      */
     public static final int ATD=1;
 
@@ -25,7 +27,7 @@ public class RefereePlaygroundMessage extends Message {
     public static final int TERMINATE =2;
 
     /**
-     * assert trial decision, enviado pelo refereee
+     * assert trial decision answer
      */
     public static final int ATD_ANS=3;
 
@@ -37,10 +39,10 @@ public class RefereePlaygroundMessage extends Message {
     private TrialStat stat = null;
 
     /**
-     * inicialização da mensagem
-     * @param type tipo de mensagem
-     * @param n_players_pushing numero de contestants a puxar a corda
-     * @param knockDif limite maximo do deslocamento da corda para decidir um knockout
+     * Message init
+     * @param type message type
+     * @param n_players_pushing number of players pushing the rope
+     * @param knockDif knockout differential
      */
     public RefereePlaygroundMessage(int type, int n_players_pushing, int knockDif){
         super(type);
@@ -50,9 +52,9 @@ public class RefereePlaygroundMessage extends Message {
 
 
     /**
-     * inicialização da mensagem
-     * @param type tipo de mensagem
-     * @param stat
+     * Message init
+     * @param type message type
+     * @param stat trial stats
      */
     public RefereePlaygroundMessage(int type, TrialStat stat){
         super(type);
@@ -61,8 +63,8 @@ public class RefereePlaygroundMessage extends Message {
 
 
     /**
-     * inicialização da mensagem
-     * @param type tipo de mensagem
+     * Message init
+     * @param type message type
      */
     public RefereePlaygroundMessage(int type){
         super(type);

@@ -4,7 +4,9 @@ import pt.ua.sd.RopeGame.enums.RefState;
 import pt.ua.sd.RopeGame.enums.WonType;
 
 /**
- * Created by ivosilva on 23/04/16.
+ * Referee Repo message
+ *
+ * Specifies messages for referee and reop communication
  */
 public class RefereeRepoMessage extends Message {
 
@@ -16,40 +18,40 @@ public class RefereeRepoMessage extends Message {
 
 
     /**
-     * Log changes in contestant (operation requested by Referee)
+     * Log changes in contestant
      */
     public static final int REFEREELOG = 1;
 
 
     /**
-     * Update game number (operation requested by Referee)
+     * Update game number
      */
     public static final int UPDATEGAMENR = 2;
 
     /**
-     * Log changes in contestant (operation requested by Referee)
+     * Log changes in contestant
      */
     public static final int UPDATEROPECENTER = 3;
 
     /**
-     * Print match results (operation requested by Referee)
+     * Print match results
      */
     public static final int PRINTMATCHRESULT = 4;
 
     /**
-     * Print match results (operation requested by Referee)
+     * Print match results
      */
     public static final int ADDHEADER = 5;
 
 
     /**
-     * Print match results (operation requested by Referee)
+     * Print match results
      */
     public static final int SETRESULT = 6;
 
 
     /**
-     * terminate message
+     * terminate execution
      */
     public static final int TERMINATE = 7;
 
@@ -87,21 +89,21 @@ public class RefereeRepoMessage extends Message {
 
 
     /**
-     * id of the team winner
+     * how was the trial winner decided
      */
     private int wonType = -1;
 
 
 
     /**
-     * id of the team winner
+     * number of trials
      */
     private int n_trials = -1;
 
 
 
     /**
-     * id of the team winner
+     * team id
      */
     private int team_id = -1;
 
@@ -137,6 +139,12 @@ public class RefereeRepoMessage extends Message {
         this.arg3 = arg3;
     }
 
+    /**
+     * Messages Instantiation
+     * @param type message type
+     * @param state referee state
+     * @param trialNr trial number
+     */
     public RefereeRepoMessage(int type,RefState state,int trialNr ){
         super(type);
         this.arg2 = state;
@@ -159,9 +167,9 @@ public class RefereeRepoMessage extends Message {
      * Messages Instantiation.
      *
      * @param type message type
-     * @param team_idOrWinner referee's trial number
-     * @param wonTypeOrScore1 referee's trial number
-     * @param n_trialsOrScore2 referee's state
+     * @param team_idOrWinner team id or winner
+     * @param wonTypeOrScore1 won type or score of team 1
+     * @param n_trialsOrScore2 number of trials or score of team 2
      */
     public RefereeRepoMessage(int type, int team_idOrWinner, int wonTypeOrScore1, int n_trialsOrScore2) {
         super(type);

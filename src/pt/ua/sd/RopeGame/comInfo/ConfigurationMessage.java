@@ -1,5 +1,10 @@
 package pt.ua.sd.RopeGame.comInfo;
 
+/**
+ * Configuration Message class
+ *
+ * Specifies the messages supported for configuration communication
+ */
 public class ConfigurationMessage extends Message {
 
 
@@ -12,70 +17,145 @@ public class ConfigurationMessage extends Message {
     /* Messages types */
 
     /**
-     * obter dados do repositorio-pedido
+     * get repository
      */
     public static final int GETREP=1;
 
     /**
-     * obter dados do repositorio-resposta
+     * get repository answer
      */
     public static final int GETREP_ANSWER=2;
 
+    /**
+     * get referee site
+     */
     public static final int GETREF_SITE=3;
 
+    /**
+     * get referee site answer
+     */
     public static final int GETREF_SITE_ANSWER=4;
 
+    /**
+     * get bench
+     */
     public static final int GETBENCH=5;
 
+    /**
+     * get bench answer
+     */
     public static final int GETBENCH_ANSWER=6;
 
+    /**
+     * get playground
+     */
     public static final int GETPLAYGROUND=7;
 
+    /**
+     * get playground answer
+     */
     public static final int GETPLAYGROUND_ANSWER=8;
 
+    /**
+     * get repository domain
+     */
     public static final int GETREP_DOM=9;
 
+    /**
+     * get repository domain answer
+     */
     public static final int GETREP_ANS_DOM=10;
 
+    /**
+     * get referee site domain
+     */
     public static final int GETREF_SITE_DOM=11;
 
+    /**
+     * get referee site domain answer
+     */
     public static final int GETREF_SITE_ANS_DOM=12;
 
+    /**
+     * get bench domain
+     */
     public static final int GETBENCH_DOM=13;
 
+    /**
+     * get bench domain answer
+     */
     public static final int GETBENCH_ANS_DOM=14;
 
+    /**
+     * get playground domain
+     */
     public static final int GETPLAYG_DOM=15;
 
+    /**
+     * get playground domain answer
+     */
     public static final int GETPLAYG_ANS_DOM=16;
 
+    /**
+     * get number of players
+     */
     public static final int GET_NPLAYERS=17;
 
+    /**
+     * get number of players answer
+     */
     public static final int GET_NPLAYERS_ANS=18;
 
+    /**
+     * get number of trials
+     */
     public static final int GET_NTRIALS=19;
 
+    /**
+     * get number of trials answer
+     */
     public static final int GET_NTRIALS_ANS=20;
 
+    /**
+     * get number of players pushing
+     */
     public static final int GET_NPLAYERS_PUSHING=21;
 
+    /**
+     * get number of players pushing answer
+     */
     public static final int GET_NPLAYERS_PUSHING_ANSWER=22;
 
+    /**
+     * get number of games
+     */
     public static final int GET_NGAMES=27;
 
+    /**
+     * get number of games answers
+     */
     public static final int GET_NGAMES_ANS=28;
 
+    /**
+     * get knockout differential
+     */
     public static final int GET_KNOCK_DIF=23;
 
+    /**
+     * get knockout differential answer
+     */
     public static final int GET_KNOCK_DIF_ANS=24;
 
+    /**
+     * get log file name
+     */
     public static final int GET_LOG_FILE_NAME=25;
 
+    /**
+     * get log file name answer
+     */
     public static final int GET_LOG_FILE_NAME_ANS=26;
 
-   // public static final int GET_REF_SITE = 29;
-
-    //public static final int GET_REF_SITE_ANS=30;
 
     /**
      * Get referee site
@@ -162,6 +242,11 @@ public class ConfigurationMessage extends Message {
             this.arg1 = arg;
     }
 
+    /**
+     * Messages instantiation (log file).
+     * @param type message type
+     * @param arg log file name
+     */
     public ConfigurationMessage(int type, String arg){
         super(type);
         this.logFileName=arg;

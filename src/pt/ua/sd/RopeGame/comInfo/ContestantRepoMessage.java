@@ -4,7 +4,9 @@ import pt.ua.sd.RopeGame.active_entities.contestantSide.Contestant;
 import pt.ua.sd.RopeGame.enums.ContestantState;
 
 /**
- * Created by ivosilva on 23/04/16.
+ * Contestant Repository message
+ *
+ * Specifies messages for contestant and repository communication
  */
 public class ContestantRepoMessage extends Message{
 
@@ -26,6 +28,9 @@ public class ContestantRepoMessage extends Message{
      */
     public static final int UPDATEROPECENTER = 2;
 
+    /**
+     * terminate execution
+     */
     public static final int TERMINATE =3;
 
     /**

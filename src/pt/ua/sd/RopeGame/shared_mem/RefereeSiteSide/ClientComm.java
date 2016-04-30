@@ -115,11 +115,9 @@ public class ClientComm {
             return (true);
         }
 
-        /**
-         *  Fecho do canal de comunicação.
-         *  Fecho dos streams de entrada e de saída do socket.
-         *  Fecho do socket de comunicação.
-         */
+    /**
+     *  close communication channels
+     */
 
         public void close (){
             try{

@@ -3,7 +3,7 @@ package pt.ua.sd.RopeGame.comInfo;
 import pt.ua.sd.RopeGame.enums.CoachState;
 
 /**
- * Created by ivosilva on 23/04/16.
+ * Message spec between coaches and repo
  */
 public class CoachRepoMessage extends Message{
     /**
@@ -14,10 +14,13 @@ public class CoachRepoMessage extends Message{
 
 
     /**
-     * Log changes in coach (operation requested by Coach)
+     * Log changes in coach
      */
     public static final int COACHLOG = 1;
 
+    /**
+     * terminate execution
+     */
     public static final int TERMINATE =2;
 
 

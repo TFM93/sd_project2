@@ -1,10 +1,14 @@
 package pt.ua.sd.RopeGame.comInfo;
 
 /**
- * Created by tiagomagalhaes on 21/04/16.
+ * Message spec between coaches and referee site
  */
 public class CoachRefSiteMessage extends Message {
 
+    /**
+     * Message init
+     * @param type message type
+     */
     public CoachRefSiteMessage(int type){
         super(type);
     }

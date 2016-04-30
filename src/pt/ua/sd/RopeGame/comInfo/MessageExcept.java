@@ -1,19 +1,19 @@
 package pt.ua.sd.RopeGame.comInfo;
 
 /**
- * Define uma excepção lançada quando uma mensagem não é válida
+ * Defines the thrown exception when the message is not valid
  */
 public class MessageExcept extends Exception {
     /**
-     * Mensagem inválida
+     * invalid message
      */
     private Message msg;
 
 
     /**
-     * Instância de mensagem inválida
-     * @param errorMsg texto que identifica a condição de erro
-     * @param msg mensagem que origina a excepção
+     * Message init
+     * @param errorMsg text identifying the error
+     * @param msg message that originates the exception
      */
     public MessageExcept(String errorMsg, Message msg)
     {
@@ -22,8 +22,8 @@ public class MessageExcept extends Exception {
     }
 
     /**
-     * obter mensagem invalida
-     * @return mensagem inválida
+     * get intvalid message
+     * @return invalid message
      */
     public Message getMsgVal()
     {

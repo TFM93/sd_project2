@@ -3,7 +3,9 @@ package pt.ua.sd.RopeGame.comInfo;
 import pt.ua.sd.RopeGame.structures.GameStat;
 
 /**
- * Created by tiagomagalhaes on 21/04/16.
+ * Referee RefSite message
+ *
+ * Specifies messages for referee and referee site communication
  */
 public class RefereeRefSiteMessage extends Message {
 
@@ -17,22 +19,22 @@ public class RefereeRefSiteMessage extends Message {
     public static final long serialVersionUID = 200416L;
 
     /**
-     * announce new game, enviado pelo refereee
+     * announce new game
      */
     public static final int ANG = 1;
 
     /**
-     * declare game winner, enviado pelo refereee
+     * declare game winner
      */
     public static final int DGW = 2;
 
     /**
-     * get number of games played, enviado pelo refereee
+     * get number of games played
      */
     public static final int GNGP = 3;
 
     /**
-     * terminate message, enviado pelo referee
+     * terminate execution
      */
     public static final int TERMINATE = 4;
 
@@ -44,12 +46,12 @@ public class RefereeRefSiteMessage extends Message {
 
 
     /**
-     * get number of games played
+     * get number of games played answer
      */
     public static final int GNGP_ANS = 6;
 
     /**
-     * get number of games played
+     * get number of games played answer
      */
     public static final int ANG_ANS = 7;
 
@@ -66,20 +68,42 @@ public class RefereeRefSiteMessage extends Message {
     private GameStat stat=null;
     private int n_games_played=-1;
 
+    /**
+     * Message init
+     * @param type message type
+     */
     public RefereeRefSiteMessage(int type){
         super(type);
     }
 
+    /**
+     * Message init
+     * @param type message type
+     * @param stat game stats
+     */
     public RefereeRefSiteMessage(int type, GameStat stat){
         super(type);
         this.stat = stat;
     }
 
+    /**
+     * Message init
+     * @param type message type
+     * @param n_games_played number of games played
+     */
     public RefereeRefSiteMessage(int type, int n_games_played){
         super(type);
         this.n_games_played = n_games_played;
     }
 
+    /**
+     * Message init
+     * @param type message type
+     * @param score_T1 score of team 1
+     * @param score_T2 score of team 2
+     * @param knock_out knockout differential
+     * @param n_games number of games
+     */
     public RefereeRefSiteMessage(int type, int score_T1, int score_T2, int knock_out, int n_games){
         super(type);
         this.score_T1=score_T1;

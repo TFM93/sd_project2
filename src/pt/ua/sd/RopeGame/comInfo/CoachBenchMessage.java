@@ -1,7 +1,7 @@
 package pt.ua.sd.RopeGame.comInfo;
 
 /**
- * Created by tiagomagalhaes on 21/04/16.
+ * Message spec between coaches and bench
  */
 public class CoachBenchMessage extends Message{
 
@@ -14,27 +14,27 @@ public class CoachBenchMessage extends Message{
 
 
     /**
-     * call contestants, enviado pelo coach
+     * call contestants
      */
     public static final int CALLCONTESTANTS = 1;
 
     /**
-     * inform referee, enviado pelo coach
+     * inform referee
      */
     public static final int INFORMREF = 2;
 
     /**
-     * inform referee, enviado pelo coach
+     * terminate execution
      */
     public static final int TERMINATE = 3;
 
     /**
-     * call contestants, enviado pelo coach
+     * call contestants answer
      */
     public static final int CALLCONTESTANTS_ANS = 4;
 
     /**
-     * inform referee, enviado pelo coach
+     * inform referee answer
      */
     public static final int INFORMREF_ANS = 5;
 
@@ -52,19 +52,19 @@ public class CoachBenchMessage extends Message{
     private boolean match_not_ended = true;
 
     /**
-     * Inicializacao da mensagem
-     * @param type tipo de mensagem
+     * Message init
+     * @param type message type
      */
     public CoachBenchMessage(int type){
         super(type);
     }
 
     /**
-     * Inicializacao da mensagem
-     * @param type
-     * @param team_id
-     * @param selected_contestants
-     * @param n_players
+     * Message init
+     * @param type message type
+     * @param team_id team id
+     * @param selected_contestants selected contestants
+     * @param n_players number of players
      */
     public  CoachBenchMessage(int type, int team_id, int[] selected_contestants, int n_players){
         super(type);
@@ -74,9 +74,9 @@ public class CoachBenchMessage extends Message{
     }
 
     /**
-     * Inicializacao da mensagem
-     * @param type
-     * @param match_not_ended
+     * Message init
+     * @param type message type
+     * @param match_not_ended match not ended
      */
     public  CoachBenchMessage(int type, boolean match_not_ended){
         super(type);
