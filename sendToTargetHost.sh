@@ -39,11 +39,7 @@ do
 done < $confFile
 
 
-# Start Configuration Server
-printf "Sending configuration file to Configuration Server...\n"
-sshpass -p $password scp $confFile $username@$configurationHostName:/home/$username &> /dev/null
-
-printf "\nClosing active servers ...\n"
+printf "\nClosing active RopeGame servers ...\n"
 {
 sshpass -p $password ssh $username@$configurationHostName killall -u sd0203
 sshpass -p $password ssh $username@$repositoryHostName killall -u sd0203
@@ -55,28 +51,27 @@ sshpass -p $password ssh $username@$coachHostName killall -u sd0203
 sshpass -p $password ssh $username@$contestantHostName killall -u sd0203
 } &> /dev/null
 
-printf "\nStarting Configuration Server ($configurationHostName, $configurationPortNum) ...\n"
+printf "\nSending Program to Configuration Host ($configurationHostName, $configurationPortNum) ...\n"
 sshpass -p $password scp jars/configuration.jar $username@$configurationHostName:/home/sd0203/jars/
 sleep 2
 
-printf "\nStarting Repository Server ($repositoryHostName, $repositoryPortNum) ...\n"
+printf "\nSending Program to Repository Host ($repositoryHostName, $repositoryPortNum) ...\n"
 sshpass -p $password scp jars/repository.jar $username@$repositoryHostName:/home/sd0203/jars/
 sleep 2
 
-printf "\nStarting RefereeSite Server ($refSiteHostName, $refSitePortNum) ...\n"
+printf "\nSending Program to RefereeSite Host ($refSiteHostName, $refSitePortNum) ...\n"
 sshpass -p $password scp jars/refSite.jar $username@$refSiteHostName:/home/sd0203/jars/
-
 sleep 2
 
-printf "\nStarting Bench Server ($benchHostName, $benchPortNum) ...\n"
+printf "\nSending Program to Bench Host ($benchHostName, $benchPortNum) ...\n"
 sshpass -p $password scp jars/bench.jar $username@$benchHostName:/home/sd0203/jars/
 sleep 2
 
-printf "\nStarting PlayGround Server ($playgHostName, $playgPortNum) ...\n"
+printf "\nSending Program to PlayGround Host ($playgHostName, $playgPortNum) ...\n"
 sshpass -p $password scp jars/playg.jar $username@$playgHostName:/home/sd0203/jars/
 sleep 2
 
-printf "\nStarting Referee Client ($refereeHostName) ...\n"
+printf "\nSending Program to Referee Host ($refereeHostName) ...\n"
 sshpass -p $password scp jars/referee.jar $username@$refereeHostName:/home/sd0203/jars/
 sleep 2
 
