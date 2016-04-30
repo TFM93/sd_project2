@@ -73,19 +73,16 @@ import pt.ua.sd.RopeGame.enums.CoachState;
                             team_selected_contestants[i] = i;
                         }
                     }
-                    System.out.println("Coach is calling contestants... team id: " + this.team_id);
                     match_not_over = this.contestants_bench.callContestants(this.team_id,this.team_selected_contestants, n_players);
                     state = CoachState.ASSEMBLE_TEAM;//change state
                     repo.coachLog(this.team_id, state);//update central info repository
                     break;
                 case ASSEMBLE_TEAM:
-                    System.out.println("Coach is informing referee... team id: " + this.team_id);
                     this.contestants_bench.informReferee();
                     state = CoachState.WATCH_TRIAL;
                     repo.coachLog(this.team_id, state);//update central info repository
                     break;
                 case WATCH_TRIAL:
-                    System.out.println("Coach is reviewing notes... team id: " + this.team_id);
                     this.team_selected_contestants = this.playground.reviewNotes(this.team_selected_contestants, n_players, n_players_pushing);
                     state = CoachState.WAIT_FOR_REFEREE_COMMAND;
                     repo.coachLog(this.team_id, state);//update central info repository

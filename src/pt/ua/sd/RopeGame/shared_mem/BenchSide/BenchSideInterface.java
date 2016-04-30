@@ -98,21 +98,17 @@ class BenchSideInterface {
         /*  process and reply to the messages  */
         switch (inMessage.getMsgType()) {
             case CoachBenchMessage.CALLCONTESTANTS:
-                System.out.println("Call contestants message received");
                 boolean match_not_ended = bench.callContestants(inMessage.getTeam_id(),
                         inMessage.getSelected_contestants(), inMessage.getN_players());
-                System.out.println("sending match not ended flag with value " + match_not_ended);
                 outMessage = new CoachBenchMessage(CoachBenchMessage.CALLCONTESTANTS_ANS, match_not_ended);
                 break;
             case CoachBenchMessage.INFORMREF:
-                System.out.println("Inform referee message received");
                 bench.informReferee();
                 outMessage = new CoachBenchMessage(CoachBenchMessage.INFORMREF_ANS);
                 break;
             case CoachBenchMessage.TERMINATE:
                 n_terminates++;
                 if (n_terminates == n_terminates_to_end) {
-                    System.out.println("Bench terminated!");
                     System.exit(0);
                 }
                 break;
@@ -135,7 +131,6 @@ class BenchSideInterface {
         /*  validate incoming messages  */
         switch (inMessage.getMsgType()) {
             case ContestantBenchMessage.FOLLOW_COACH_ADVICE:
-                System.out.println("follow coach advice received");
                 if (inMessage.getTeam_id() < 0) {
                     throw new MessageExcept ("Invalid team id!", inMessage);
                 }
@@ -153,7 +148,6 @@ class BenchSideInterface {
                 }
                 break;
             case ContestantBenchMessage.GETREADY:
-                System.out.println("get ready received");
                 if (inMessage.getN_players_pushing() < 0 && inMessage.getN_players_pushing()>inMessage.getN_players()) {
                     throw new MessageExcept ("Invalid number of players pushing! " + inMessage.getN_players_pushing(), inMessage);
                 }
@@ -204,10 +198,8 @@ class BenchSideInterface {
         /*  validate incoming messages  */
         switch (inMessage.getMsgType()) {
             case RefereeBenchMessage.CALLTR:
-                System.out.println("call trial received");
                 break;
             case RefereeBenchMessage.STARTTR:
-                System.out.println("start trial received");
                 break;
             case RefereeBenchMessage.DECLAREMATCHWIN:
                 if(inMessage.getGames1() < 0){

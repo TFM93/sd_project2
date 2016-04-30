@@ -75,10 +75,10 @@ printf "\nSending Program to Referee Host ($refereeHostName) ...\n"
 sshpass -p $password scp jars/referee.jar $username@$refereeHostName:/home/sd0203
 sleep 2
 
-printf "\nStarting Coach Client ($coachHostName) ...\n"
+printf "\nSending Program to Coach Host ($coachHostName) ...\n"
 sshpass -p $password scp jars/coach.jar $username@$coachHostName:/home/sd0203
 sleep 2
 
-printf "\nStarting Contestant Client ($contestantHostName) ...\n"
+printf "\nSending Program to Contestant Host ($contestantHostName) ...\n"
 sshpass -p $password scp jars/contestant.jar $username@$contestantHostName:/home/sd0203
 sleep 2

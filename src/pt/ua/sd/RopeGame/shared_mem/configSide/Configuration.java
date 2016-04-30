@@ -167,9 +167,7 @@ public class Configuration {
         this.contestantHostName = properties.getProperty("CONTESTANT_HOST_NAME");
 
         this.nPlayers = Integer.parseInt(properties.getProperty("N_PLAYERS_TEAM"));
-        System.out.println("nPlayers " +this.nPlayers);
         this.nPlayersPushing = Integer.parseInt(properties.getProperty("N_PLAYERS_PUSHING"));
-        System.out.println("nPlayers pushing " + this.nPlayersPushing);
         this.nTrials = Integer.parseInt(properties.getProperty("N_TRIALS"));
         this.nGames = Integer.parseInt(properties.getProperty("N_GAMES"));
         this.knockDif = Integer.parseInt(properties.getProperty("KNOCKOUT_DIF"));

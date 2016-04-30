@@ -304,6 +304,7 @@ import java.util.Arrays;
                     for (int i = 0; i < players_pushing; i++){
                         if (contestants_team1[i] == -1){
                             contestants_team1[i] = id;
+                            break;
                         }
                     }
 
@@ -316,6 +317,7 @@ import java.util.Arrays;
                     for (int i = 0; i < players_pushing; i++){
                         if (contestants_team2[i] == -1){
                             contestants_team2[i] = id;
+                            break;
                         }
                     }
                 }
