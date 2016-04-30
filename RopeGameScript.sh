@@ -39,11 +39,7 @@ do
 done < $confFile
 
 
-# Start Configuration Server
-printf "Sending configuration file to Configuration Server...\n"
-sshpass -p $password scp $confFile $username@$configurationHostName:/home/$username &> /dev/null
-
-printf "\nClosing active servers ...\n"
+printf "\nClosing all active servers and clients ...\n"
 {
 sshpass -p $password ssh $username@$configurationHostName killall -u sd0203
 sshpass -p $password ssh $username@$repositoryHostName killall -u sd0203
@@ -55,34 +51,41 @@ sshpass -p $password ssh $username@$coachHostName killall -u sd0203
 sshpass -p $password ssh $username@$contestantHostName killall -u sd0203
 } &> /dev/null
 
-printf "\nStarting Configuration Server ($configurationHostName, $configurationPortNum) ...\n"
+
+
+
+printf "Sending configuration file to Configuration Host...\n"
+sshpass -p $password scp $confFile $username@$configurationHostName:/home/$username &> /dev/null
+sleep 2
+
+printf "\nStarting Configuration Server at($configurationHostName, $configurationPortNum) ...\n"
 sshpass -p $password ssh -f $username@$configurationHostName java -jar configuration.jar $configurationPortNum $confFile
 sleep 2
 
-printf "\nStarting Repository Server ($repositoryHostName, $repositoryPortNum) ...\n"
+printf "\nStarting Repository Server at($repositoryHostName, $repositoryPortNum) ...\n"
 sshpass -p $password ssh -f $username@$repositoryHostName java -jar repository.jar $configurationHostName $configurationPortNum
 sleep 2
 
-printf "\nStarting RefereeSite Server ($refSiteHostName, $refSitePortNum) ...\n"
+printf "\nStarting RefereeSite Server at($refSiteHostName, $refSitePortNum) ...\n"
 sshpass -p $password ssh -f $username@$refSiteHostName java -jar refSite.jar $configurationHostName $configurationPortNum
 sleep 2
 
-printf "\nStarting Bench Server ($benchHostName, $benchPortNum) ...\n"
+printf "\nStarting Bench Server at($benchHostName, $benchPortNum) ...\n"
 sshpass -p $password ssh -f $username@$benchHostName java -jar bench.jar $configurationHostName $configurationPortNum
 sleep 2
 
-printf "\nStarting PlayGround Server ($playgHostName, $playgPortNum) ...\n"
+printf "\nStarting PlayGround Server at($playgHostName, $playgPortNum) ...\n"
 sshpass -p $password ssh -f $username@$playgHostName java -jar playg.jar $configurationHostName $configurationPortNum
 sleep 2
 
-printf "\nStarting Referee Client ($refereeHostName) ...\n"
+printf "\nStarting Referee Client at($refereeHostName) ...\n"
 sshpass -p $password ssh -f $username@$refereeHostName java -jar referee.jar $configurationHostName $configurationPortNum
 sleep 2
 
-printf "\nStarting Coach Client ($coachHostName) ...\n"
+printf "\nStarting Coach Client at($coachHostName) ...\n"
 sshpass -p $password ssh -f $username@$coachHostName java -jar coach.jar $configurationHostName $configurationPortNum
 sleep 2
 
-printf "\nStarting Contestant Client ($contestantHostName) ...\n"
+printf "\nStarting Contestant Client at($contestantHostName) ...\n"
 sshpass -p $password ssh -f $username@$contestantHostName java -jar contestant.jar $configurationHostName $configurationPortNum
 sleep 2
