@@ -6,8 +6,6 @@ import java.io.Serializable;
  * This data type defines the messages that are switched between clients and servers.
  * The communication is based in the switch of Message objects in a TCP channel.
  *
- * @author Tiago Magalhães
- * @author Ivo Silva
  */
 public abstract class Message implements Serializable{
 
