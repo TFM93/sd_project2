@@ -3,6 +3,9 @@ package pt.ua.sd.RopeGame.active_entities.contestantSide;
 import java.io.*;
 import java.net.*;
 
+/**
+ * Client communication channel
+ */
 public class ClientComm {
 
 

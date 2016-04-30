@@ -5,19 +5,21 @@ import pt.ua.sd.RopeGame.interfaces.IContestantsBenchContestant;
 
 
 /**
- * Created by tiagomagalhaes on 25/04/16.
+ * Contestants' Bench Broker
+ *
+ * Sends the desired messages to the Bench
  */
 public class ContestantBenchBroker implements IContestantsBenchContestant {
 
 
     /**
-     * Machine hostname
+     * Host name
      * @serialfield hostName
      */
     private final String hostName;
 
     /**
-     * Machine port number
+     * Port number
      * @serialfield portNum
      */
     private final int portNum;
@@ -33,98 +35,97 @@ public class ContestantBenchBroker implements IContestantsBenchContestant {
     }
 
     /**
-     * Signals Bench server that Contestants will terminate.
+     * Send a terminate message to the playground
      */
     public void terminate() {
 
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ContestantBenchMessage inMessage;
         ContestantBenchMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message terminate to bench  */
         outMessage = new ContestantBenchMessage(ContestantBenchMessage.TERMINATE);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Close connection
+        /*  close the connection  */
         con.close();
     }
 
-
+    /**
+     * Send a follow coach advice to the bench
+     * @param contestant_id contestant's id
+     * @param strength contestant's strength
+     * @param team_id team id
+     * @param n_players number of players
+     * @param n_players_pushing number of players pushing
+     * @return advice followed
+     */
     @Override
     public boolean[] followCoachAdvice(int contestant_id, int strength, int team_id, int n_players, int n_players_pushing) {
 
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ContestantBenchMessage inMessage;
         ContestantBenchMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message follow coach advice to bench  */
         outMessage = new ContestantBenchMessage(ContestantBenchMessage.FOLLOW_COACH_ADVICE,contestant_id,strength,team_id,n_players,n_players_pushing);
-
-        // Send message
         con.writeObject(outMessage);
 
-
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ContestantBenchMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != ContestantBenchMessage.FOLLOW_COACH_ADVICE_ANS)) {
             System.out.println("Invalid message type at " + ContestantBenchBroker.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-
-        // Close connection
+        /*  close the connection  */
         con.close();
 
         return inMessage.getAdvice_followed();
     }
 
+    /**
+     * Send a get ready message to the bench
+     * @param n_players_pushing number of players pushing
+     */
     @Override
     public void getReady(int n_players_pushing) {
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ContestantBenchMessage inMessage;
         ContestantBenchMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message get ready to bench  */
         outMessage = new ContestantBenchMessage(ContestantBenchMessage.GETREADY,n_players_pushing);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ContestantBenchMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != ContestantBenchMessage.GETREADY_ANS)) {
             System.out.println("Invalid message type at " + ContestantBenchBroker.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-
-        // Close connection
+        /*  close the connection  */
         con.close();
     }
 }

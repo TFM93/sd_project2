@@ -3,18 +3,22 @@ package pt.ua.sd.RopeGame.active_entities.contestantSide;
 import pt.ua.sd.RopeGame.comInfo.ContestantPlaygroundMessage;
 import pt.ua.sd.RopeGame.interfaces.IPlaygroundContestant;
 
-
+/**
+ * Contestants' Playground Broker
+ *
+ * Sends the desired messages to the Repo
+ */
 public class ContestantPlaygroundBroker implements IPlaygroundContestant {
 
 
     /**
-     * Machine hostname
+     * Host name
      * @serialfield hostName
      */
     private final String hostName;
 
     /**
-     * Machine port number
+     * Port number
      * @serialfield portNum
      */
     private final int portNum;
@@ -31,123 +35,125 @@ public class ContestantPlaygroundBroker implements IPlaygroundContestant {
 
 
     /**
-     * Signals Playground server that Contestant will terminate.
+     * Send a terminate message to the playground
      */
     public void terminate() {
 
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ContestantPlaygroundMessage inMessage;
         ContestantPlaygroundMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message terminate to playground  */
         outMessage = new ContestantPlaygroundMessage(ContestantPlaygroundMessage.TERMINATE);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Close connection
+        /*  close the connection  */
         con.close();
     }
 
+    /**
+     * Send a pull the rope message to the playground
+     * @param team_id team id
+     * @param strenght contestant's strength
+     * @param contestant_id contestant's id
+     * @param n_players_pushing number of players pushing
+     * @param n_players number of players
+     */
     @Override
     public void pullTheRope(int team_id, int strenght, int contestant_id, int n_players_pushing, int n_players) {
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ContestantPlaygroundMessage inMessage;
         ContestantPlaygroundMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message pull the rope to playground  */
         outMessage = new ContestantPlaygroundMessage(ContestantPlaygroundMessage.PULLROPE,team_id,strenght,contestant_id,n_players_pushing,n_players);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ContestantPlaygroundMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != ContestantPlaygroundMessage.PULLROPE_ANS)) {
             System.out.println("Invalid message type at " + this.getClass().getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
     }
 
+    /**
+     * Send a i Am Done message to the playground
+     * @param n_players_pushing number of players pushing
+     */
     @Override
     public void iAmDone(int n_players_pushing) {
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ContestantPlaygroundMessage inMessage;
         ContestantPlaygroundMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message i am done to playground  */
         outMessage = new ContestantPlaygroundMessage(ContestantPlaygroundMessage.AMDONE,n_players_pushing);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ContestantPlaygroundMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != ContestantPlaygroundMessage.AMDONE_ANS)) {
             System.out.println("Invalid message type at " + this.getClass().getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
     }
 
+    /**
+     * Send a seat down message to the playground
+     * @param n_players_pushing number of players pushing
+     */
     @Override
     public void seatDown(int n_players_pushing) {
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ContestantPlaygroundMessage inMessage;
         ContestantPlaygroundMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message seat down to playground  */
         outMessage = new ContestantPlaygroundMessage(ContestantPlaygroundMessage.SEATDOWN,n_players_pushing);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ContestantPlaygroundMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != ContestantPlaygroundMessage.SEATDOWN_ANS)) {
             System.out.println("Invalid message type at " + this.getClass().getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
     }
 }

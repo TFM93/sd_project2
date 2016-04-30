@@ -4,10 +4,7 @@ import java.io.*;
 import java.net.*;
 
 /**
- * Este tipo de dados implementa o canal de comunicação, lado do servidor, para
- * uma comunicação baseada em passagem de mensagens sobre sockets usando o
- * protocolo TCP. A transferência de dados é baseada em objectos, um objecto de
- * cada vez.
+ * Server communication channel
  */
 public class ServerComChannel {
 

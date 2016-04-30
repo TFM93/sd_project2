@@ -6,10 +6,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Este tipo de dados define a informação requesitada pelas várias entidades nas respectivas inicializações
+ * Defines data requested by the different entities
  *
- * @author Ivo Silva
- * @author Tiago Magalhães
  */
 public class Configuration {
 
@@ -111,7 +109,7 @@ public class Configuration {
     private int nGames;
 
     /**
-     * Knockout, max rope dealocation
+     * Knockout differential
      *
      * @serialField knockDif
      */
@@ -133,7 +131,7 @@ public class Configuration {
     private String logFileName;
 
     /**
-     * Configuration Instantiation.
+     * Configuration constructor method
      *
      * @param configurationFile configuration file
      * @throws IOException error reading the configuration file

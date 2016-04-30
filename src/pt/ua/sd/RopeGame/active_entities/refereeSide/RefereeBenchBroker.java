@@ -4,19 +4,21 @@ import pt.ua.sd.RopeGame.comInfo.RefereeBenchMessage;
 import pt.ua.sd.RopeGame.interfaces.IContestantsBenchReferee;
 
 /**
- * Created by ivosilva on 25/04/16.
+ * Referee's Bench Broker
+ *
+ * Sends the desired messages to the Bnech
  */
 public class RefereeBenchBroker implements IContestantsBenchReferee {
 
 
     /**
-     * Machine hostname
+     * Host name
      * @serialfield hostName
      */
     private final String hostName;
 
     /**
-     * Machine port number
+     * Port number
      * @serialfield portNum
      */
     private final int portNum;
@@ -32,104 +34,103 @@ public class RefereeBenchBroker implements IContestantsBenchReferee {
     }
 
 
-
+    /**
+     * Send call trial message to Bench
+     */
     @Override
     public void callTrial() {
 
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         RefereeBenchMessage inMessage;
         RefereeBenchMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message call trial to bench  */
         outMessage = new RefereeBenchMessage(RefereeBenchMessage.CALLTR);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (RefereeBenchMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != RefereeBenchMessage.CALLTR_ANS)) {
             System.out.println("Invalid message type at " + this.getClass().getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
 
     }
 
+    /**
+     * Send start trial message to Bench
+     */
     @Override
     public void startTrial() {
 
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         RefereeBenchMessage inMessage;
         RefereeBenchMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message start trial to bench  */
         outMessage = new RefereeBenchMessage(RefereeBenchMessage.STARTTR);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (RefereeBenchMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != RefereeBenchMessage.STARTTR_ANS)) {
             System.out.println("Invalid message type at " + this.getClass().getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
 
     }
 
+    /**
+     * Send declare match winner message to Bench
+     * @param games1 games won by team 1
+     * @param games2 games won by team 2
+     * @return match_winner
+     */
     @Override
     public int declareMatchWinner(int games1, int games2) {
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         RefereeBenchMessage inMessage;
         RefereeBenchMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message declare match winner to bench  */
         outMessage = new RefereeBenchMessage(RefereeBenchMessage.DECLAREMATCHWIN, games1, games2);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (RefereeBenchMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != RefereeBenchMessage.DECLAREMATCHWIN_ANS)) {
             System.out.println("Invalid message type at " + this.getClass().getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
 
         int match_winner = inMessage.getWinner();
@@ -137,27 +138,25 @@ public class RefereeBenchBroker implements IContestantsBenchReferee {
     }
 
     /**
-     * Signals Bench server that Referee will terminate.
+     * Send a terminate message to the Bench
      */
     public void terminate() {
 
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         RefereeBenchMessage inMessage;
         RefereeBenchMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message terminate to bench  */
         outMessage = new RefereeBenchMessage(RefereeBenchMessage.TERMINATE);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Close connection
+        /*  close the connection  */
         con.close();
     }
 }

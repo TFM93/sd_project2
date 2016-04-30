@@ -6,24 +6,26 @@ import pt.ua.sd.RopeGame.enums.CoachState;
 import pt.ua.sd.RopeGame.interfaces.IRepoCoach;
 
 /**
- * Created by ivosilva on 25/04/16.
+ * Coaches' Central Information Repository Broker
+ *
+ * Sends the desired messages to the Central Information Repository
  */
 public class CoachRepoBroker implements IRepoCoach {
 
     /**
-     * Machine hostname
+     * Host name
      * @serialfield hostName
      */
     private final String hostName;
 
     /**
-     * Machine port number
+     * Port number
      * @serialfield portNum
      */
     private final int portNum;
 
     /**
-     * Repo Broker for coach
+     * Repository Broker for coach
      * @param hostName host name
      * @param portNum port number
      */
@@ -32,60 +34,58 @@ public class CoachRepoBroker implements IRepoCoach {
         this.portNum = portNum;
     }
 
+    /**
+     * Send a coach log message to the repository
+     * @param team_id team id of the coach
+     * @param state state of the coach
+     */
     @Override
     public void coachLog(int team_id, CoachState state) {
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         CoachRepoMessage inMessage;
         CoachRepoMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message to get repository configuration  */
         outMessage = new CoachRepoMessage(CoachRepoMessage.COACHLOG, team_id, state.ordinal());
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (CoachRepoMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != CoachRepoMessage.ACK)) {
             System.out.println("Invalid message type at " + this.getClass().getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
     }
 
     /**
-     * Signals Repo server that Referee will terminate.
+     * Send a terminate message to the repository
      */
     public void terminate() {
-
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         CoachRepoMessage inMessage;
         CoachRepoMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message to get repository configuration  */
         outMessage = new CoachRepoMessage(CoachRepoMessage.TERMINATE);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Close connection
+        /*  close the connection  */
         con.close();
     }
 }

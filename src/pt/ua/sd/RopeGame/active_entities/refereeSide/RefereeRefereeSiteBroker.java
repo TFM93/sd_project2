@@ -5,18 +5,20 @@ import pt.ua.sd.RopeGame.interfaces.IRefereeSiteReferee;
 import pt.ua.sd.RopeGame.structures.GameStat;
 
 /**
- * Created by ivosilva on 25/04/16.
+ * Referee's Referee Site Broker
+ *
+ * Sends the desired messages to the Referee Site
  */
 public class RefereeRefereeSiteBroker implements IRefereeSiteReferee {
 
     /**
-     * Machine hostname
+     * Host name
      * @serialfield hostName
      */
     private final String hostName;
 
     /**
-     * Machine port number
+     * Port number
      * @serialfield portNum
      */
     private final int portNum;
@@ -31,102 +33,105 @@ public class RefereeRefereeSiteBroker implements IRefereeSiteReferee {
         this.portNum = portNum;
     }
 
+    /**
+     * Send message announce new game to referee site
+     */
     @Override
     public void announceNewGame() {
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         RefereeRefSiteMessage inMessage;
         RefereeRefSiteMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message announce new game to referee site  */
         outMessage = new RefereeRefSiteMessage(RefereeRefSiteMessage.ANG);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (RefereeRefSiteMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != RefereeRefSiteMessage.ANG_ANS)) {
             System.out.println("Invalid message type at " + this.getClass().getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
     }
 
+    /**
+     * Send message declare game winner to referee site
+     * @param score_T1 team 1 score
+     * @param score_T2 team 2 score
+     * @param knock_out knockout differential
+     * @param n_games number of games
+     * @return game's stats
+     */
     @Override
     public GameStat declareGameWinner(int score_T1, int score_T2, int knock_out, int n_games) {
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         RefereeRefSiteMessage inMessage;
         RefereeRefSiteMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message declare game winner to referee site  */
         outMessage = new RefereeRefSiteMessage(RefereeRefSiteMessage.DGW, score_T1, score_T2, knock_out, n_games);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (RefereeRefSiteMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != RefereeRefSiteMessage.DGW_ANS)) {
             System.out.println("Invalid message type at " + this.getClass().getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
 
         GameStat stats = inMessage.getStat();
         return stats;
     }
 
+    /**
+     * Send message get number of games played to referee site
+     * @return number of games played
+     */
     @Override
     public int getN_games_played() {
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         RefereeRefSiteMessage inMessage;
         RefereeRefSiteMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message get number of games played to referee site  */
         outMessage = new RefereeRefSiteMessage(RefereeRefSiteMessage.GNGP);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (RefereeRefSiteMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != RefereeRefSiteMessage.GNGP_ANS)) {
             System.out.println("Invalid message type at " + this.getClass().getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
 
         int n_games_played = inMessage.getN_games_played();
@@ -134,27 +139,25 @@ public class RefereeRefereeSiteBroker implements IRefereeSiteReferee {
     }
 
     /**
-     * Signals Referee Site server that Referee will terminate.
+     * Send a terminate message to the referee site
      */
     public void terminate() {
 
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         RefereeRefSiteMessage inMessage;
         RefereeRefSiteMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message terminate to referee site  */
         outMessage = new RefereeRefSiteMessage(RefereeRefSiteMessage.TERMINATE);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Close connection
+        /*  close the connection  */
         con.close();
     }
 }

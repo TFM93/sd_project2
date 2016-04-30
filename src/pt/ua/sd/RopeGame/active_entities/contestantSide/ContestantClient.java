@@ -5,7 +5,9 @@ import pt.ua.sd.RopeGame.comInfo.ConfigurationMessage;
 import java.util.Random;
 
 /**
- * Created by tiagomagalhaes on 25/04/16.
+ * Contestant client class
+ *
+ * Instantiates a contestant client
  */
 public class ContestantClient {
 
@@ -15,7 +17,7 @@ public class ContestantClient {
 
         // Get host name and port number of configuration server
         if (args.length < 2) {
-            System.out.println("Usage: java -jar contestant.jar <configuration host name> <configuration port number>");
+            System.out.println("Usage: java -jar contestant.jar <host name> <port number>");
             System.exit(0);
         }
 
@@ -124,36 +126,32 @@ public class ContestantClient {
      */
     private static Domain getBenchConfiguration(String configurationServerHostname, int configurationServerPortnum) {
 
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ConfigurationMessage inMessage;
         ConfigurationMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send get bench message  */
         outMessage = new ConfigurationMessage(ConfigurationMessage.GETBENCH);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ConfigurationMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != ConfigurationMessage.GETBENCH_ANSWER)) {
             System.out.println("Invalid message type at " + ContestantClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
 
-        // Extract data from message
+        /*  get data from message  */
         Domain conf = new Domain(inMessage.getHostName(), inMessage.getPortNumb());
 
         return conf;
@@ -165,36 +163,32 @@ public class ContestantClient {
      * @return Playground server host name and port number
      */
     private static Domain getPlaygroundConfiguration(String configurationServerHostname, int configurationServerPortnum) {
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ConfigurationMessage inMessage;
         ConfigurationMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send get playground message  */
         outMessage = new ConfigurationMessage(ConfigurationMessage.GETPLAYGROUND);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ConfigurationMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != ConfigurationMessage.GETPLAYGROUND_ANSWER)) {
             System.out.println("Invalid message type at " + ContestantClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
 
-        // Extract data from message
+        /*  get data from message  */
         Domain conf = new Domain(inMessage.getHostName(), inMessage.getPortNumb());
 
         return conf;
@@ -205,36 +199,32 @@ public class ContestantClient {
      * @return ref site server host name and port number
      */
     private static Domain getRefereeSiteConfiguration(String configurationServerHostname, int configurationServerPortnum) {
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ConfigurationMessage inMessage;
         ConfigurationMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send get referee site message  */
         outMessage = new ConfigurationMessage(ConfigurationMessage.GETREF_SITE);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ConfigurationMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != ConfigurationMessage.GETREF_SITE_ANSWER)) {
             System.out.println("Invalid message type at " + ContestantClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
 
-        // Extract data from message
+        /*  get data from message  */
         Domain conf = new Domain(inMessage.getHostName(), inMessage.getPortNumb());
 
         return conf;
@@ -246,37 +236,32 @@ public class ContestantClient {
      * @return repo server host name and port number
      */
     private static Domain getRepoConfiguration(String configurationServerHostname, int configurationServerPortnum) {
-
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ConfigurationMessage inMessage;
         ConfigurationMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send get repo domain message  */
         outMessage = new ConfigurationMessage(ConfigurationMessage.GETREP_DOM);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ConfigurationMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != ConfigurationMessage.GETREP_ANS_DOM)) {
             System.out.println("Invalid message type at " + ContestantClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
 
-        // Extract data from message
+        /*  get data from message  */
         Domain conf = new Domain(inMessage.getHostName(), inMessage.getPortNumb());
 
         return conf;
@@ -288,37 +273,32 @@ public class ContestantClient {
      * @return number of players in team
      */
     private static int getNPlayersTeamConfiguration(String configurationServerHostname, int configurationServerPortnum) {
-
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ConfigurationMessage inMessage;
         ConfigurationMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send get number of players message  */
         outMessage = new ConfigurationMessage(ConfigurationMessage.GET_NPLAYERS);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ConfigurationMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != ConfigurationMessage.GET_NPLAYERS_ANS)) {
             System.out.println("Invalid message type at " + ContestantClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
 
-        // Extract data from message
+        /*  get data from message  */
         int n_players = inMessage.getArg1();
 
         return n_players;
@@ -330,36 +310,32 @@ public class ContestantClient {
      */
     private static int getNPlayersPushingConfiguration(String configurationServerHostname, int configurationServerPortnum) {
 
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ConfigurationMessage inMessage;
         ConfigurationMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send get number of players pushing message  */
         outMessage = new ConfigurationMessage(ConfigurationMessage.GET_NPLAYERS_PUSHING);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ConfigurationMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != ConfigurationMessage.GET_NPLAYERS_PUSHING_ANSWER)) {
             System.out.println("Invalid message type at " + ContestantClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
 
-        // Extract data from message
+        /*  get data from message  */
         int n_players_pushing = inMessage.getArg2();
 
         return n_players_pushing;
@@ -372,36 +348,32 @@ public class ContestantClient {
      */
     private static int getNGamesConfiguration(String configurationServerHostname, int configurationServerPortnum) {
 
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ConfigurationMessage inMessage;
         ConfigurationMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send get number of games message  */
         outMessage = new ConfigurationMessage(ConfigurationMessage.GET_NGAMES);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ConfigurationMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != ConfigurationMessage.GET_NGAMES_ANS)) {
             System.out.println("Invalid message type at " + ContestantClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
 
-        // Extract data from message
+        /*  get data from message  */
         int n_games = inMessage.getArg4();
 
         return n_games;
@@ -414,36 +386,32 @@ public class ContestantClient {
      */
     private static int getNTrialsConfiguration(String configurationServerHostname, int configurationServerPortnum) {
 
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ConfigurationMessage inMessage;
         ConfigurationMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send get number of trials message  */
         outMessage = new ConfigurationMessage(ConfigurationMessage.GET_NTRIALS);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ConfigurationMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != ConfigurationMessage.GET_NTRIALS_ANS)) {
             System.out.println("Invalid message type at " + ContestantClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
 
-        // Extract data from message
+        /*  get data from message  */
         int n_trials = inMessage.getArg3();
 
         return n_trials;
@@ -455,56 +423,35 @@ public class ContestantClient {
      */
     private static int getKnockoutDifConfiguration(String configurationServerHostname, int configurationServerPortnum) {
 
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (configurationServerHostname, configurationServerPortnum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ConfigurationMessage inMessage;
         ConfigurationMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send get knockout differential message  */
         outMessage = new ConfigurationMessage(ConfigurationMessage.GET_KNOCK_DIF);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ConfigurationMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != ConfigurationMessage.GET_KNOCK_DIF_ANS)) {
             System.out.println("Invalid message type at " + ContestantClient.class.getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
 
-        // Extract data from message
+        /*  get data from message  */
         int knock_dif = inMessage.getArg5();
 
         return knock_dif;
     }
 
-
-    /**
-     * This data type defines the Domain.
-     * It includes host name and port number
-     */
-    private static class Domain {
-
-        // Attributes
-        String hostName;
-        int portNumb;
-
-        // Constructor
-        public Domain(String hostName, int portNumb) {
-            this.hostName = hostName;
-            this.portNumb = portNumb;
-        }
-    }
 }

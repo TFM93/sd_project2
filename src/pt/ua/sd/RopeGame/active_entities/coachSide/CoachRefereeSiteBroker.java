@@ -4,17 +4,19 @@ import pt.ua.sd.RopeGame.comInfo.CoachRefSiteMessage;
 import pt.ua.sd.RopeGame.interfaces.IRefereeSiteCoach;
 
 /**
- * Created by ivosilva on 25/04/16.
+ * Coaches' Referee Site Broker
+ *
+ * Sends the desired messages to the Referee Site
  */
 public class CoachRefereeSiteBroker implements IRefereeSiteCoach {
     /**
-     * Machine hostname
+     * Host name
      * @serialfield hostName
      */
     private final String hostName;
 
     /**
-     * Machine port number
+     * Port number
      * @serialfield portNum
      */
     private final int portNum;

@@ -5,19 +5,21 @@ import pt.ua.sd.RopeGame.enums.ContestantState;
 import pt.ua.sd.RopeGame.interfaces.IRepoContestant;
 
 /**
- * Created by tiagomagalhaes on 25/04/16.
+ * Contestants' Repo Broker
+ *
+ * Sends the desired messages to the Repo
  */
 public class ContestantRepoBroker implements IRepoContestant{
 
 
     /**
-     * Machine hostname
+     * Host name
      * @serialfield hostName
      */
     private final String hostName;
 
     /**
-     * Machine port number
+     * Port number
      * @serialfield portNum
      */
     private final int portNum;
@@ -33,89 +35,92 @@ public class ContestantRepoBroker implements IRepoContestant{
     }
 
     /**
-     * Signals Repo server that Contestant will terminate.
+     * Send a terminate message to the repo
      */
     public void terminate() {
 
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ContestantRepoMessage inMessage;
         ContestantRepoMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message terminate to repo  */
         outMessage = new ContestantRepoMessage(ContestantRepoMessage.TERMINATE);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Close connection
+        /*  close the connection  */
         con.close();
     }
 
+    /**
+     * Send a contestant log message to the repo
+     * @param id contestant's id
+     * @param team_id team id
+     * @param strength contestant's strength
+     * @param state contestant's state
+     */
     @Override
     public void contestantLog(int id, int team_id, int strength, ContestantState state) {
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ContestantRepoMessage inMessage;
         ContestantRepoMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message contestant log to repo  */
         outMessage = new ContestantRepoMessage(ContestantRepoMessage.CONTESTANTLOG,id,team_id,strength,state.ordinal());
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ContestantRepoMessage) con.readObject();
-
         if ((inMessage.getMsgType() != ContestantRepoMessage.ACK)) {
             System.out.println("Invalid message type at " + this.getClass().getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
     }
 
+    /**
+     * Send an update rope center message to the repo
+     * @param new_val new rope center value
+     */
     @Override
     public void updtRopeCenter(int new_val) {
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         ContestantRepoMessage inMessage;
         ContestantRepoMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message update rope center to repo  */
         outMessage = new ContestantRepoMessage(ContestantRepoMessage.UPDATEROPECENTER,new_val);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (ContestantRepoMessage) con.readObject();
-
         if ((inMessage.getMsgType() != ContestantRepoMessage.ACK)) {
             System.out.println("Invalid message type at " + this.getClass().getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
     }
 }

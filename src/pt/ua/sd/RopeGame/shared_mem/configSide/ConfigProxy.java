@@ -3,17 +3,20 @@ package pt.ua.sd.RopeGame.shared_mem.ConfigSide;
 import pt.ua.sd.RopeGame.comInfo.Message;
 import pt.ua.sd.RopeGame.comInfo.MessageExcept;
 
+/**
+ * Configuration Proxy
+ */
 public class ConfigProxy extends Thread{
 
     /**
-     * canal de comunicação
+     * Communication channel
      * @serialField sc
      */
     private final ServerComChannel sc;
 
 
     /**
-     * numero de threads lançadas
+     * Count released threads
      * @serialField nInstances
      */
     private static int nInstances;
@@ -27,7 +30,7 @@ public class ConfigProxy extends Thread{
 
 
     /**
-     * Instantiation of the configuration client proxy.
+     * Configuration proxy constructor method
      * @param sc communication channel
      * @param configInterf interface to Configuration
      */
@@ -40,41 +43,41 @@ public class ConfigProxy extends Thread{
 
 
     /**
-     * ciclo de vida da thread
+     * Life cycle of the thread
      */
     @Override
     public void run(){
 
-        Message entrada;
-        Message saida = null;
+        Message inMessage = null;
+        Message outMessage = null;
 
-        entrada = (Message) sc.readObject();
+        /*  read input message  */
+        inMessage = (Message) sc.readObject();
 
-
-        // Process message
+        /*  process and reply to the input message  */
         try {
-            saida = configInterf.processAndReply(entrada);
+            outMessage = configInterf.processAndReply(inMessage);
         } catch (MessageExcept e) {
             System.out.println("Thread " + getName() + ": " + e.getMessage() + "!");
             System.out.println(e.getMsgVal().toString());
             System.exit(1);
         }
 
-        // Send answer to client and close communication
-        sc.writeObject(saida);
+        /*  send the reply message and close the communication channel  */
+        sc.writeObject(outMessage);
         sc.close();
 
 
     }
 
     /**
-     * Generation of instantiation identifier.
-     * @return instantiation identifier
+     * Gets proxy id
+     * @return Proxy id
      */
     private static int getProxyId() {
 
         Class<pt.ua.sd.RopeGame.shared_mem.ConfigSide.ConfigProxy> cl = null;
-        int proxyId;                            // intantiation identifier
+        int proxyId;
 
         try {
             cl = (Class<pt.ua.sd.RopeGame.shared_mem.ConfigSide.ConfigProxy>) Class.forName("pt.ua.sd.RopeGame.shared_mem.ConfigSide.ConfigProxy");

@@ -6,38 +6,35 @@ import pt.ua.sd.RopeGame.comInfo.MessageExcept;
 import pt.ua.sd.RopeGame.shared_mem.ConfigSide.Configuration;
 
 /**
- * Created by tiagomagalhaes on 25/04/16.
+ * Interface to the Configuration Server
  */
 public class ConfigInterface {
     /**
-     * Repository (it is the service provided)
+     * Configuration
      * @serialField configuration
      */
     private final Configuration configuration;
 
     /**
-     * Instantiation of Configuration interface.
+     * Configuration interface constructor method
      * @param configuration configuration
      */
     public ConfigInterface(Configuration configuration) {
         this.configuration = configuration;
     }
 
-    public int getTest(){
-        return configuration.getnPlayersPushing();
-    }
-
     /**
-     * Processing of messages executing its task and generating an answer message.
-     * @param inMessage message with the request
-     * @return answer message
-     * @throws MessageExcept if the message with the request is considered invalid
+     * Process and reply the incoming messages
+     * @param inMessage Incoming message
+     * @return Outgoing message
+     * @throws MessageExcept Exception that shows that the incoming message is not valid
      */
     public Message processAndReply (Message inMessage) throws MessageExcept {
 
         ConfigurationMessage outMessage = null;
 
-        // Validate received message
+        /*  Configuration Server receives messages from the repository, coaches, contestants and the referee  */
+        /*  validate incoming messages  */
         switch (inMessage.getMsgType()) {
             case ConfigurationMessage.GETREP:
                 break;
@@ -71,7 +68,7 @@ public class ConfigInterface {
                 throw new MessageExcept("Invalid type!", inMessage);
         }
 
-        // Processing
+        /*  process and reply to the messages  */
         switch (inMessage.getMsgType()) {
             case ConfigurationMessage.GETREP:
                 String hostname = configuration.getRepositoryHostName();

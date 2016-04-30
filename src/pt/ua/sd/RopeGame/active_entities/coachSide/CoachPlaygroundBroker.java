@@ -4,24 +4,26 @@ import pt.ua.sd.RopeGame.comInfo.CoachPlaygroundMessage;
 import pt.ua.sd.RopeGame.interfaces.IPlaygroundCoach;
 
 /**
- * Created by ivosilva on 25/04/16.
+ * Coaches' Playground Broker
+ *
+ * Sends the desired messages to the Playground
  */
 public class CoachPlaygroundBroker implements IPlaygroundCoach {
 
     /**
-     * Machine hostname
+     * Host name
      * @serialfield hostName
      */
     private final String hostName;
 
     /**
-     * Machine port number
+     * Port number
      * @serialfield portNum
      */
     private final int portNum;
 
     /**
-     * Playground Broker for coach instantiation.
+     * Playground Broker for coach constructor method
      * @param hostName host name
      * @param portNum port number
      */
@@ -30,36 +32,39 @@ public class CoachPlaygroundBroker implements IPlaygroundCoach {
         this.portNum = portNum;
     }
 
+    /**
+     * Send a review notes message to the playground
+     * @param selected_contestants selected contestants
+     * @param n_players number of players
+     * @param n_players_pushing number of players pushing
+     * @return new team selected to play
+     */
     @Override
     public int[] reviewNotes(int[] selected_contestants, int n_players, int n_players_pushing) {
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         CoachPlaygroundMessage inMessage;
         CoachPlaygroundMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send review notes message to playground  */
         outMessage = new CoachPlaygroundMessage(CoachPlaygroundMessage.REVIEWNOTES, selected_contestants, n_players,
                 n_players_pushing);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Get answer
+        /*  get and validate response message  */
         inMessage = (CoachPlaygroundMessage) con.readObject();
-
-        // Validate answer
         if ((inMessage.getMsgType() != CoachPlaygroundMessage.REVIEWNOTES_ANS)) {
             System.out.println("Invalid message type at " + this.getClass().getName());
             System.out.println(inMessage.toString());
             System.exit(1);
         }
 
-        // Close connection
+        /*  close the connection  */
         con.close();
 
         int[] new_team = inMessage.getChosen_contestants_after_review();
@@ -67,27 +72,25 @@ public class CoachPlaygroundBroker implements IPlaygroundCoach {
     }
 
     /**
-     * Signals Repo server that Referee will terminate.
+     * Send a terminate message to the playground
      */
     public void terminate() {
 
-        // Instatiate a communication socket
+        /*  create communication socket  */
         ClientComm con = new ClientComm (hostName, portNum);
 
-        // In and out message
+        /*  instantiate the configuration messages  */
         CoachPlaygroundMessage inMessage;
         CoachPlaygroundMessage outMessage;
 
-        // Open connection
+        /*  open connection  */
         con.open();
 
-        // Define out message
+        /*  send message terminate to playground  */
         outMessage = new CoachPlaygroundMessage(CoachPlaygroundMessage.TERMINATE);
-
-        // Send message
         con.writeObject(outMessage);
 
-        // Close connection
+        /*  close the connection  */
         con.close();
     }
 }
